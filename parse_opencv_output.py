@@ -1,0 +1,29 @@
+from sys import argv
+
+
+def main():
+    with open(argv[1]) as opencv_output:
+        text = opencv_output.read()
+    print(text)
+    lines = text.split('\n')
+    output = ""
+    for line in lines:
+        if line[0:16] == 'pairwise_matches':
+            tokens = line.split(" ")
+            src_img_idx = int(tokens[4].split(":")[1])
+            dst_img_idx = int(tokens[7].split(":")[1])
+            if not (src_img_idx == -1) and not (dst_img_idx == -1):
+                output = output + "# {0} {1}\n".format(src_img_idx, dst_img_idx)
+        elif line[0:7] == 'matches':
+            tokens = line.split(" ")
+            query_x = float(tokens[9])
+            query_y = float(tokens[10])
+            train_x = float(tokens[17])
+            train_y = float(tokens[18])
+            output = output + "{0} {1} {2} {3}\n".format(query_x, query_y, train_x, train_y)
+    print(output)
+    with open("parse_output.txt", "w") as text_file:
+        text_file.write(output)
+
+if __name__ == '__main__':
+    main()
