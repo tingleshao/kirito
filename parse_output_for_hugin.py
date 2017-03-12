@@ -1,6 +1,4 @@
 
-
-
 def main():
     with open('parse_output.txt') as input_file:
         text = input_file.read()
