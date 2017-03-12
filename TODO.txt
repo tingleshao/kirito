@@ -1,0 +1,2 @@
+TODOs:
+1. write a script to call opencv, parse script, and hugin
