@@ -85,7 +85,7 @@ def main():
     #hugin_optimizerPhotoMasterSwitch 21
 '''
 
-    with opencv('test0.pto', 'w') as pto_file:
+    with open('test0.pto', 'w') as pto_file:
         pto_file.write(output)
 
 
