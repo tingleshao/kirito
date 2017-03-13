@@ -1,2 +1,3 @@
 TODOs:
 1. write a script to call opencv, parse script, and hugin
+2. filter out features for non-adjacent images.
