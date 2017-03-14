@@ -1,8 +1,31 @@
 from subprocess import call
-
 import os
 
+
+rename_files = False
+
 # TODO: rename the image files
+if rename_files:
+    os.system("mkdir old_order_images")
+    os.system("mv mcam*.jpg old_order_images")
+    os.system("cp old_order_images/mcam_1_scale_2.jpg mcam_13_scale_2.jpg")
+    os.system("cp old_order_images/mcam_2_scale_2.jpg mcam_14_scale_2.jpg")
+    os.system("cp old_order_images/mcam_3_scale_2.jpg mcam_15_scale_2.jpg")
+    os.system("cp old_order_images/mcam_4_scale_2.jpg mcam_16_scale_2.jpg")
+    os.system("cp old_order_images/mcam_5_scale_2.jpg mcam_17_scale_2.jpg")
+    os.system("cp old_order_images/mcam_6_scale_2.jpg mcam_18_scale_2.jpg")
+    os.system("cp old_order_images/mcam_7_scale_2.jpg mcam_12_scale_2.jpg")
+    os.system("cp old_order_images/mcam_8_scale_2.jpg mcam_1_scale_2.jpg")
+    os.system("cp old_order_images/mcam_9_scale_2.jpg mcam_2_scale_2.jpg")
+    os.system("cp old_order_images/mcam_10_scale_2.jpg mcam_3_scale_2.jpg")
+    os.system("cp old_order_images/mcam_11_scale_2.jpg mcam_4_scale_2.jpg")
+    os.system("cp old_order_images/mcam_12_scale_2.jpg mcam_5_scale_2.jpg")
+    os.system("cp old_order_images/mcam_13_scale_2.jpg mcam_11_scale_2.jpg")
+    os.system("cp old_order_images/mcam_14_scale_2.jpg mcam_10_scale_2.jpg")
+    os.system("cp old_order_images/mcam_15_scale_2.jpg mcam_9_scale_2.jpg")
+    os.system("cp old_order_images/mcam_16_scale_2.jpg mcam_8_scale_2.jpg")
+    os.system("cp old_order_images/mcam_17_scale_2.jpg mcam_7_scale_2.jpg")
+    os.system("cp old_order_images/mcam_18_scale_2.jpg mcam_6_scale_2.jpg")
 
 # call the opencv customzied
 os.system("./stitching_detailed2 mcam_1_scale_2.jpg mcam_2_scale_2.jpg mcam_3_scale_2.jpg mcam_4_scale_2.jpg mcam_5_scale_2.jpg mcam_6_scale_2.jpg mcam_7_scale_2.jpg mcam_8_scale_2.jpg mcam_9_scale_2.jpg mcam_10_scale_2.jpg  mcam_11_scale_2.jpg mcam_12_scale_2.jpg mcam_13_scale_2.jpg mcam_14_scale_2.jpg mcam_15_scale_2.jpg mcam_16_scale_2.jpg mcam_17_scale_2.jpg mcam_18_scale_2.jpg --features orb --ba reproj | tee sample_output_0.txt")
