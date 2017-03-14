@@ -26,5 +26,6 @@ def main():
     with open("parsed_output.txt", "w") as text_file:
         text_file.write(output)
 
+
 if __name__ == '__main__':
     main()

@@ -1,5 +1,4 @@
 # generate hugin input from prased hugin feature file
-# TODO: filter out several matches
 
 def main():
     output = '''# hugin project file

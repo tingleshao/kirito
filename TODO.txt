@@ -1,3 +1,2 @@
 TODOs:
-1. write a script to call opencv, parse script, and hugin
-2. filter out features for non-adjacent images.
+Include the script for converting hugin pto file to Saccade input
