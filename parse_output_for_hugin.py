@@ -31,8 +31,8 @@ def main():
             curr_i = curr_i + 1
         curr_idx = curr_i
         if curr_key[1] in adjacent_map[curr_key[0]]:
-            print("curr_key[1]: " + str(curr_key[1]))
-            print("adjacent_map[curr_key[0]]: " + str(curr_key[0]))
+    #        print("curr_key[1]: " + str(curr_key[1]))
+    #        print("adjacent_map[curr_key[0]]: " + str(curr_key[0]))
             important_features = [values_lst[w] for w in sorted(range(len(values_lst)), key=lambda k: dist_lst[k])]
             for i in range(min(len(important_features), 25)):
                 output_str = output_str + "c n{0} N{1} x{2:.12f} y{3:.12f} X{4:.12f} Y{5:.12f} t0\n".format(curr_key[0], curr_key[1], important_features[i][0] * ratio, important_features[i][1] * ratio, important_features[i][2] * ratio, important_features[i][3] * ratio)

@@ -4,7 +4,6 @@ import os
 
 rename_files = False
 
-# TODO: rename the image files
 if rename_files:
     os.system("mkdir old_order_images")
     os.system("mv mcam*.jpg old_order_images")
