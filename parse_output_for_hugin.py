@@ -29,9 +29,6 @@ def main():
             dist_lst.append(int(tokens[4]))
             curr_i = curr_i + 1
         curr_idx = curr_i
-#        print("curr_idx: " + str(curr_idx))
-#        print("currline for curridx: " + lines[curr_idx])
-    #    print(sorted(range(len(values_lst)), key=lambda k: dist_lst[k]))
         if curr_key[1] in adjacent_map[curr_key[0]]:
             important_features = [values_lst[w] for w in sorted(range(len(values_lst)), key=lambda k: dist_lst[k])]
             for i in range(min(len(important_features), 25)):
