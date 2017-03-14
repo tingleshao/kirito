@@ -4,7 +4,6 @@ import os
 
 # TODO: rename the image files
 
-# call the opencv customzied
 
 # generating project file
 os.system("pto_gen -o init.pto *.jpg")
