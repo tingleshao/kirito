@@ -8,7 +8,7 @@ def main():
     lines = text.split('\n')
     output = ""
     for line in lines:
-        if line[0:16] == 'pairwise_matches':
+        if line[0:22] == 'pairwise_matches index':
             tokens = line.split(" ")
             src_img_idx = int(tokens[4].split(":")[1])
             dst_img_idx = int(tokens[7].split(":")[1])
