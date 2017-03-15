@@ -1,2 +1,3 @@
 TODOs:
-Include the script for converting hugin pto file to Saccade input
+1. C++ feature finder that does not do extra computation
+2. Tune the HuginMakeSaccadeConfig.py script.
