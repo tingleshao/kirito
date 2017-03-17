@@ -52,12 +52,10 @@ char** str_split(char* a_str, const char a_delim) {
 
 
 int main(int argc, char **argv) {
-    // TODO: implement me
     for (int i = 0; i < argc; ++i) {
         printf("argv[%d]: %s\n", i, argv[i]);
     }
 
-    // TODO: read input
     char const* const filename = argv[1];
     FILE* file = fopen(filename, "r");
     char line[256];
@@ -71,7 +69,6 @@ int main(int argc, char **argv) {
         char *substr = (char *)calloc(1, end-start+1);
         memcpy(substr, start, end-start);
         printf("%s\n", substr);
-
         char *end2 = &line[7];
         char *substr2 = (char *)calloc(1, end2-start+1);
         memcpy(substr2, start, end2-start);
@@ -100,4 +97,6 @@ int main(int argc, char **argv) {
     }
     fclose(file);
     return 0;
+
+    //TODO:  save the variable output to a text file
 }
