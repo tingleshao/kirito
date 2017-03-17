@@ -4,7 +4,6 @@ from sys import argv
 def main():
     with open(argv[1]) as opencv_output:
         text = opencv_output.read()
-    print(text)
     lines = text.split('\n')
     output = ""
     for line in lines:
