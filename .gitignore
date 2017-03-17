@@ -1,3 +1,4 @@
 *.jpg
 *.pto
 *.txt
+convert_opencv_output
