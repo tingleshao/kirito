@@ -97,6 +97,5 @@ int main(int argc, char **argv) {
     }
     fclose(file);
     return 0;
-
     //TODO:  save the variable output to a text file
 }
