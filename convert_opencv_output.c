@@ -6,8 +6,6 @@
 #include <assert.h>
 
 
-
-
 char** str_split(char* a_str, const char a_delim) {
     char** result    = 0;
     size_t count     = 0;

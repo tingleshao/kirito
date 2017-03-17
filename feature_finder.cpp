@@ -262,7 +262,7 @@ int main(int argc, char* argv[])
     int64 t = getTickCount();
 #endif
 
-    Ptr<FeaturesFinder> finder;
+    Ptr<FeaturesFinder> finder;2
     if (features_type == "surf")
     {
 #ifdef HAVE_OPENCV_XFEATURES2D
