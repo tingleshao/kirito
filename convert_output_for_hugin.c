@@ -4,7 +4,6 @@
 #include <assert.h>
 
 
-// TODO: implement the samething as the one in parse_output_for_hugin.py
 char** str_split(char* a_str, const char a_delim) {
     char** result    = 0;
     size_t count     = 0;
@@ -47,15 +46,28 @@ char** str_split(char* a_str, const char a_delim) {
     return result;
 }
 
+float ** sort_features(float ** values_lst) {
+  float important_features[25][4];
+  return *important_features;
+}
 
-void main() {
-// TODO: implement me
+int contains(int key, int * set) {
+    int set_size = sizeof(set) / sizeof(set[0]);
+
+    for (int i = 0; i < set_size; i++) {
+       if (key == set[i]) {
+         return 1;
+       }
+    }
+   return 0;
+
+}
+int main() {
     float ratio = 920.0 / 670.0;
 
     char const* const filename = "parsed_output.txt";
     FILE* file = fopen(filename, "r");
     char line[256];
-    char *output;
 
     int curr_idx = 0;
     char * output = "# control points\n";
@@ -63,23 +75,35 @@ void main() {
     while (fgets(line, sizeof(line), file)) {
         printf("%s", line);
         char ** tokens;
-        tokens = str_split(line, " ");
+        tokens = str_split(line, ' ');
         int curr_key_0 = atoi(tokens[1]);
         int curr_key_1 = atoi(tokens[2]);
+        int curr_key[] = {curr_key_0, curr_key_1};
         int curr_i = curr_idx + 1;
 
-        while (curr_i < xxx) && (len(line) > 0) && (line[0] != "#") {
-            values_lst.append([float(tokens[0]), float(tokens[1]), float(tokens[2]), float(tokens[3])]);
-            dist_lst.append(int(tokens[4]));
+        float values_lst[1000][4];
+        int dist_lst[1000];
+
+        while ((strcmp(line, "") != 1) && (line[0] != "#")) {
+            values_lst[curr_i][0] = atof(tokens[0]);
+            values_lst[curr_i][1] = atof(tokens[1]);
+            values_lst[curr_i][2] = atof(tokens[2]);
+            values_lst[curr_i][3] = atof(tokens[3]);
+            dist_lst[curr_i] = atoi(tokens[4]);
             curr_i ++;
         }
         curr_idx = curr_i;
-        if (curr_key[1] in adjacent_map[curr_key[0]]) {
-            important_features = sort ...
-            for (int i = 0; i < xx; i++) { //TODO: the upper limit is the min between 25 and the length of the list of features
-                output_str = output_str + "c n%d N%d x%f y%f X%f Y%f t0\n", curr_keyp[0], curr_key[1], important_features[i][0] * ratio, important_features[i][1] * ratio, important_features[i][2] * ratio, important_features[i][3] * ratio;
+        char * output_str;
+        char ** adjacent_map;  // TODO: make this work
+        if (contains(curr_key[1], adjacent_map[curr_key[0]])) {
+            float ** important_features = sort_features(values_lst);
+            for (int i = 0; i < 1000; i++) { //TODO: the upper limit is the min between 25 and the length of the list of features
+                char * temp;
+                sprintf(temp, "c n%d N%d x%f y%f X%f Y%f t0\n", curr_key[0], curr_key[1], important_features[i][0] * ratio, important_features[i][1] * ratio, important_features[i][2] * ratio, important_features[i][3] * ratio);
+                output_str = strcat(output_str, temp);
             }
         }
      // TODO: save the output into text file
     }
+    return 0;
 }
