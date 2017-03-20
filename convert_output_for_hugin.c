@@ -84,7 +84,7 @@ int main() {
         float values_lst[1000][4];
         int dist_lst[1000];
 
-        while ((strcmp(line, "") != 1) && (line[0] != "#")) {
+        while ((strcmp(line, "") != 1) && (line[0] != '#')) {
             values_lst[curr_i][0] = atof(tokens[0]);
             values_lst[curr_i][1] = atof(tokens[1]);
             values_lst[curr_i][2] = atof(tokens[2]);
@@ -92,6 +92,7 @@ int main() {
             dist_lst[curr_i] = atoi(tokens[4]);
             curr_i++;
         }
+
         curr_idx = curr_i;
         char * output_str;
         char ** adjacent_map;  // TODO: make this work
@@ -99,11 +100,14 @@ int main() {
             float ** important_features = sort_features(values_lst);
             for (int i = 0; i < 1000; i++) { //TODO: the upper limit is the min between 25 and the length of the list of features
                 char * temp;
-                sprintf(temp, "c n%d N%d x%f y%f X%f Y%f t0\n", curr_key[0], curr_key[1], important_features[i][0] * ratio, important_features[i][1] * ratio, important_features[i][2] * ratio, important_features[i][3] * ratio);
-                output_str = strcat(output_str, temp);
+                sprintf(temp, "c n%d N%d x%f y%f X%f Y%f t0\n",
+                    curr_key[0], curr_key[1], important_features[i][0] * ratio,
+                    important_features[i][1] * ratio, important_features[i][2] * ratio,
+                    important_features[i][3] * ratio);
+                output = strcat(output, temp);
             }
         }
-     // TODO: save the output into text file
     }
+    printf(output);
     return 0;
 }
