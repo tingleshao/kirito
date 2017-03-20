@@ -56,8 +56,20 @@ int contains(int key, int * set) {
        }
     }
    return 0;
-
 }
+
+int sizeof_arr(int * arr) {
+    int size = sizeof(arr) / sizeof(arr[0]);
+    return size;
+}
+
+int min(int a, int b) {
+  if (a > b) {
+    return b;
+  }
+  return a;
+}
+
 int main() {
     float ratio = 920.0 / 670.0;
 
@@ -81,20 +93,18 @@ int main() {
     while (fgets(line, sizeof(line), file)) {
         printf("%s", line);
         char ** tokens;
-        tokens = str_split(line, ' '); // split this line with #
+        tokens = str_split(line, ' ');
         int curr_key_0;
         int curr_key_1;
         int curr_key[2];
 
-        if ((strcmp(line, "") != 1) && ((line[0]) == '#')) {
+        if ((strcmp(line, "") != 1) && ((line[0]) == '#')) { // header line
             curr_key[0] = atoi(tokens[1]);
             curr_key[1] = atoi(tokens[2]);
-            // TODO: initialize dist_lst and values_lst
-            // TODO: if not first line, update output string
             curr_i = 0;
             if (!first_line) {
                 float ** important_features = sort_features(values_lst);
-                for (int i = 0; i < 1000; i++) { //TODO: the upper limit is the min between 25 and the length of the list of features
+                for (int i = 0; i < min(25, sizeof_arr(important_features)); i++) {
                     char * temp;
                     sprintf(temp, "c n%d N%d x%f y%f X%f Y%f t0\n",
                         curr_key[0], curr_key[1], important_features[i][0] * ratio,
