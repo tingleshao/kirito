@@ -74,23 +74,28 @@ int main(int argc, char **argv) {
         // head of a group of matches
         if (strcmp(substr, "pairwise_matches index") != 0) {
             char **tokens;
-            tokens = str_split(line, " ");
+            const char delim = ' ';
+            tokens = str_split(line, delim);
 
-            int src_img_idx = atoi(str_split(tokens[4], ":")[1]);
-            int dst_img_idx = atoi(str_split(tokens[7], ":")[1]);
-            if (src_img_idx != -1) && (dst_img_idx != -1) {
-                output = strcat(output, sprintf("# %d %d\n", src_img_idx, dst_img_idx));
+            int src_img_idx = atoi(str_split(tokens[4], ':')[1]);
+            int dst_img_idx = atoi(str_split(tokens[7], ':')[1]);
+            if ((src_img_idx != -1) && (dst_img_idx != -1)) {
+                char *temp;
+                sprintf(temp, "# %d %d\n", src_img_idx, dst_img_idx);
+                output = strcat(output, temp);
             }
         }
         else if (strcmp(substr2, "matches")) {
             char **tokens;
-            tokens = str_split(line, " ");
+            tokens = str_split(line, ' ');
             float query_x = atof(tokens[9]);
             float query_y = atof(tokens[10]);
             float train_x = atof(tokens[17]);
             float train_y = atof(tokens[18]);
             int distance = atoi(tokens[20]);
-            output = strcat(output, sprintf("%d %d %d %d %d\n", query_x, query_y, train_x, train_y, distance));
+            char *temp;
+            sprintf(temp, "%f %f %f %f %d\n", query_x, query_y, train_x, train_y, distance);
+            output = strcat(output, temp);
         }
     }
     fclose(file);
