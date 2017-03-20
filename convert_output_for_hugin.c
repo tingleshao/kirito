@@ -41,10 +41,31 @@ char** str_split(char* a_str, const char a_delim) {
     return result;
 }
 
-float ** sort_features(float ** values_lst) {
+float ** sort_features(float ** values_lst, int * dist_lst, int length) {
   // TODO: implement me
   float important_features[25][4];
-  return *important_features;
+
+  //  sort dist lst
+  // dumb sort
+  for (int i = 0; i < length; i++) {
+      for (int j = 0; j < length-1; j++) {
+          if (dist_lst[j] > dist_lst[j+1]) {
+              int temp = dist_lst[j];
+              dist_lst[j] = dist_lst[j+1];
+              dist_lst[j+1] = temp;
+          }
+      }
+  }
+
+  // fill in important features
+  for (int i = 0; i < 25; i++) {
+    important_features[i][0] = values_lst[dist_lst[i]][0];
+    important_features[i][1] = values_lst[dist_lst[i]][1];
+    important_features[i][2] = values_lst[dist_lst[i]][2];
+    important_features[i][3] = values_lst[dist_lst[i]][3];
+  }
+
+  return important_features;
 }
 
 int contains(int key, int * set) {
@@ -101,9 +122,8 @@ int main() {
         if ((strcmp(line, "") != 1) && ((line[0]) == '#')) { // header line
             curr_key[0] = atoi(tokens[1]);
             curr_key[1] = atoi(tokens[2]);
-            curr_i = 0;
             if (!first_line) {
-                float ** important_features = sort_features(values_lst);
+                float ** important_features = sort_features(values_lst, dist_lst, curr_i);
                 for (int i = 0; i < min(25, sizeof_arr(important_features)); i++) {
                     char * temp;
                     sprintf(temp, "c n%d N%d x%f y%f X%f Y%f t0\n",
@@ -113,6 +133,7 @@ int main() {
                     output = strcat(output, temp);
                 }
             }
+            curr_i = 0;
             first_line = 0;
         }
         else if ((strcmp(line, "") != 1) && ((line[0]) != '#')) {
