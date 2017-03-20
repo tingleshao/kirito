@@ -90,7 +90,7 @@ int main() {
             values_lst[curr_i][2] = atof(tokens[2]);
             values_lst[curr_i][3] = atof(tokens[3]);
             dist_lst[curr_i] = atoi(tokens[4]);
-            curr_i ++;
+            curr_i++;
         }
         curr_idx = curr_i;
         char * output_str;
