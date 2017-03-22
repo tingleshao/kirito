@@ -1,12 +1,19 @@
 from subprocess import call
 import os
+import cv2
 
+
+def enhance(img):
+    img_yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
+    img_yuv[:,:,0] = cv2.equalizeHist(img_yuv[:,:,0])
+    img_output = cv2.cvtColor(img_yuv, cv2.COLOR_YUV2BGR)
+    return img_output
 
 rename_files = False
 use_ip_files = True
 
-sensor_id_map = [(1.1, 17), (1.2, 16), (2.1, 15), (3.1, 14), (4.1, 13), (4.2, 12), (5.1, 4), (5.2, 3), (2.2, 2), (3.2, 1), (8.1, 0), (8.2, 11),
-                 (9.1, 5), (9.2, 6), (6.1, 7), (6.2, 8), (10.1, 9), (10.2, 10)]
+sensor_id_map = [(1, 1, 17), (1, 2, 16), (2, 1, 15), (3, 1, 14), (4, 1, 13), (4, 2, 12), (5, 1, 4), (5, 2, 3), (2, 2, 2), (3, 2, 1), (8, 1, 0), (8, 2, 11),
+                 (9, 1, 5), (9, 2, 6), (6, 1, 7), (6, 2, 8), (10, 1, 9), (10, 2, 10)]
 
 if rename_files:
     os.system("mkdir old_order_images")
@@ -35,13 +42,18 @@ if use_ip_files:
     os.system("mv *.jpg old_order_images")
     for item in sensor_id_map:
         ip = int(item[0] / 1)
-        sensor_id = int(item[0] % 1 * 10)
-        old_id = item[1]
-        os.system("cp 10.0.1.{0}_sensor{1}.jpg mcam_{2}_scale_2.jpg".format(ip, sensor_id, old_id))
+        sensor_id = int(item[1])
+        old_id = item[2]
+        os.system("cp old_order_images/10.0.1.{0}_sensor{1}.jpg mcam_{2}_scale_2.jpg".format(ip, sensor_id, old_id+1))
+    #    img = cv2.imread("mcam_{0}_scale_2.jpg".format(old_id+1))
+    #    new_img = cv2.resize(img, (1228, 920))
+    #    enhanced_img = enhance(new_img)
+        #cv2.imwrite("mcam_{0}_scale_2.jpg".format(old_id+1), new_img)
+
 
 # call the opencv customzied
 #if not use_ip_files:
-os.system("./feature_finder mcam_1_scale_2.jpg mcam_2_scale_2.jpg mcam_3_scale_2.jpg mcam_4_scale_2.jpg mcam_5_scale_2.jpg mcam_6_scale_2.jpg mcam_7_scale_2.jpg mcam_8_scale_2.jpg mcam_9_scale_2.jpg mcam_10_scale_2.jpg  mcam_11_scale_2.jpg mcam_12_scale_2.jpg mcam_13_scale_2.jpg mcam_14_scale_2.jpg mcam_15_scale_2.jpg mcam_16_scale_2.jpg mcam_17_scale_2.jpg mcam_18_scale_2.jpg --features orb | tee sample_output_0.txt")
+os.system("./feature_finder mcam_1_scale_2.jpg mcam_2_scale_2.jpg mcam_3_scale_2.jpg mcam_4_scale_2.jpg mcam_5_scale_2.jpg mcam_6_scale_2.jpg mcam_7_scale_2.jpg mcam_8_scale_2.jpg mcam_9_scale_2.jpg mcam_10_scale_2.jpg  mcam_11_scale_2.jpg mcam_12_scale_2.jpg mcam_13_scale_2.jpg mcam_14_scale_2.jpg mcam_15_scale_2.jpg mcam_16_scale_2.jpg mcam_17_scale_2.jpg mcam_18_scale_2.jpg --features orb --match_conf 0.3 | tee sample_output_0.txt")
 #else:
 #    os.system("foo")
 

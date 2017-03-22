@@ -92,8 +92,8 @@ int min(int a, int b) {
 }
 
 int main() {
-    float ratio = 920.0 / 670.0;
-
+  //  float ratio = 920.0 / 670.0;
+    float ratio =  2160.0 / 581.0
     char const* const filename = "parsed_output.txt";
     FILE* file = fopen(filename, "r");
     char line[256];
