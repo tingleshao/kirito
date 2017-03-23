@@ -53,10 +53,7 @@ if use_ip_files:
 
 
 # call the opencv customzied
-#if not use_ip_files:
 os.system("./feature_finder mcam_1_scale_2.jpg mcam_2_scale_2.jpg mcam_3_scale_2.jpg mcam_4_scale_2.jpg mcam_5_scale_2.jpg mcam_6_scale_2.jpg mcam_7_scale_2.jpg mcam_8_scale_2.jpg mcam_9_scale_2.jpg mcam_10_scale_2.jpg  mcam_11_scale_2.jpg mcam_12_scale_2.jpg mcam_13_scale_2.jpg mcam_14_scale_2.jpg mcam_15_scale_2.jpg mcam_16_scale_2.jpg mcam_17_scale_2.jpg mcam_18_scale_2.jpg --features orb --match_conf 0.3 | tee sample_output_0.txt")
-#else:
-#    os.system("foo")
 
 # convert the output into a simplified format
 os.system("python3 parse_opencv_output.py sample_output_0.txt")

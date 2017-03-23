@@ -16,5 +16,3 @@ os.system("celeste_standalone -i control_pts.pto -o pruning_pts.pto")
 
 # optimizing positions and geometry
 os.system("autooptimiser -a -l -s -m -o optimized.pto pruning_pts.pto");
-
-# TODO: optional: clean up, remove intmediate files
