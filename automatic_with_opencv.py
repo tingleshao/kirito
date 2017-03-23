@@ -11,6 +11,7 @@ def enhance(img):
 
 rename_files = False
 use_ip_files = True
+clean_up = False
 
 sensor_id_map = [(1, 1, 17), (1, 2, 16), (2, 1, 15), (3, 1, 14), (4, 1, 13), (4, 2, 12), (5, 1, 4), (5, 2, 3), (2, 2, 2), (3, 2, 1), (8, 1, 0), (8, 2, 11),
                  (9, 1, 5), (9, 2, 6), (6, 1, 7), (6, 2, 8), (10, 1, 9), (10, 2, 10)]
@@ -73,4 +74,8 @@ os.system("cpclean -o pruning_pts2.pto pruning_pts.pto")
 
 os.system("autooptimiser -a -l -s -m -o optimized.pto pruning_pts2.pto");
 
-# TODO: optional: clean up, remove intmediate files
+if clean_up:
+    os.system("rm *.txt")
+    os.system("mv optimized.pto optimized")
+    os.system("rm *.pto")
+    os.system("mv optimized optimized.pto")
