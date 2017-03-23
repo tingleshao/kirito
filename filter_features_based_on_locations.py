@@ -8,6 +8,14 @@ def is_good_match(match, percent, relation):
     # match format: [x1, y1, x2, y2]
     # percent: (p1, p2) the percentage of overlapping in the images
     # relation: the second image relate to the first one, e: 0, w: 1, n: 2, s: 3
+    if relation == 0:
+        
+    elif relation == 1:
+
+    elif relation == 2:
+
+    elif relation == 3:
+
     return False
 
 
