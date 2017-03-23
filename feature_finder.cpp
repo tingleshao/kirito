@@ -369,18 +369,7 @@ int main(int argc, char* argv[])
 
     LOGLN("Pairwise matching, time: " << ((getTickCount() - t) / getTickFrequency()) << " sec");
 
-    // output features
-    for (int i = 0; i < features.size(); i++) {
-        LOGLN("Features for image idx:" << features[i].img_idx << "\n");
-    }
-    LOGLN("pairwise_matches size: " << pairwise_matches.size());
-    for (int i = 0; i < pairwise_matches.size(); i++) {
-        LOGLN("pairwise_matches index:" << i << " src img idx:" << pairwise_matches[i].src_img_idx << " dst img idx:" << pairwise_matches[i].dst_img_idx << "\n");
-        LOGLN("pariwise matches size:" << pairwise_matches[i].matches.size() << "\n");
-        for (int j = 0; j < pairwise_matches[i].matches.size(); j++) {
-            LOGLN("matches  #:" << j << " query index: " << pairwise_matches[i].matches[j].queryIdx << " query feature location: " << features[pairwise_matches[i].src_img_idx].keypoints[pairwise_matches[i].matches[j].queryIdx].pt.x << " " <<  features[pairwise_matches[i].src_img_idx].keypoints[pairwise_matches[i].matches[j].queryIdx].pt.y << " train index: " << pairwise_matches[i].matches[j].trainIdx << " train feature location: " << features[pairwise_matches[i].dst_img_idx].keypoints[pairwise_matches[i].matches[j].trainIdx].pt.x << " " << features[pairwise_matches[i].dst_img_idx].keypoints[pairwise_matches[i].matches[j].trainIdx].pt.y << " distance: " << pairwise_matches[i].matches[j].distance);
-        }
-    }
+
 
     // Check if we should save matches graph
     if (save_graph)
@@ -421,7 +410,18 @@ int main(int argc, char* argv[])
         estimator = makePtr<HomographyBasedEstimator>();
 
     vector<CameraParams> cameras;
-
+    // output features
+    for (int i = 0; i < features.size(); i++) {
+        LOGLN("Features for image idx:" << features[i].img_idx << "\n");
+    }
+    LOGLN("pairwise_matches size: " << pairwise_matches.size());
+    for (int i = 0; i < pairwise_matches.size(); i++) {
+        LOGLN("pairwise_matches index:" << i << " src img idx:" << pairwise_matches[i].src_img_idx << " dst img idx:" << pairwise_matches[i].dst_img_idx << "\n");
+        LOGLN("pariwise matches size:" << pairwise_matches[i].matches.size() << "\n");
+        for (int j = 0; j < pairwise_matches[i].matches.size(); j++) {
+            LOGLN("matches  #:" << j << " query index: " << pairwise_matches[i].matches[j].queryIdx << " query feature location: " << features[pairwise_matches[i].src_img_idx].keypoints[pairwise_matches[i].matches[j].queryIdx].pt.x << " " <<  features[pairwise_matches[i].src_img_idx].keypoints[pairwise_matches[i].matches[j].queryIdx].pt.y << " train index: " << pairwise_matches[i].matches[j].trainIdx << " train feature location: " << features[pairwise_matches[i].dst_img_idx].keypoints[pairwise_matches[i].matches[j].trainIdx].pt.x << " " << features[pairwise_matches[i].dst_img_idx].keypoints[pairwise_matches[i].matches[j].trainIdx].pt.y << " distance: " << pairwise_matches[i].matches[j].distance);
+        }
+    }
 
     LOGLN("Finished.");
     return 0;
