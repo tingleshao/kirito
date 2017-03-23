@@ -13,7 +13,8 @@ import cv2
 adjacent_map = [[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],
                 [11],[12],[13],[14],[15],[16],[17],[16]]
 adjacent_map2 = [[11],[8, 14],[7, 15],[6, 16],[5,17],[],[],[],[],[],[],[],[],[],[],[],[],[]]
-adjacent_map3 = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+adjacent_map3 = [[8,10,12,14],[7,9,13,15],[6,8,14,16],[5,7,15,17],[6,16],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+
 
 def main():
 #    ratio = 920.0 / 670.0
@@ -21,6 +22,27 @@ def main():
     with open('parsed_output.txt') as input_file:
         text = input_file.read()
     lines = text.split('\n')
+    curr_idx = 0
+    output_str = '# control points\n'
+    # first order adjacency
+    while curr_idx < len(lines) and len(lines[curr_idx]) > 0:
+        line = lines[curr_idx]
+        curr_key = (int(float(line.split(' ')[1])), int(float(line.split(' ')[2])))
+        curr_i = curr_idx + 1
+        values_lst = []
+        dist_lst = []
+        while curr_i < len(lines) and len(lines[curr_i]) > 0 and lines[curr_i][0] != '#':
+            line = lines[curr_i]
+            tokens = line.split(' ')
+            values_lst.append([float(tokens[0]), float(tokens[1]), float(tokens[2]), float(tokens[3])])
+            dist_lst.append(float(tokens[4]))
+            curr_i = curr_i + 1
+        curr_idx = curr_i
+        if curr_key[1] in adjacent_map[curr_key[0]]:
+            important_features = [values_lst[w] for w in sorted(range(len(values_lst)), key=lambda k: dist_lst[k])]
+            for i in range(min(len(important_features), 25)):
+                output_str = output_str + "c n{0} N{1} x{2:.12f} y{3:.12f} X{4:.12f} Y{5:.12f} t0\n".format(curr_key[0], curr_key[1], important_features[i][0] * ratio, important_features[i][1] * ratio, important_features[i][2] * ratio, important_features[i][3] * ratio)
+    # second order adjacency
     curr_idx = 0
     output_str = '# control points\n'
     while curr_idx < len(lines) and len(lines[curr_idx]) > 0:
@@ -40,6 +62,29 @@ def main():
             important_features = [values_lst[w] for w in sorted(range(len(values_lst)), key=lambda k: dist_lst[k])]
             for i in range(min(len(important_features), 25)):
                 output_str = output_str + "c n{0} N{1} x{2:.12f} y{3:.12f} X{4:.12f} Y{5:.12f} t0\n".format(curr_key[0], curr_key[1], important_features[i][0] * ratio, important_features[i][1] * ratio, important_features[i][2] * ratio, important_features[i][3] * ratio)
+    # third order adjacency
+    curr_idx = 0
+    output_str = '# control points\n'
+    while curr_idx < len(lines) and len(lines[curr_idx]) > 0:
+        line = lines[curr_idx]
+        curr_key = (int(float(line.split(' ')[1])), int(float(line.split(' ')[2])))
+        curr_i = curr_idx + 1
+        values_lst = []
+        dist_lst = []
+        while curr_i < len(lines) and len(lines[curr_i]) > 0 and lines[curr_i][0] != '#':
+            line = lines[curr_i]
+            tokens = line.split(' ')
+            values_lst.append([float(tokens[0]), float(tokens[1]), float(tokens[2]), float(tokens[3])])
+            dist_lst.append(float(tokens[4]))
+            curr_i = curr_i + 1
+        curr_idx = curr_i
+        if curr_key[1] in adjacent_map[curr_key[0]]:
+            important_features = [values_lst[w] for w in sorted(range(len(values_lst)), key=lambda k: dist_lst[k])]
+            for i in range(min(len(important_features), 25)):
+                output_str = output_str + "c n{0} N{1} x{2:.12f} y{3:.12f} X{4:.12f} Y{5:.12f} t0\n".format(curr_key[0], curr_key[1], important_features[i][0] * ratio, important_features[i][1] * ratio, important_features[i][2] * ratio, important_features[i][3] * ratio)
+
+
+
     with open("parsed_output_for_hugin.txt", "w") as text_file:
         text_file.write(output_str)
 
