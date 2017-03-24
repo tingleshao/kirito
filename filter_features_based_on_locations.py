@@ -1,4 +1,3 @@
-# TODO: implement this: filter features based on locaitons
 
 # Make it:
 # for every image pair, we examine if the matched features are between the 30%, if not then we remove it.
@@ -46,7 +45,10 @@ def main():
             line = lines[curr_i]
             tokens = line.split(' ')
             match = [float(tokens[0]), float(tokens[1]), float(tokens[2]), float(tokens[3])]
-            if is_good_match(match):
+            percent = # XXX:
+            relation = # XXX:
+            img_size = # XXX: 
+            if is_good_match(match, percent, relation, img_size):
                 output_str = output_str + line + "\n"
     with open("parsed_output_2.txt", 'w') as output_file:
         output_file.wrfite(output_str)
