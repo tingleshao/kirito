@@ -3,6 +3,9 @@
 # for every image pair, we examine if the matched features are between the 30%, if not then we remove it.
 #
 
+relations = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+img_size = [1033, 581]
+
 def is_good_match(match, percent, relation, img_size):
     # match format: [x1, y1, x2, y2]
     # percent: (p1, p2) the percentage of overlapping in the images
@@ -45,9 +48,8 @@ def main():
             line = lines[curr_i]
             tokens = line.split(' ')
             match = [float(tokens[0]), float(tokens[1]), float(tokens[2]), float(tokens[3])]
-            percent = # XXX:
-            relation = # XXX:
-            img_size = # XXX: 
+            percent = [0.3, 0.3]
+            relation = 0
             if is_good_match(match, percent, relation, img_size):
                 output_str = output_str + line + "\n"
     with open("parsed_output_2.txt", 'w') as output_file:
