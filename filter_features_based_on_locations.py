@@ -54,7 +54,7 @@ def main():
             line = lines[curr_i]
             tokens = line.split(' ')
             match = [float(tokens[0]), float(tokens[1]), float(tokens[2]), float(tokens[3])]
-            percent = [0.3, 0.3]
+            percent = [0.2, 0.2]
             key = str(curr_key[0]) + "#" + str(curr_key[1])
             if relaitons_map.has_key(key):
                 relation = relations_map[key]
