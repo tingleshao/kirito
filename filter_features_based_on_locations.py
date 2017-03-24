@@ -55,9 +55,13 @@ def main():
             tokens = line.split(' ')
             match = [float(tokens[0]), float(tokens[1]), float(tokens[2]), float(tokens[3])]
             percent = [0.3, 0.3]
-            relation = 0
-            if is_good_match(match, percent, relation, img_size):
-                output_str = output_str + line + "\n"
+            key = str(curr_key[0]) + "#" + str(curr_key[1])
+            if relaitons_map.has_key(key):
+                relation = relations_map[key]
+                if is_good_match(match, percent, relation, img_size):
+                    output_str = output_str + line + "\n"
+            else:
+                print("no such relation: " + key)
     with open("parsed_output_2.txt", 'w') as output_file:
         output_file.wrfite(output_str)
 
