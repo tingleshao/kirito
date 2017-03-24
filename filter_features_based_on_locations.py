@@ -6,6 +6,7 @@
 relations = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 img_size = [1033, 581]
 
+# TODO: add corner neighbors
 relations_map = {"0#1": 1, "0#9":2, "0#11":0, "0#13":3, "1#2":1, "1#8":2, "1#14":3,
                  "2#3":1, "2#7":2, "2#15":3, "3#4":1, "3#6":2, "3#16":3,
                  "4#5":2, "4#17":3, "5#6":0, "6#7":0, "7#8":0, "8#9":0, "9#10":0, "10#11":3,
@@ -37,7 +38,6 @@ def is_good_match(match, percent, relation, img_size):
 
 
 def main():
-    return None
     with open('parsed_output.txt') as input_file:
         text = input_file.read()
     lines = text.split('\n')
@@ -56,14 +56,17 @@ def main():
             match = [float(tokens[0]), float(tokens[1]), float(tokens[2]), float(tokens[3])]
             percent = [0.2, 0.2]
             key = str(curr_key[0]) + "#" + str(curr_key[1])
-            if relaitons_map.has_key(key):
+            if key in relations_map: # has_key() was removed in Python 3
                 relation = relations_map[key]
                 if is_good_match(match, percent, relation, img_size):
                     output_str = output_str + line + "\n"
             else:
                 print("no such relation: " + key)
+            curr_i = curr_i + 1
+        curr_idx = curr_i
+
     with open("parsed_output_2.txt", 'w') as output_file:
-        output_file.wrfite(output_str)
+        output_file.write(output_str)
 
 if __name__ == '__main__':
     main()
