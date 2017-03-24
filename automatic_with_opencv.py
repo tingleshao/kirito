@@ -2,7 +2,7 @@ from subprocess import call
 import os
 import cv2
 
-# TODO: add region of interest feature finding.
+# TODO: convert everything into JSON 
 def enhance(img):
     img_yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
     img_yuv[:,:,0] = cv2.equalizeHist(img_yuv[:,:,0])
