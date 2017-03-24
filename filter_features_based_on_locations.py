@@ -4,18 +4,27 @@
 # for every image pair, we examine if the matched features are between the 30%, if not then we remove it.
 #
 
-def is_good_match(match, percent, relation):
+def is_good_match(match, percent, relation, img_size):
     # match format: [x1, y1, x2, y2]
     # percent: (p1, p2) the percentage of overlapping in the images
     # relation: the second image relate to the first one, e: 0, w: 1, n: 2, s: 3
+    # image size: the size of each image
     if relation == 0:
-        
+        # the second image is right to the first image
+        if match[0] > ((1.0 - percent[0]) * img_size[0]) and match[2] < (percent[1] * img_size[0]):
+            return True
     elif relation == 1:
-
+        # the second image is left to the first image
+        if match[0] < (percent[0] * img_size[0]) and match[2] > ((1.0 - percent[1]) * img_size[0]):
+            return True
     elif relation == 2:
-
+        # the second image is top to the first image
+        if match[1] < (percent[0] * img_size[1]) and match[3] > ((1.0 - percent[1]) * img_size[1]):
+            return True
     elif relation == 3:
-
+        # the second image is down to the first image
+        if match[1] > ((1.0 - percent[0]) * img_size[1]) and match[3] < (percent[1] * img_size[1]):
+            return True
     return False
 
 
