@@ -11,7 +11,7 @@ relations_map = {"0#1": 1, "0#9":2, "0#11":0, "0#13":3, "1#2":1, "1#8":2, "1#14"
                  "4#5":2, "4#17":3, "5#6":0, "6#7":0, "7#8":0, "8#9":0, "9#10":0, "10#11":3,
                  "11#12":3, "12#13":1, "13#14":1, "14#15":1, "15#16":1, "16#17":1,
                  "0#8":5, "0#10":4, "0#12":6, "0#14":7, "1#7":5, "1#9":4, "1#13":6,
-                 "1#15"7:, "2#6":5, "2#8":4, "2#14":6, "2#16":7, "3#5":5,
+                 "1#15":7, "2#6":5, "2#8":4, "2#14":6, "2#16":7, "3#5":5,
                  "3#7":4, "3#15":6, "3#17":7, "9#11":6, "11#13":7}
 
 
@@ -39,22 +39,22 @@ def is_good_match(match, percent, relation, img_size):
             return True
     elif relation == 4:
         # the second image is top right to the first image
-        if match[0] > ((1.0 - percent[0]) * img_size[0]) and match[2] < (percent[1] * img_size[0]) and
+        if match[0] > ((1.0 - percent[0]) * img_size[0]) and match[2] < (percent[1] * img_size[0]) and \
            match[1] < (percent[0] * img_size[1]) and match[3] > ((1.0 - percent[1]) * img_size[1]):
            return True
     elif relation == 5:
         # the second image is top left to the first image
-        if match[0] < (percent[0] * img_size[0]) and match[2] > ((1.0 - percent[1]) * img_size[0]) and
+        if match[0] < (percent[0] * img_size[0]) and match[2] > ((1.0 - percent[1]) * img_size[0]) and \
            match[1] < (percent[0] * img_size[1]) and match[3] > ((1.0 - percent[1]) * img_size[1]):
            return True
     elif relation == 6:
         # the second image is down right to the first image
-        if match[0] > ((1.0 - percent[0]) * img_size[0]) and match[2] < (percent[1] * img_size[0]) and
+        if match[0] > ((1.0 - percent[0]) * img_size[0]) and match[2] < (percent[1] * img_size[0]) and \
            match[1] > ((1.0 - percent[0]) * img_size[1]) and match[3] < (percent[1] * img_size[1]):
            return True
     elif relation == 7:
         # the second image is down left to the first image
-        if match[0] < (percent[0] * img_size[0]) and match[2] > ((1.0 - percent[1]) * img_size[0]) and
+        if match[0] < (percent[0] * img_size[0]) and match[2] > ((1.0 - percent[1]) * img_size[0]) and \
            match[1] > ((1.0 - percent[0]) * img_size[1]) and match[3] < (percent[1] * img_size[1]):
            return True
     return False
@@ -77,11 +77,18 @@ def main():
             line = lines[curr_i]
             tokens = line.split(' ')
             match = [float(tokens[0]), float(tokens[1]), float(tokens[2]), float(tokens[3])]
-            percent = [0.2, 0.2]
+            percent = [0.18, 0.12]
             key = str(curr_key[0]) + "#" + str(curr_key[1])
+            reverse_key = str(curr_key[1]) + "#" + str(curr_key[0])
             if key in relations_map: # has_key() was removed in Python 3
                 relation = relations_map[key]
                 if is_good_match(match, percent, relation, img_size):
+                    output_str = output_str + line + "\n"
+            # test inverse relation
+            elif reverse_key in relations_map:
+                relation = relations_map[reverse_key]
+                reverse_match = [match[2], match[3], match[0], match[1]]
+                if is_good_match(reverse_match, percent, relation, img_size):
                     output_str = output_str + line + "\n"
             else:
                 print("no such relation: " + key)
