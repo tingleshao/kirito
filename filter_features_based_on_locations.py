@@ -6,7 +6,6 @@
 relations = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 img_size = [1033, 581]
 
-# TODO: add corner neighbors
 relations_map = {"0#1": 1, "0#9":2, "0#11":0, "0#13":3, "1#2":1, "1#8":2, "1#14":3,
                  "2#3":1, "2#7":2, "2#15":3, "3#4":1, "3#6":2, "3#16":3,
                  "4#5":2, "4#17":3, "5#6":0, "6#7":0, "7#8":0, "8#9":0, "9#10":0, "10#11":3,
@@ -57,7 +56,7 @@ def is_good_match(match, percent, relation, img_size):
         # the second image is down left to the first image
         if match[0] < (percent[0] * img_size[0]) and match[2] > ((1.0 - percent[1]) * img_size[0]) and
            match[1] > ((1.0 - percent[0]) * img_size[1]) and match[3] < (percent[1] * img_size[1]):
-           return True 
+           return True
     return False
 
 
