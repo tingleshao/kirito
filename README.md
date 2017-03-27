@@ -9,7 +9,7 @@ g++ -ggdb feature_finder.cpp -o feature_finder `pkg-config --cflags --libs openc
 
 ### Then type
 ```bash
-python3 automatic_with_opencv.py [threshold for matching: recommend 0.1].
+python3 automatic_with_opencv.py [threshold for matching: recommend 0.1]
 ```
 
 ### for example:
