@@ -6,7 +6,7 @@
 1. [Install OpenCV from source on Ubuntu](#Install-OpenCV)
 2. [Run our script](#Run)
 
-## Install OpenCV from source on Ubuntu
+## Install OpenCV from source on Ubuntu <a name="Install-OpenCV"></a>
 
 First upgrade pre-installed packages:
 ```bash
@@ -69,7 +69,7 @@ cd ~/usr/local/lib/python3.4/site-packages/
 ln -s /usr/local/lib/python3.4/site-packages/cv2.cpython-34m.so cv2.so
 ```
 
-## Run our script
+## Run our script <a name="Run"></a>
 
 ### To use the tool, first compile the opencv feature finder program in the current directory:
 ```bash
