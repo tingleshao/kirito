@@ -1,7 +1,5 @@
+# For every image pair, we examine if the matched features are inside the overlaopping regions, if not then we remove it.
 
-# Make it:
-# for every image pair, we examine if the matched features are between the 30%, if not then we remove it.
-#
 
 relations = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 img_size = [1033, 581]
