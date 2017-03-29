@@ -4,6 +4,13 @@
 
 ## Install OpenCV from source
 
+first upgrade pre-installed packages:
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+
 
 ## Run our script
 
