@@ -86,3 +86,8 @@ python3 automatic_with_opencv.py [threshold for matching: recommend 0.1]
 ```bash
 python3 automatic_with_opencv.py 0.1
 ```
+
+### Finally, convert the pto file into Saccade model file:
+```bash
+python3 HuginMakeSaccadeConfig.py optimized.pto model.json
+```
