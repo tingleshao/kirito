@@ -3,9 +3,8 @@
 ### You should have Hugin installed in your system, and you should current be in a directory with a runnable compiled feature_finder cpp program.
 
 ## Table of Contents
-1. [Install OpenCV from source on Ubuntu](###Install OpenCV from source on Ubuntu)
-2. [Run our script](###Run our script)
-
+1. [Install OpenCV from source on Ubuntu](#Install-OpenCV)
+2. [Run our script](#Run)
 
 ## Install OpenCV from source on Ubuntu
 
