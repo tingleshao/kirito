@@ -72,7 +72,7 @@ ln -s /usr/local/lib/python3.4/site-packages/cv2.cpython-34m.so cv2.so
 g++ -ggdb feature_finder.cpp -o feature_finder `pkg-config --cflags --libs opencv`
 ```
 
-### Then type
+### Then make sure all images are in current directory, in the format xx.xx.xx.xx_sensorx.jpg. Type
 ```bash
 python3 automatic_with_opencv.py [threshold for matching: recommend 0.1]
 ```
