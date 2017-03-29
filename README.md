@@ -2,7 +2,7 @@
 
 ### You should have Hugin installed in your system, and you should current be in a directory with a runnable compiled feature_finder cpp program.
 
-## Install OpenCV from source
+## Install OpenCV from source on Ubuntu
 
 First upgrade pre-installed packages:
 ```bash
@@ -62,7 +62,7 @@ sudo make install
 sudo ldconfig
 
 cd ~/usr/local/lib/python3.4/site-packages/
-ln -s /usr/local/lib/python3.4/site-packages/cv2.cpython-34m.so cv2.so 
+ln -s /usr/local/lib/python3.4/site-packages/cv2.cpython-34m.so cv2.so
 ```
 
 ## Run our script
