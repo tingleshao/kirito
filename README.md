@@ -73,7 +73,7 @@ g++ -ggdb feature_finder.cpp -o feature_finder `pkg-config --cflags --libs openc
 ```
 
 ### Then make sure all images are in current directory, in the format xx.xx.xx.xx_sensorX.jpg.
-## Type
+### Type
 ```bash
 python3 automatic_with_opencv.py [threshold for matching: recommend 0.1]
 ```
