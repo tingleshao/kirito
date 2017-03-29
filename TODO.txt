@@ -1,4 +1,3 @@
 TODOs:
 
 1. Tune the HuginMakeSaccadeConfig.py script.
-2. Better feature extraction and ordering. 
