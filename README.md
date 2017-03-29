@@ -2,6 +2,11 @@
 
 ### You should have Hugin installed in your system, and you should current be in a directory with a runnable compiled feature_finder cpp program.
 
+## Install OpenCV from source
+
+
+## Run our script
+
 ### To use the tool, first compile the opencv feature finder program in the current directory:
 ```bash
 g++ -ggdb feature_finder.cpp -o feature_finder `pkg-config --cflags --libs opencv`
