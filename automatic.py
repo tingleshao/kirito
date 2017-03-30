@@ -2,8 +2,6 @@ from subprocess import call
 
 import os
 
-# TODO: rename the image files
-
 
 # generating project file
 os.system("pto_gen -o init.pto *.jpg")

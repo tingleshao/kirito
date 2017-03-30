@@ -2,10 +2,8 @@
 # process:
 # 1. read in the images,
 # 2. find features in all images, including the global one
-# 3.
-# 4.
-# 5.
-# 6.
+# 3. filter out matches, only leave matches between small view and global view
+# 4. run model estimation
 
 enhance_image = False
 rename_files = False
@@ -16,7 +14,6 @@ clean_up = False
 # global view has id 0
 sensor_id_map = [(1, 1, 17), (1, 2, 16), (2, 1, 15), (3, 1, 14), (4, 1, 13), (4, 2, 12), (5, 1, 4), (5, 2, 3), (2, 2, 2), (3, 2, 1), (8, 1, 0), (8, 2, 11),
                  (9, 1, 5), (9, 2, 6), (6, 1, 7), (6, 2, 8), (10, 1, 9), (10, 2, 10), (7, 1, 0)]
-
 
 if rename_file:
     os.system("mdkir old_order_images")
