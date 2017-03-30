@@ -52,7 +52,7 @@ cd ~
 git clone https://github.com/opencv/opencv_contrib.git
 git checkout 3.1.0
 
-cd ~/opencv2
+cd ~/opencv
 mkdir build
 cd build
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
