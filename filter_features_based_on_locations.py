@@ -1,7 +1,6 @@
 # For every image pair, we examine if the matched features are inside the overlaopping regions, if not then we remove it.
 
 
-relations = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 img_size = [1033, 581]
 
 relations_map = {"0#1": 1, "0#9":2, "0#11":0, "0#13":3, "1#2":1, "1#8":2, "1#14":3,
@@ -14,7 +13,7 @@ relations_map = {"0#1": 1, "0#9":2, "0#11":0, "0#13":3, "1#2":1, "1#8":2, "1#14"
 
 
 def is_good_match(match, percent, relation, img_size):
-    # match format: [x1, y1, x2, y2]
+    # match format: [x1, y1x2, y2]
     # percent: (p1, p2) the percentage of overlapping in the images
     # relation: the second image relate to the first one,
     # e: 0, w: 1, n: 2, s: 3, ne: 4, nw: 5, se: 6, sw: 7
@@ -95,6 +94,7 @@ def main():
 
     with open("parsed_output_2.txt", 'w') as output_file:
         output_file.write(output_str)
+
 
 if __name__ == '__main__':
     main()
