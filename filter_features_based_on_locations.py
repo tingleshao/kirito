@@ -74,7 +74,7 @@ def main():
             line = lines[curr_i]
             tokens = line.split(' ')
             match = [float(tokens[0]), float(tokens[1]), float(tokens[2]), float(tokens[3])]
-            percent = [0.18, 0.12]
+            percent = [0.20, 0.24]
             key = str(curr_key[0]) + "#" + str(curr_key[1])
             reverse_key = str(curr_key[1]) + "#" + str(curr_key[0])
             if key in relations_map: # has_key() was removed in Python 3
