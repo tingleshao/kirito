@@ -2,7 +2,7 @@ import matched
 import cv2
 
 # parse the plain text output into hugin style
-# t he opencv feature extraction is on images with scale 581 x xxx
+# the opencv feature extraction is on images with scale 581 x xxx
 # hugin uses the original image resolution
 # 2160 x xxxx
 adjacernt_map = [[1, 8, 9, 10, 11, 12, 13, 14],[0, 2, 7, 8, 9, 13, 14, 15],[1, 3, 6, 7, 8, 14, 15, 16],
