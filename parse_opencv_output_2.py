@@ -17,12 +17,14 @@ def main():
                 # TODO; here replace 0 with @
                 output = output + "# {} {}\n".format(src_img_idx, dst_img_idx)
             elif line[0:7] == 'matches':
+                query_id = float(tokens[5])
                 query_x = float(tokens[9])
                 query_y = float(tokens[10])
+                train_id = float(tokens[13])
                 train_x = float(tokens[17])
                 train_y = float(tokens[18])
                 distance = float(tokens[20])
-                output = output + "{0} {1} {2} {3} {4}\n".format(query_x, query_y, train_x, train_y, distance)
+                output = output + "{0} {1} {2} {3} {4} {5} {6}\n".format(query_x, query_y, train_x, train_y, distance, query_id, train_id)
     with open("parsed_output.txt", "w") as text_file:
         text_file.write(output)
 
