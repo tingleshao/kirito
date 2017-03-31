@@ -24,7 +24,6 @@ if use_ip_files:
     os.system("mv *.jpg old_order_images")
     for item in sensor_id_map:
         ip = int(item[0]/1)
-        print(ip)
         sensor_id = int(item[1])
         old_id = item[2]
         os.system("cp old_order_images/10.0.2.{0}_sensor{1}.jpg mcam_{2}_scale_2.jpg".format(ip, sensor_id, old_id+1))
@@ -39,7 +38,7 @@ os.system("./feature_finder mcam_0_scale_2.jpg mcam_1_scale_2.jpg mcam_2_scale_2
 
 # convert the output into a simplified format
 # NOTE here, we represent the global view using "@", since "0" has been used for "1"
-os.system("python3 parse_opencv_output_2.py sample_output_0.txt")
+os.system("python3 parse_opencv_output_2.py feature_finder_output.txt")
 
 # remove the false matches by limiting the pixel coordinates to be the overlapping regions
 #os.system("python3 filter_features_based_on_locations_2.py")
