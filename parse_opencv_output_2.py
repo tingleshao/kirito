@@ -1,8 +1,7 @@
 from sys import argv
-
-
 # convert the opencv output into some plain text format, which is easier to be
 #   passed into later stages
+
 
 def main():
     with opencv(argv[1]) as opencv_output:
