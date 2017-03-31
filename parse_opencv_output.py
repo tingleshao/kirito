@@ -20,7 +20,6 @@ def main():
             train_y = float(tokens[18])
             distance = float(tokens[20])
             output = output + "{0} {1} {2} {3} {4}\n".format(query_x, query_y, train_x, train_y, distance)
-#    print(output)
     with open("parsed_output.txt", "w") as text_file:
         text_file.write(output)
 

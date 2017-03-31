@@ -40,8 +40,11 @@ os.system("./feature_finder mcam_0_scale_2.jpg mcam_1_scale_2.jpg mcam_2_scale_2
 # NOTE here, we represent the global view using "@", since "0" has been used for "1"
 os.system("python3 parse_opencv_output_2.py feature_finder_output.txt")
 
+# remove the false matches by limiting the features to be found on global view
+os.system("python3 filter_features_based_on_global_view.py")
+
 # remove the false matches by limiting the pixel coordinates to be the overlapping regions
-#os.system("python3 filter_features_based_on_locations_2.py")
+os.system("python3 filter_features_based_on_locations_2.py")
 
 # convert the simplified output to hugin format
 #os.system("python3 parse_output_for_hugin_2.py")
