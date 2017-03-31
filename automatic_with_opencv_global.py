@@ -1,4 +1,6 @@
-# TODO: this script does the similar thing as automatic_with_opencv.py, but includes the global view image in the stitching.
+import os
+import sys
+# This script does the similar thing as automatic_with_opencv.py, but includes the global view image in the stitching.
 # process:
 # 1. read in the images,
 # 2. find features in all images, including the global one
@@ -11,8 +13,8 @@ clean_up = False
 
 # this map is different than the one in the other script: it contians the global view
 # global view has id 0
-sensor_id_map = [(1, 1, 17), (1, 2, 16), (2, 1, 15), (3, 1, 14), (4, 1, 13), (4, 2, 12), (5, 1, 4), (5, 2, 3), (2, 2, 2), (3, 2, 1), (8, 1, 0), (8, 2, 11),
-                 (9, 1, 5), (9, 2, 6), (6, 1, 7), (6, 2, 8), (10, 1, 9), (10, 2, 10), (7, 1, 0)]
+sensor_id_map = [(1, 1, 17), (1, 2, 16), (2, 1, 15), (3, 1, 14), (4, 1, 13), (4, 2, 12), (5, 1, 4), (5, 2, 3), (2, 2, 2), (3, 2, 1),
+                 (8, 1, 0), (8, 2, 11), (9, 1, 5), (9, 2, 6), (6, 1, 7), (6, 2, 8), (10, 1, 9), (10, 2, 10), (7, 1, 0)]
 
 if use_ip_files:
     os.system("mkdir old_order_images")
@@ -29,7 +31,7 @@ if use_ip_files:
             cv2.imwrite("mcam_{0}_scale_2.jpg".format(old_id+1), new_img)
 
 # call the opencv customized
-os.system("./feature_finder mcam_0_scale_2.jpg mcam_1_scale_2.jpg mcam_2_scale_2.jpg mcam_3_scale_2.jpg mcam_4_scale_2.jpg mcam_5_scale_2.jpg mcam_6_scale_2.jpg mcam_7_scale_2.jpg mcam_8_scale_2.jpg mcam_9_scale_2.jpg mcam_10_scale_2.jpg  mcam_11_scale_2.jpg mcam_12_scale_2.jpg mcam_13_scale_2.jpg mcam_14_scale_2.jpg mcam_15_scale_2.jpg mcam_16_scale_2.jpg mcam_17_scale_2.jpg mcam_18_scale_2.jpg --features orb --match_conf " + sys.argv[1] + " --rangewidth 8 --conf_thresh 0.5 | tee sample_output_0.txt"
+os.system("./feature_finder mcam_0_scale_2.jpg mcam_1_scale_2.jpg mcam_2_scale_2.jpg mcam_3_scale_2.jpg mcam_4_scale_2.jpg mcam_5_scale_2.jpg mcam_6_scale_2.jpg mcam_7_scale_2.jpg mcam_8_scale_2.jpg mcam_9_scale_2.jpg mcam_10_scale_2.jpg  mcam_11_scale_2.jpg mcam_12_scale_2.jpg mcam_13_scale_2.jpg mcam_14_scale_2.jpg mcam_15_scale_2.jpg mcam_16_scale_2.jpg mcam_17_scale_2.jpg mcam_18_scale_2.jpg --features orb --match_conf " + sys.argv[1] + " --rangewidth 8 --conf_thresh 0.5 | tee feature_finder_output.txt")
 
 # convert the output into a simplified format
 # NOTE here, we represent the global view using "@", since "0" has been used for "1"
@@ -50,7 +52,6 @@ os.system("./feature_finder mcam_0_scale_2.jpg mcam_1_scale_2.jpg mcam_2_scale_2
 #os.system("cpclean -o pruning_pts2.pto pruning_pts.pto")
 
 #os.system("autooptimiser -a -l -s -m -o optimized.pto pruning_pts2.pto")
-
 
 if clean_up:
     os.system("rm *.txt")
