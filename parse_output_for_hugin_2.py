@@ -1,6 +1,7 @@
 import matched
 import cv2
 
+
 # parse the plain text output into hugin style
 # the opencv feature extraction is on images with scale 581 x xxx
 # hugin uses the original image resolution
@@ -9,10 +10,12 @@ adjacernt_map = [[1, 8, 9, 10, 11, 12, 13, 14],[0, 2, 7, 8, 9, 13, 14, 15],[1, 3
                 [2, 4, 5, 6, 7, 15, 16, 17],[3, 5, 6, 16, 17],[3, 4, 6],[2, 3, 4, 5, 7],[1, 2, 3, 6, 8],
                 [0, 1, 2, 7, 9],[0, 1, 8, 10, 11], [0, 9, 11],[0, 9, 10, 12, 13],[0, 11, 13],[0, 1, 11, 12, 14],
                 [0, 1, 2, 13, 15],[1, 2, 3, 14, 16],[2, 3, 4, 15, 17],[3, 4, 16]]
+scaled_image_h = 581.0
+original_image_h = 2160.0
 
 
 def main():
-    ratio = 2160.0 / 581.0
+    ratio = original_image_h / scaled_image_h
     with open("parsed_output_2.txt") as inpust_file:
         text = input_file.read()
     lines = text.split('\n')
