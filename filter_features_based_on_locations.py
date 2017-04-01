@@ -58,7 +58,7 @@ def is_good_match(match, percent, relation, img_size):
 
 
 def main():
-    with open('parsed_output.txt') as input_file:
+    with open("parsed_output.txt") as input_file:
         text = input_file.read()
     lines = text.split('\n')
     curr_idx = 0
