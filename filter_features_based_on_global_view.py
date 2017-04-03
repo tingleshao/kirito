@@ -11,7 +11,6 @@
 #   img, choose the one with smallest distance
 
 
-
 def main():
     # build the map
     global_img_matching_map = {}
@@ -70,5 +69,5 @@ def main():
         values_lst = []
         dist_lst = []
         if 0 in curr_key:
-        else: 
+        else:
             output_str = output_str = line + "\n"
