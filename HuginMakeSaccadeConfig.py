@@ -69,11 +69,12 @@ def parse(pano, filename):
 					print("found the equals")
 				else:
 					F=float(width)/(math.pi*float(fov)/180)
-					F=41578.58/float(fov)
+				#	F=41578.58/float(fov)
+					F=220363.4/float(fov) # = 41578* 5.2
 				print("f is "+str(F))
 
 				m=re.search('mcam_\S+.',temp)
-				slot=(temp[m.start():m.end()].split('_')[1])
+				slot=(temp[m.start():m.end()].split('.')[0].split('_')[1])
 				print("slot is "+str(slot))
 
 				m=re.search('\sVb\S+\s',temp)

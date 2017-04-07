@@ -1,0 +1,128 @@
+{
+	"camera_stitch_params": {
+		"version": 4,
+		"global": {
+			"vig_poly_red": [
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[1]
+			],
+			"vig_poly_green": [
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[1]
+			],
+			"vig_poly_blue": [
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[0],
+				[1]
+			],
+			"pixel_size": 0.00586,
+			"sensorwidth": 1920,
+			"sensorheight": 1080,
+			"focal_length": 35
+		},
+		"microcameras": [
+				{
+				"Slot": 0,
+				"Sensorcal": [
+					"1",
+					"1",
+					"1",
+					"1"
+				],
+				"gain": 1,
+				"vigoffset_x": 0,
+				"vigoffset_y": 0,
+				"Yaw": -6.1526,
+				"Pitch": 17.6126,
+				"Roll": -0.43356,
+				"K1": 0.012654,
+				"OFFSET_X": 0,
+				"OFFSET_Y": 0,
+				"F": 7888.48
+			},
+				{
+				"Slot": 1,
+				"Sensorcal": [
+					"1",
+					"1",
+					"1",
+					"1"
+				],
+				"gain": 1.800851844,
+				"vigoffset_x": 0,
+				"vigoffset_y": 0,
+				"Yaw": -5.7725,
+				"Pitch": 10.6876,
+				"Roll": -3.9396,
+				"K1": -0.0037824,
+				"OFFSET_X": 0,
+				"OFFSET_Y": 0,
+				"F": 7762.42
+			},
+				{
+				"Slot": 2,
+				"Sensorcal": [
+					"1",
+					"1",
+					"1",
+					"1"
+				],
+				"gain": 1,
+				"vigoffset_x": 0,
+				"vigoffset_y": 0,
+				"Yaw": 4.0333,
+				"Pitch": 10.4328,
+				"Roll": 0.11638,
+				"K1": -0.011389,
+				"OFFSET_X": 0,
+				"OFFSET_Y": 0,
+				"F": 7846.33
+			},
+				{
+				"Slot": 3,
+				"Sensorcal": [
+					"1",
+					"1",
+					"1",
+					"1"
+				],
+				"gain": 1,
+				"vigoffset_x": 0,
+				"vigoffset_y": 0,
+				"Yaw": 5.029,
+				"Pitch": 16.1465,
+				"Roll": -3.3831,
+				"K1": 0.0028473,
+				"OFFSET_X": 0,
+				"OFFSET_Y": 0,
+				"F": 8016.83
+			}
+		]
+	}
+}
