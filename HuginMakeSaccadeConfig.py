@@ -73,8 +73,10 @@ def parse(pano, filename):
 					F=220363.4/float(fov) # = 41578* 5.2
 				print("f is "+str(F))
 
-				m=re.search('mcam_\S+.',temp)
-				slot=(temp[m.start():m.end()].split('.')[0].split('_')[1])
+				#m=re.search('mcam_\S+.',temp)
+				#slot=(temp[m.start():m.end()].split('.')[0].split('_')[1])
+				m=re.search('1700\S+.',temp)
+				slot=temp[m.start()-3:m.end()].split('.')[0]
 				print("slot is "+str(slot))
 
 				m=re.search('\sVb\S+\s',temp)
