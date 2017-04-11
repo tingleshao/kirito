@@ -44,20 +44,20 @@ os.system("python3 parse_opencv_output_2.py feature_finder_output.txt")
 os.system("python3 filter_features_based_on_global_view.py")
 
 # remove the false matches by limiting the pixel coordinates to be the overlapping regions
-#os.system("python3 filter_features_based_on_locations.py")
+os.system("python3 filter_features_based_on_locations.py")
 
 # convert the simplified output to hugin format
-#os.system("python3 parse_output_for_hugin.py")
+os.system("python3 parse_output_for_hugin.py")
 
 # put all the parts togethero generate the pto file
-#os.system("python3 generate_hugin_input.py")
+os.system("python3 generate_hugin_input.py")
 
 # use hugin tools to filter features, and genrate paranoma
-#os.system("celeste_standalone -i test0.pto -o pruning_pts.pto")
+os.system("celeste_standalone -i test0.pto -o pruning_pts.pto")
 
-#os.system("cpclean -o pruning_pts2.pto pruning_pts.pto")
+os.system("cpclean -o pruning_pts2.pto pruning_pts.pto")
 
-#os.system("autooptimiser -a -l -s -m -o optimized.pto pruning_pts2.pto")
+os.system("autooptimiser -a -l -s -m -o optimized.pto pruning_pts2.pto")
 
 if clean_up:
     os.system("rm *.txt")

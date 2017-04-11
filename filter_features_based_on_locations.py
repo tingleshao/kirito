@@ -64,11 +64,11 @@ def main():
     output_str = ''
     while curr_idx < len(lines) and len(lines[curr_idx]) > 0:
         line = lines[curr_idx]
-        curr_key = (int(float(line.split(' ')[1])), int(float(line.split(' ')[2])))
+        curr_key = (int(float(line.split(' ')[1]))-1, int(float(line.split(' ')[2]))-1)
         curr_i = curr_idx + 1
         values_lst = []
         dist_lst = []
-        output_str = output_str + line + "\n"
+        output_str = output_str + "# " + str(curr_key[0]) + " " + str(curr_key[1]) + "\n"
         while curr_i < len(lines) and len(lines[curr_i]) > 0 and lines[curr_i][0] != '#':
             line = lines[curr_i]
             tokens = line.split(' ')

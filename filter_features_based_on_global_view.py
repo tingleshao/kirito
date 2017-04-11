@@ -18,7 +18,6 @@ def main():
         text = input_file.read()
     lines = text.split('\n')
     curr_idx = 0
-    output_str = ''
     while curr_idx < len(lines) and len(lines[curr_idx]) > 0:
         line = lines[curr_idx]
         curr_key = (int(float(line.split(' ')[1])), int(float(line.split(' ')[2])))
@@ -77,7 +76,7 @@ def main():
         dist_lst = []
         if 0 not in curr_key:
             # if the current matched featrues are also matched pairs in the global map, add this line
-            output_str = output_str = line + "\n"
+            output_str = output_str + line + "\n"
             while curr_i < len(lines) and len(lines[curr_i]) > 0 and lines[curr_i][0] != '#':
                 line = lines[curr_i]
                 tokens = line.split(' ')
@@ -101,8 +100,10 @@ def main():
                     this_matched_list = this_global_matcher[0]
                     that_matched_list = that_global_matcher[0]
                     if this_matched_list == that_matched_list:
-                        print("find a line: " + line)
+                    #    print("find a line: " + line)
                         output_str = output_str + line + "\n"
+                    #    print("output_str: " + output_str)
+                    #    print("====================\n")
                 curr_i = curr_i + 1
         else:
             while curr_i < len(lines) and len(lines[curr_i]) > 0 and lines[curr_i][0] != '#':

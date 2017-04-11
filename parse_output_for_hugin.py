@@ -36,6 +36,7 @@ def main():
     while curr_idx < len(lines) and len(lines[curr_idx]) > 0:
         line = lines[curr_idx]
         curr_key = (int(float(line.split(' ')[1])), int(float(line.split(' ')[2])))
+        print("curr_key: " + str(curr_key))
         curr_i = curr_idx + 1
         values_lst = []
         dist_lst = []
