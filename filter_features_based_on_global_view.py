@@ -32,12 +32,15 @@ def main():
                 other_img_feature_id = int(tokens[6])
                 global_img_feature_id = int(tokens[5])
                 curr_distance = float(tokens[4])
-                if other_img_feature_id in global_img_matching_map[curr_key[1]]:
-                    existing_distance = global_img_matching_map[curr_key[1]][other_img_feature_id][1]
-                    if existing_distance > curr_distance:
+                if curr_key[1] in global_img_matching_map:
+                    if other_img_feature_id in global_img_matching_map[curr_key[1]]:
+                        existing_distance = global_img_matching_map[curr_key[1]][other_img_feature_id][1]
+                        if existing_distance > curr_distance:
+                            global_img_matching_map[curr_key[1]][other_img_feature_id] = [global_img_feature_id, curr_distance]
+                    else:
                         global_img_matching_map[curr_key[1]][other_img_feature_id] = [global_img_feature_id, curr_distance]
                 else:
-                    global_img_matching_map[curr_key[1]][other_img_feature_id] = [global_img_feature_id, curr_distance]
+                    global_img_matching_map[curr_key[1]] = {other_img_feature_id: [global_img_feature_id, curr_distance]}
                 curr_i = curr_i + 1
         elif curr_key[1] == 0:
             # second image is global view
@@ -47,12 +50,15 @@ def main():
                 other_img_feature_id = int(tokens[5])
                 global_img_feature_id = int(tokens[6])
                 curr_distance = float(tokens[4])
-                if other_img_feature_id in global_img_matching_map[curr_key[0]]:
-                    existing_distance = global_img_matching_map[curr_key[1]][other_img_feature_id][1]
-                    if existing_distance > curr_distance:
+                if curr_key[0] in global_img_matching_map:
+                    if other_img_feature_id in global_img_matching_map[curr_key[0]]:
+                        existing_distance = global_img_matching_map[curr_key[0]][other_img_feature_id][1]
+                        if existing_distance > curr_distance:
+                            global_img_matching_map[curr_key[0]][other_img_feature_id] = [global_img_feature_id, curr_distance]
+                    else:
                         global_img_matching_map[curr_key[0]][other_img_feature_id] = [global_img_feature_id, curr_distance]
                 else:
-                    global_img_matching_map[curr_key[0]][other_img_feature_id] = [global_img_feature_id, curr_distance]
+                    global_img_feature_id[curr_key[0]] = {other_img_feature_id: [global_img_feature_id, curr_distance]}
                 curr_i = curr_i + 1
         curr_idx = curr_i
 
@@ -69,9 +75,7 @@ def main():
         curr_i = curr_idx + 1
         values_lst = []
         dist_lst = []
-        if 0 in curr_key:
-            continue
-        else:
+        if 0 not in curr_key:
             # if the current matched featrues are also matched pairs in the global map, add this line
             output_str = output_str = line + "\n"
             while curr_i < len(lines) and len(lines[curr_i]) > 0 and lines[curr_i][0] != '#':
@@ -96,10 +100,12 @@ def main():
                 # compare two lists see if there is anything in common
                     this_matched_list = this_global_matcher[0]
                     that_matched_list = that_global_matcher[0]
-                    for i in this_matched_list:
-                        if i in that_matched_list:
-                            output_str = output_str + line + "\n"
-                            break
+                    if this_matched_list == that_matched_list:
+                        print("find a line: " + line)
+                        output_str = output_str + line + "\n"
+                curr_i = curr_i + 1
+        else:
+            while curr_i < len(lines) and len(lines[curr_i]) > 0 and lines[curr_i][0] != '#':
                 curr_i = curr_i + 1
         curr_idx = curr_i
     with open("parsed_output_2.txt", 'w') as output_file:
