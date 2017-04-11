@@ -6,7 +6,7 @@ import os
 stage = sys.argv[1]
 # generating project file
 if stage == '0':
-    os.system("pto_gen -f 14.4 -o init.pto mcam_1_scale_2.jpg mcam_2_scale_2.jpg mcam_3_scale_2.jpg mcam_4_scale_2.jpg mcam_5_scale_2.jpg mcam_6_scale_2.jpg mcam_7_scale_2.jpg mcam_8_scale_2.jpg mcam_9_scale_2.jpg mcam_10_scale_2.jpg  mcam_11_scale_2.jpg mcam_12_scale_2.jpg mcam_13_scale_2.jpg mcam_14_scale_2.jpg mcam_15_scale_2.jpg mcam_16_scale_2.jpg mcam_17_scale_2.jpg mcam_18_scale_2.jpg")
+    os.system("pto_gen -f 14.4 -o init.pto *.jpg")
 
 elif stage == '1':
 # generating control points
@@ -22,4 +22,5 @@ elif stage == '1':
 # optimizing positions and geometry
     os.system("autooptimiser -a -l -s -m -o optimized.pto lines.pto");
 
-    os.system("hugin_executor --stitching --prefix=prefix optimized.pto")
+    os.system("python3 HuginMakeSaccadeConfig.py optimized.pto model.json")
+    #os.system("hugin_executor --stitching --prefix=prefix optimized.pto")
