@@ -38,27 +38,26 @@ if use_ip_files:
 os.system("./feature_finder mcam_0_scale_2.jpg mcam_1_scale_2.jpg mcam_2_scale_2.jpg mcam_3_scale_2.jpg mcam_4_scale_2.jpg mcam_5_scale_2.jpg mcam_6_scale_2.jpg mcam_7_scale_2.jpg mcam_8_scale_2.jpg mcam_9_scale_2.jpg mcam_10_scale_2.jpg  mcam_11_scale_2.jpg mcam_12_scale_2.jpg mcam_13_scale_2.jpg mcam_14_scale_2.jpg mcam_15_scale_2.jpg mcam_16_scale_2.jpg mcam_17_scale_2.jpg mcam_18_scale_2.jpg --features orb --match_conf " + sys.argv[1] + " --rangewidth 8 --conf_thresh 0.5 | tee feature_finder_output.txt")
 
 # convert the output into a simplified format
-# NOTE here, we represent the global view using "@", since "0" has been used for "1"
-os.system("python3 parse_opencv_output_2.py feature_finder_output.txt")
+os.system("python3 parse_opencv_output.py feature_finder_output.txt")
 
 # remove the false matches by limiting the features to be found on global view
 os.system("python3 filter_features_based_on_global_view.py")
 
 # remove the false matches by limiting the pixel coordinates to be the overlapping regions
-os.system("python3 filter_features_based_on_locations_2.py")
+os.system("python3 filter_features_based_on_locations.py")
 
 # convert the simplified output to hugin format
-#os.system("python3 parse_output_for_hugin_2.py")
+os.system("python3 parse_output_for_hugin.py")
 
 # put all the parts togethero generate the pto file
-#os.system("python3 generate_hugin_input_2.py")
+os.system("python3 generate_hugin_input.py")
 
 # use hugin tools to filter features, and genrate paranoma
-#os.system("celeste_standalone -i test0.pto -o pruning_pts.pto")
+os.system("celeste_standalone -i test0.pto -o pruning_pts.pto")
 
-#os.system("cpclean -o pruning_pts2.pto pruning_pts.pto")
+os.system("cpclean -o pruning_pts2.pto pruning_pts.pto")
 
-#os.system("autooptimiser -a -l -s -m -o optimized.pto pruning_pts2.pto")
+os.system("autooptimiser -a -l -s -m -o optimized.pto pruning_pts2.pto")
 
 if clean_up:
     os.system("rm *.txt")

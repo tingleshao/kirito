@@ -28,6 +28,7 @@ def main():
             while curr_i < len(lines) and len(lines[curr_i]) > 0 and lines[curr_i][0] != '#':
                 line = lines[curr_i]
                 tokens = line.split(' ')
+                print("tokens" + str(tokens))
                 other_img_feature_id = int(tokens[6])
                 global_img_feature_id = int(tokens[5])
                 curr_distance = float(tokens[4])
@@ -101,7 +102,7 @@ def main():
                             break
                 curr_i = curr_i + 1
         curr_idx = curr_i
-    with open("parsed_output.txt", 'w') as output_file:
+    with open("parsed_output_2.txt", 'w') as output_file:
         output_file.write(output_str)
 
 

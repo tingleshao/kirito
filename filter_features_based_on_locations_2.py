@@ -2,8 +2,7 @@
 # if not, we neglect them
 
 
- img_size = [1033, 581]
- # TODO: for global view, do we have a different image size?
+img_size = [1033, 581]
 
 relations_map = {"0#1": 1, "0#9":2, "0#11":0, "0#13":3, "1#2":1, "1#8":2, "1#14":3,
                  "2#3":1, "2#7":2, "2#15":3, "3#4":1, "3#6":2, "3#16":3,
@@ -41,7 +40,6 @@ def main():
             percent = [0.18, 0.12]
             key = str(curr_key[0]) + "#" + str(curr_key[1])
             reverse_key = str(curr_key[1]) + "#" + str(curr_key[0])
-            # TODO: consider the global view case
             if key in relations_map:
                 relation = relations_map[key]
                 if is_good_match(match, percent, relaiton, img_size):

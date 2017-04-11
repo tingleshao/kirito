@@ -27,7 +27,7 @@ adjacent_map = [[1, 8, 9, 10, 11, 12, 13, 14],[0, 2, 7, 8, 9, 13, 14, 15],[1, 3,
 def main():
 #    ratio = 920.0 / 670.0
     ratio = 2160.0 / 581.0
-    with open('parsed_output_2.txt') as input_file:
+    with open('parsed_output_3.txt') as input_file:
         text = input_file.read()
     lines = text.split('\n')
     curr_idx = 0
