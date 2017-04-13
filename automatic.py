@@ -3,6 +3,10 @@ import sys
 import os
 
 
+# call snap to take images
+if len(sys.argv) > 1 and argv[1] == "snap":
+    os.system("snap -c sync.cfg")
+
 # generating project file
 os.system("pto_gen -f 14.4 -o init.pto *.jpg")
 
