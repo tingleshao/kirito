@@ -15,7 +15,7 @@ os.system("python3 update_crop_factor.py init.pto")
 os.system("cpfind --multirow -o control_pts.pto init2.pto")
 
 # pruning control points
-os.system("cpclean -o  control_pts2.pto control_pts.pto")
+os.system("cpclean -o control_pts2.pto control_pts.pto")
 
 os.system("celeste_standalone -i control_pts2.pto -o pruning_pts.pto")
 
