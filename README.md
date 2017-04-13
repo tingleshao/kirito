@@ -1,10 +1,50 @@
 # kirito
 
-### You should have Hugin installed in your system, and you should current be in a directory with a runnable compiled feature_finder cpp program.
+##### This repository contains a set of Python scripts and C/C++ programs for multi-row image stitiching.
+
+
 
 ## Table of Contents
+0. [Introduction](#Introduction)
+0. [Required libraries](#Requirements)
 1. [Install OpenCV from source on Ubuntu](#Install-OpenCV)
-2. [Run our script](#Run)
+2. [Run stitching script](#Run)
+
+
+## Introduction <a name="Introduction"></a>
+#### Currently there are three separate stitching process implemented. They are:
+1. Completely Hugin-based stitching (recommended)
+2. OpenCV + Hugin (not recommended)
+3. OpenCV + Hugin + Making use of the global view image (not as robust as process 1. But will be improved later)
+
+#### How do they work?
+
+#### 0. Common points
+All three processes take input:
+A list of images that can potentially be stitched together.
+And produces outputs:
+1. optimized.pto: a project file that can be opened by Hugin.
+2. model.json: a model file taht can be openend by Saccade.
+
+#### 1. Completely Hugin-based stitching
+Pure Hugin-based stitching contains the following stages:
+1. Initialize project
+2. Update the project file to set the crop factor equals 7
+3. Generate control points (visual feature locations)
+4. Clean up control points by removing ones that are likely to generate false matches
+5. Further clean up control points
+6. Find vertical lines in the images
+7. Run optimization to find a stitching
+9. Run Python script to generate a Saccade model file
+
+#### 2. OpenCV + Hugin
+To be continued...
+
+#### 3. OpenCV + Hugin + global view
+To be continued...
+
+## Required libraries <a name="Requirements"></a>
+You should have Hugin installed in your system, and you should current be in a directory with a runnable compiled feature_finder cpp program.
 
 ## Install OpenCV from source on Ubuntu <a name="Install-OpenCV"></a>
 
@@ -69,7 +109,7 @@ cd ~/usr/local/lib/python3.4/site-packages/
 ln -s /usr/local/lib/python3.4/site-packages/cv2.cpython-34m.so cv2.so
 ```
 
-## Run our script <a name="Run"></a>
+## Run stitching script <a name="Run"></a>
 
 ### To use the tool, first compile the opencv feature finder program in the current directory:
 ```bash
