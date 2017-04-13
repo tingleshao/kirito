@@ -15,9 +15,10 @@ def main():
             output_str  = output_str + "#-hugin  cropFactor=7" + '\n'
         else:
             output_str = output_str + line + '\n'
+        curr_idx = curr_idx + 1
     with open("init2.pto", 'w') as output_file:
         output_file.write(output_str)
-    
+
 
 if __name__ == "__main__":
     main()
