@@ -23,6 +23,7 @@
 All three processes take input:
 
 A list of images that can potentially be stitched together.
+
 And produces outputs:
 1. optimized.pto: a project file that can be opened by Hugin.
 2. model.json: a model file taht can be openend by Saccade.
