@@ -3,9 +3,7 @@ import sys
 import os
 
 
-#stage = sys.argv[1]
 # generating project file
-#if stage == '0':
 os.system("pto_gen -f 14.4 -o init.pto *.jpg")
 
 os.system("python3 update_crop_factor.py init.pto")
