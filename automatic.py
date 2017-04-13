@@ -7,7 +7,6 @@ import os
 os.system("pto_gen -f 14.4 -o init.pto *.jpg")
 
 os.system("python3 update_crop_factor.py init.pto")
-#elif stage == '1':
 # generating control points
 os.system("cpfind --multirow -o control_pts.pto init2.pto")
 
