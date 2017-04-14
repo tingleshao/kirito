@@ -32,8 +32,8 @@ def visualize(img1_name, match1, img2_name, match2):
         y2 = match2[i][1]
         draw1.ellipse((x1-r, y1-r, x1+r, y1+r), fill=(255,0,0,0))
         draw2.ellipse((x2-r, y2-r, x2+r, y2+r), fill=(255,0,0,0))
-        draw1.text((x1, y1), str(i), (255,255,255),font=font)
-        draw2.text((x2, y2), str(i), (255,255,255),font=font)
+        draw1.text((x1, y1), str(i), (255,255,255), font=font)
+        draw2.text((x2, y2), str(i), (255,255,255), font=font)
     img1.save("annonated" + img1_name)
     img2.save("annonated" + img2_name)
 
