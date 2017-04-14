@@ -15,7 +15,7 @@ def main():
     return None
 
 
-    
+
 def visualize(img1_name, match1, img2_name, match2):
     # feature locations are expected to be scaled and ordered
     img1 = Image.open(img1_name)
@@ -36,7 +36,6 @@ def visualize(img1_name, match1, img2_name, match2):
         draw2.text((x2, y2), str(i), (255,255,255),font=font)
     img1.save("annonated" + img1_name)
     img2.save("annonated" + img2_name)
-    #cv2.drawMatches(img1, keypoints1, img2, keypoints2, matches1to2[, outImg[, matchColor[, singlePointColor[, matchesMask[, flags]]]]]) → outImg
 
 
 if __name__ == "__main__":
