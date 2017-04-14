@@ -51,10 +51,13 @@ In this version of stitching, the feature finding stage is different.
 7. Same as stage 7 in completely Hugin-based stitching.
 
 #### 3. OpenCV + Hugin + global view
-This process is similar to OpenCV + Hugin process. Besides that after stage 1 in OpenCV + Hugin process, the features are first sent to another filter "filter_features_based_on_global_view.py". In this program, first only the features in each local view image that matches features in the global view image is kept. Then if there is a direct match between two features in two local view images in this set, and the two features share the same matched feature in the global view, they are considered as a good match. Other matches are ignored. Then the later stages are the same as OpenCV + Hugin process stage 2~7. 
+This process is similar to OpenCV + Hugin process. Besides that after stage 1 in OpenCV + Hugin process, the features are first sent to another filter "filter_features_based_on_global_view.py". In this program, first only the features in each local view image that matches features in the global view image is kept. Then if there is a direct match between two features in two local view images in this set, and the two features share the same matched feature in the global view, they are considered as a good match. Other matches are ignored. Then the later stages are the same as OpenCV + Hugin process stage 2~7.
 
 ## Required libraries <a name="Requirements"></a>
-You should have Hugin installed in your system, and you should current be in a directory with a runnable compiled feature_finder cpp program.
+0. You should have Python3 installed in your system.
+1. You should have Hugin installed in your system.
+2. For process 2 and process 3, you also need to have OpenCV installed and linked to Python3.
+3. The program has been tested on Ubuntu 16.04.
 
 ## Install OpenCV from source on Ubuntu <a name="Install-OpenCV"></a>
 
@@ -120,8 +123,12 @@ ln -s /usr/local/lib/python3.4/site-packages/cv2.cpython-34m.so cv2.so
 ```
 
 ## Run stitching script <a name="Run"></a>
+### To run pure Hugin based stitching, Type
+```bash
+python3 automatic.py
+```
 
-### To use the tool, first compile the opencv feature finder program in the current directory:
+### To run process 2 and 3, first compile the opencv feature finder program in the current directory:
 ```bash
 g++ -ggdb feature_finder.cpp -o feature_finder `pkg-config --cflags --libs opencv`
 ```
