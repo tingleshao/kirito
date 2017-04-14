@@ -12,13 +12,10 @@ from PIL import ImageDraw
 
 
 def main():
-    img1_name = # XXX:
-    img2_name = # XXX:
-    feature1 = # XXX:
-    feature2 = # XXX:
-    visualize(img1_name, match1, img2_name, match2)
+    return None
 
 
+    
 def visualize(img1_name, match1, img2_name, match2):
     # feature locations are expected to be scaled and ordered
     img1 = Image.open(img1_name)
