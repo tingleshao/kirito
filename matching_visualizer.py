@@ -20,11 +20,11 @@ def visualize(img1_name, match1, img2_name, match2):
     # feature locations are expected to be scaled and ordered
     img1 = Image.open(img1_name)
     img2 = Image.open(img2_name)
-    draw1 = ImageDraw.draw(img1)
-    draw2 = ImageDraw.draw(img2)
+    draw1 = ImageDraw.Draw(img1)
+    draw2 = ImageDraw.Draw(img2)
     num_of_matches = len(match1)
     r = 5
-    font = ImageFont.truetype("sans-serif.ttf", 16)
+    font = ImageFont.truetype("Skia.ttf", 16)
     for i in range(num_of_matches):
         x1 = match1[i][0]
         y1 = match1[i][1]

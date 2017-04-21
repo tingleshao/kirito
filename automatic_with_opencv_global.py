@@ -20,6 +20,11 @@ sensor_id_map = [(1, 1, 5), (1, 2, 6), (2, 1, 7), (3, 1, 9), (4, 1, 4), (4, 2, 3
                  (2, 2, 8), (3, 2, 10), (8, 1, 15), (8, 2, 14), (9, 1, 13), (9, 2, 12), (6, 1, 0),
                  (6, 2, 11), (7, 1, 17), (7, 2, 16), (10, 1, -1)]
 
+img_names = ["foo", "mcam_1_scale_2.jpg", "mcam_1_scale_2.jpg", "mcam_2_scale_2.jpg", "mcam_3_scale_2.jpg",
+            "mcam_4_scale_2.jpg", "mcam_5_scale_2.jpg", "mcam_6_scale_2.jpg", "mcam_7_scale_2.jpg", "mcam_8_scale_2.jpg",
+            "mcam_9_scale_2.jpg", "mcam_10_scale_2.jpg", "mcam_11_scale_2.jpg", "mcam_12_scale_2.jpg", "mcam_13_scale_2.jpg",
+            "mcam_14_scale_2.jpg", "mcam_15_scale_2.jpg", "mcam_16_scale_2.jpg", "mcam_17_scale_2.jpg", "mcam_18_scale_2.jpg"]
+
 
 if use_ip_files:
     os.system("mkdir old_order_images")
@@ -49,14 +54,15 @@ os.system("python3 filter_features_based_on_global_view.py")
 # feature location based on size: [581, 1033]
 # original scale: [2160, 3840]
 # read my file
-with open("parsed_output_3.txt") as input_file:
+with open("parsed_output_2.txt") as input_file:
     text = input_file.read()
 
 lines = text.split('\n')
 curr_idx = 0
 while curr_idx < len(lines) and len(lines[curr_idx]) > 0:
     line = lines[curr_idx]
-    curr_key = (int(float(line.split(' ')[1]), int(float(line.split(' ')[2]))))
+    print("line: " + str(line))
+    curr_key = (int(line.split(' ')[1]), int(line.split(' ')[2]))
     curr_i = curr_idx + 1
     img1_name = img_names[curr_key[0]]
     img2_name = img_names[curr_key[1]]
@@ -71,6 +77,8 @@ while curr_idx < len(lines) and len(lines[curr_idx]) > 0:
         y2 = float(tokens[3])
         match1.append([x1, y1])
         match2.append([x2, y2])
+        curr_i = curr_i + 1
+    curr_idx = curr_i
     vis.visualize(img1_name, match1, img2_name, match2)
 
 
