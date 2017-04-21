@@ -7,6 +7,7 @@ import matching_visualizer as vis
 # 2. find features in all images, including the global one
 # 3. filter out matches, only leave matches between small view and global view
 # 4. run model estimation
+# TODO: try change the global stitching to use only Hugin
 
 enhance_image = False
 use_ip_files = True
