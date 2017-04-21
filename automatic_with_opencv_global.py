@@ -62,7 +62,7 @@ while curr_idx < len(lines) and len(lines[curr_idx]) > 0:
     img2_name = img_names[curr_key[1]]
     match1 = []
     match2 = []
-    while curr_i < len(lines) and len(lines[curr_i]) > 0 and lines[curr_i][0] != "#":
+    while curr_i < len(lines) afuwornd len(lines[curr_i]) > 0 and lines[curr_i][0] != "#":
         line = lines[curr_i]
         tokens = line.split(' ')
         x1 = float(tokens[0])
