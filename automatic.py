@@ -3,6 +3,8 @@ import sys
 import os
 import kgui.main as gui
 
+# TODO: update readme to mention QT dependency 
+
 # call snap to take images
 if len(sys.argv) > 1 and sys.argv[1] == "snap":
     os.system("snap -c sync.cfg")
