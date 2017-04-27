@@ -3,3 +3,4 @@
 *.txt
 convert_opencv_output
 convert_output_for_hugin
+kgui/__pycache__/
