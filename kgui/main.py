@@ -5,6 +5,7 @@ import PyQt5
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 import kgui.kirito_gui as kirito_gui
+import os
 
 '''
 # always seem to need this
@@ -270,7 +271,9 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
 
         # optimizing positions and geometry
         os.system("autooptimiser -a -l -s -m -o optimized.pto lines.pto");
-        os.system("hugin_executor -s optimized.pto")
+    #    os.system("hugin_executor -s optimized.pto -t 10")
+    #    os.system("convert *.tif -resize 1500x500 output.jpg")
+        self.label.setPixmap(QtGui.QPixmap("output.jpg"))
 
 def main():
     # read input image path
