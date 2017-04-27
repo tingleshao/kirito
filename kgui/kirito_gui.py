@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralWidget)
         self.label.setGeometry(QtCore.QRect(50, 30, 1191, 421))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("AquetiLogo.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("kgui/AquetiLogo.jpg"))
         self.label.setObjectName("label")
         self.horizontalSlider = QtWidgets.QSlider(self.centralWidget)
         self.horizontalSlider.setGeometry(QtCore.QRect(60, 500, 531, 41))
@@ -57,4 +57,3 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Control points matching threshold (higher value: more features are expected to be found)"))
         self.label_3.setText(_translate("MainWindow", "0.1"))
         self.label_4.setText(_translate("MainWindow", "0.9"))
-

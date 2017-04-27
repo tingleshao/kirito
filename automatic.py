@@ -1,11 +1,14 @@
 from subprocess import call
 import sys
 import os
-
+import kgui.main as gui
 
 # call snap to take images
-if len(sys.argv) > 1 and argv[1] == "snap":
+if len(sys.argv) > 1 and sys.argv[1] == "snap":
     os.system("snap -c sync.cfg")
+
+if len(sys.argv) > 1 and sys.argv[1] == "gui":
+    gui.main()
 
 # generating project file
 #os.system("pto_gen -f 14.4 -o init.pto *.jpg")
