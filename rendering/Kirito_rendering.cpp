@@ -65,5 +65,13 @@ int main(int argc, char* argv[])
 
     // Construct the Display Window we're going to use.
     Fovea_rendering_pose_state_PTZ state;
-    Fovea
+    Fovea_CamImage_semaphored_queue queue;
+    Fovea_CamImage_Display_Jpeg *dw = new Fovea_CamImage_Display_Jpeg(queue, 100, state, RequestImageHandler, nullptr, RequestLargestTimeHandler, nullptr,
+    config_file_name, 20, 1, fps, 640, 480);
+
+    // Wait...
+    size_t numFrames = 0;
+    auto start = std::chrono::system_clock::now();
+
+
 }
