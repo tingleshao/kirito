@@ -72,6 +72,37 @@ int main(int argc, char* argv[])
     // Wait...
     size_t numFrames = 0;
     auto start = std::chrono::system_clock::now();
+    auto end = start;
+    std::chrono::duration<double> dt = end - start;
+    do {
+        atl::CamImage frame;
+        if (queue.pull(frame)) {
+            if ((frame.getWidth() != 640) || (frame.getHeight() != 480)) {
+                std::cerr << "Unexpected frame size: " << frame.getWidth() << "," << frame.getHeight() << std::endl;
+                return 5;
+            }
 
+            if (output_file_name.size() > 0) {
+                FILE *of = fopen(output_file_name.c_str(), "wb");
+                if (of) {
+                    fwfrite(frame.getDataPointer(), 1, frame.getDataSize(), of);
+                    fclose(of);
+                } else {
+                    std::cerr << "Could not open file " << output_file_name << "for writing" << std::endl;
+                }
+            }
+            numFrames++;
+        }
+        end = std::chrono::system_clock::now();
+        dt = end - start;
+    } while ((duration == 0) || (dt.count() < duration));
 
+    delere dw;
+
+    if (numFrames == 0) {
+        std::cerr << "Error: No frames received" << std::endl;
+        return 6;
+    }
+    std::cout << "Success, got " << numFrames << " frames!" << std::endl;
+    return 0;
 }
