@@ -1,14 +1,48 @@
-
-
+#ifdef _WIN32
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 
 
 #include <Fovea_CamImage_Display_Window.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdlib.h>
+#include <thread>
+#include <chrono>
 
+
+// Global variables to hold the info needed by the callback handlers
+unsigned char *g_data = nullptr;
+size_t g_data_size = 0;
+int g_image_width = 96;
+int g_image_height = 96;
+
+
+static atl::CamImage RequestImageHandler(void *userdata, const Fovea_ATL_image_request &request) {
+    #if 0
+     // a sfjalfjalfjasl
+    #endif
+    atl::CamImage ret;
+    ret.allocate(g_image_width, g_image_height, 24, ATL_MODE_JPEG_RGB, g_data_size);
+    uint8_t *writePointer;
+    if (!ret.getWritePointer(&writePointer)) {
+        std::cerr << "RequestImageHandler(): Could not get write pointer" << std::endl;
+    } else {
+        memcpy(writePointer, g_data, g_data_size);
+        ret.lockWritePointer(&writePointer, g_data_size);
+    }
+    ret.setGamma(2.4);
+    ret.setShutter(1e-3f);
+    return ret;
+}
+
+static uint64_t RequestLargestTimeHandler(void *userdata, uint64_t camera_id) {
+    return 1000;
+}
 
 int main(int argc, char* argv[])
 {
-    const char
-
     const_char *jpeg_file_name0 = "./test0.jpg";
     const_char *jpeg_file_name1 = "./test1.jpg";
     const_char *jpeg_file_name2 = "./test2.jpg";
@@ -30,6 +64,10 @@ int main(int argc, char* argv[])
     const_char *jpeg_file_name18 = "./test18.jpg";
     std::string config_file_name = "model.json";
     std::string output_file_name = "./preview.jpg";
+
+    double fps = 10;
+    bool verbose = false;
+    double duration = 0.5;
 
     /// Parse the command line
     size_t i;
