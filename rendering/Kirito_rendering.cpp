@@ -115,42 +115,6 @@ int main(int argc, char* argv[])
     /// Parse the command line
     size_t i;
     size_t real_params = 0;
-  //  for (i = 1; i < argc; i++) {
-  //      if (!strcmp(argv[i], "-image")) {
-  //          (++i >= argc) {
-  //              Usage(argv[0]);
-  //          }
-  //          jpeg_file_name = argv[i];
-  ///      }
-    // }
-
-    // FILE *f = fopen(jpeg_file_name0, "rb");
-    // if (!f) {
-    //     std::cerr << "Could not open JPEG file " << jpeg_file_name0 << std::endl;
-    //     return 1;
-    // }
-    //
-    // FILE *f1 = fopen(jpeg_file_name1, "rb");
-    // if (!f1) {
-    //    std::cerr << "Could not open JPEG file " << jpeg_file_name1 << std::endl;
-    //    return 1;
-    // }
-    //
-    // // Read the image into memory after finding its size.
-    // fseek(f, 0L, SEEK_END);
-    // g_data_size = ftell(f);
-    // fseek(f, 0L, SEEK_SET);
-    // g_data = new unsigned char[g_data_size];
-    // fread(g_data, sizeof(g_data[0]), g_data_size, f);
-    // fclose(f);
-    //
-    // fseek(f1, 0L, SEEK_END);
-    // g_data_size1 = ftell(f1);
-    // fseek(f1, 0L, SEEK_SET);
-    // g_data1 = new unsigned char[g_data_size1];
-    //
-    // fread(g_data1, sizeof(g_data1[0]), g_data_size1, f1);
-    // fclose(f1);
 
     // Test the image returning callback handler.
     Fovea_ATL_image_request testReq(1,0,1);
