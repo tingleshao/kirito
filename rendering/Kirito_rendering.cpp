@@ -20,10 +20,6 @@ int g_image_height = 96;
 //int curr_frame_id = 0;
 
 static atl::CamImage RequestImageHandler(void *userdata, const Fovea_ATL_image_request &request) {
-    #if 0
-     // a sfjalfjalfjasl
-    #endif
-
     const char *jpeg_file_name0 = "./test0.jpg";
     const char *jpeg_file_name1 = "./test1.jpg";
     unsigned char *g_data = nullptr;
@@ -80,10 +76,7 @@ static atl::CamImage RequestImageHandler(void *userdata, const Fovea_ATL_image_r
     }
     ret.setGamma(2.4);
     ret.setShutter(1e-3f);
-//    curr_frame_id ++ ;
-//    if (curr_frame_id == 2) {
-//      curr_frame_id = 0;
-//
+
     return ret;
 }
 
