@@ -13,27 +13,77 @@
 
 
 // Global variables to hold the info needed by the callback handlers
-unsigned char *g_data = nullptr;
-size_t g_data_size = 0;
+
 int g_image_width = 96;
 int g_image_height = 96;
 
+//int curr_frame_id = 0;
 
 static atl::CamImage RequestImageHandler(void *userdata, const Fovea_ATL_image_request &request) {
     #if 0
      // a sfjalfjalfjasl
     #endif
+
+    const char *jpeg_file_name0 = "./test0.jpg";
+    const char *jpeg_file_name1 = "./test1.jpg";
+    unsigned char *g_data = nullptr;
+    size_t g_data_size = 0;
+    unsigned char *g_data1 = nullptr;
+    size_t g_data_size1 = 0;
     atl::CamImage ret;
-    ret.allocate(g_image_width, g_image_height, 24, ATL_MODE_JPEG_RGB, g_data_size);
+    if (request.d_camId == 1 || request.d_camId == 2) {
+
+        FILE *f = fopen(jpeg_file_name0, "rb");
+        if (!f) {
+            std::cerr << "Could not open JPEG file " << jpeg_file_name0 << std::endl;
+        //    return 1;
+        }
+
+        // Read the image into memory after finding its size.
+        fseek(f, 0L, SEEK_END);
+        g_data_size = ftell(f);
+        fseek(f, 0L, SEEK_SET);
+        g_data = new unsigned char[g_data_size];
+        fread(g_data, sizeof(g_data[0]), g_data_size, f);
+        fclose(f);
+
+        ret.allocate(g_image_width, g_image_height, 24, ATL_MODE_JPEG_RGB, g_data_size);
+      //  ret.setCamId(0);
+    } else {
+      FILE *f1 = fopen(jpeg_file_name1, "rb");
+      if (!f1) {
+         std::cerr << "Could not open JPEG file " << jpeg_file_name1 << std::endl;
+      //   return 1;
+      }
+      fseek(f1, 0L, SEEK_END);
+      g_data_size1 = ftell(f1);
+      fseek(f1, 0L, SEEK_SET);
+      g_data1 = new unsigned char[g_data_size1];
+      fread(g_data1, sizeof(g_data1[0]), g_data_size1, f1);
+      fclose(f1);
+      ret.allocate(g_image_width, g_image_height, 24, ATL_MODE_JPEG_RGB, g_data_size1);
+      //    ret.setCamId(1);
+    }
+
     uint8_t *writePointer;
     if (!ret.getWritePointer(&writePointer)) {
         std::cerr << "RequestImageHandler(): Could not get write pointer" << std::endl;
     } else {
-        memcpy(writePointer, g_data, g_data_size);
-        ret.lockWritePointer(&writePointer, g_data_size);
+        if (request.d_camId == 1 || request.d_camId == 2) {
+            memcpy(writePointer, g_data, g_data_size);
+            ret.lockWritePointer(&writePointer, g_data_size);
+        }
+        else {
+          memcpy(writePointer, g_data1, g_data_size1);
+          ret.lockWritePointer(&writePointer, g_data_size1);
+        }
     }
     ret.setGamma(2.4);
     ret.setShutter(1e-3f);
+//    curr_frame_id ++ ;
+//    if (curr_frame_id == 2) {
+//      curr_frame_id = 0;
+//
     return ret;
 }
 
@@ -81,19 +131,33 @@ int main(int argc, char* argv[])
   ///      }
     // }
 
-    FILE *f = fopen(jpeg_file_name0, "rb");
-    if (!f) {
-        std::cerr << "Could not open JPEG file " << jpeg_file_name0 << std::endl;
-        return 1;
-    }
-
-    // Read the image into memory after finding its size.
-    fseek(f, 0L, SEEK_END);
-    g_data_size = ftell(f);
-    fseek(f, 0L, SEEK_SET);
-    g_data = new unsigned char[g_data_size];
-    fread(g_data, sizeof(g_data[0]), g_data_size, f);
-    fclose(f);
+    // FILE *f = fopen(jpeg_file_name0, "rb");
+    // if (!f) {
+    //     std::cerr << "Could not open JPEG file " << jpeg_file_name0 << std::endl;
+    //     return 1;
+    // }
+    //
+    // FILE *f1 = fopen(jpeg_file_name1, "rb");
+    // if (!f1) {
+    //    std::cerr << "Could not open JPEG file " << jpeg_file_name1 << std::endl;
+    //    return 1;
+    // }
+    //
+    // // Read the image into memory after finding its size.
+    // fseek(f, 0L, SEEK_END);
+    // g_data_size = ftell(f);
+    // fseek(f, 0L, SEEK_SET);
+    // g_data = new unsigned char[g_data_size];
+    // fread(g_data, sizeof(g_data[0]), g_data_size, f);
+    // fclose(f);
+    //
+    // fseek(f1, 0L, SEEK_END);
+    // g_data_size1 = ftell(f1);
+    // fseek(f1, 0L, SEEK_SET);
+    // g_data1 = new unsigned char[g_data_size1];
+    //
+    // fread(g_data1, sizeof(g_data1[0]), g_data_size1, f1);
+    // fclose(f1);
 
     // Test the image returning callback handler.
     Fovea_ATL_image_request testReq(1,0,1);
