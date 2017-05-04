@@ -43,25 +43,25 @@ static uint64_t RequestLargestTimeHandler(void *userdata, uint64_t camera_id) {
 
 int main(int argc, char* argv[])
 {
-    const_char *jpeg_file_name0 = "./test0.jpg";
-    const_char *jpeg_file_name1 = "./test1.jpg";
-    const_char *jpeg_file_name2 = "./test2.jpg";
-    const_char *jpeg_file_name3 = "./test3.jpg";
-    const_char *jpeg_file_name4 = "./test4.jpg";
-    const_char *jpeg_file_name5 = "./test5.jpg";
-    const_char *jpeg_file_name6 = "./test6.jpg";
-    const_char *jpeg_file_name7 = "./test7.jpg";
-    const_char *jpeg_file_name8 = "./test8.jpg";
-    const_char *jpeg_file_name9 = "./test9.jpg";
-    const_char *jpeg_file_name10 = "./test10.jpg";
-    const_char *jpeg_file_name11 = "./test11.jpg";
-    const_char *jpeg_file_name12 = "./test12.jpg";
-    const_char *jpeg_file_name13 = "./test13.jpg";
-    const_char *jpeg_file_name14 = "./test14.jpg";
-    const_char *jpeg_file_name15 = "./test15.jpg";
-    const_char *jpeg_file_name16 = "./test16.jpg";
-    const_char *jpeg_file_name17 = "./test17.jpg";
-    const_char *jpeg_file_name18 = "./test18.jpg";
+    const char *jpeg_file_name0 = "./test0.jpg";
+    const char *jpeg_file_name1 = "./test1.jpg";
+    const char *jpeg_file_name2 = "./test2.jpg";
+    const char *jpeg_file_name3 = "./test3.jpg";
+    const char *jpeg_file_name4 = "./test4.jpg";
+    const char *jpeg_file_name5 = "./test5.jpg";
+    const char *jpeg_file_name6 = "./test6.jpg";
+    const char *jpeg_file_name7 = "./test7.jpg";
+    const char *jpeg_file_name8 = "./test8.jpg";
+    const char *jpeg_file_name9 = "./test9.jpg";
+    const char *jpeg_file_name10 = "./test10.jpg";
+    const char *jpeg_file_name11 = "./test11.jpg";
+    const char *jpeg_file_name12 = "./test12.jpg";
+    const char *jpeg_file_name13 = "./test13.jpg";
+    const char *jpeg_file_name14 = "./test14.jpg";
+    const char *jpeg_file_name15 = "./test15.jpg";
+    const char *jpeg_file_name16 = "./test16.jpg";
+    const char *jpeg_file_name17 = "./test17.jpg";
+    const char *jpeg_file_name18 = "./test18.jpg";
     std::string config_file_name = "model.json";
     std::string output_file_name = "./preview.jpg";
 
@@ -72,14 +72,20 @@ int main(int argc, char* argv[])
     /// Parse the command line
     size_t i;
     size_t real_params = 0;
-    for (i = 1; i < argc; i++) {
-        if (!strcmp(argv[i, "-image"])) {
-            (++i >= argc) {
-                Usage(argv[0]);
-            }
-            jpeg_file_name = argv[i];
-        }
-     }
+  //  for (i = 1; i < argc; i++) {
+  //      if (!strcmp(argv[i], "-image")) {
+  //          (++i >= argc) {
+  //              Usage(argv[0]);
+  //          }
+  //          jpeg_file_name = argv[i];
+  ///      }
+    // }
+
+    FILE *f = fopen(jpeg_file_name0, "rb");
+    if (!f) {
+        std::cerr << "Could not open JPEG file " << jpeg_file_name0 << std::endl;
+        return 1;
+    }
 
     // Read the image into memory after finding its size.
     fseek(f, 0L, SEEK_END);
@@ -123,7 +129,7 @@ int main(int argc, char* argv[])
             if (output_file_name.size() > 0) {
                 FILE *of = fopen(output_file_name.c_str(), "wb");
                 if (of) {
-                    fwfrite(frame.getDataPointer(), 1, frame.getDataSize(), of);
+                    fwrite(frame.getDataPointer(), 1, frame.getDataSize(), of);
                     fclose(of);
                 } else {
                     std::cerr << "Could not open file " << output_file_name << "for writing" << std::endl;
@@ -135,7 +141,7 @@ int main(int argc, char* argv[])
         dt = end - start;
     } while ((duration == 0) || (dt.count() < duration));
 
-    delere dw;
+    delete dw;
 
     if (numFrames == 0) {
         std::cerr << "Error: No frames received" << std::endl;
