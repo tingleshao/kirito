@@ -1,8 +1,6 @@
 #ifdef _WIN32
 #define _CRT_SECURE_NO_WARNINGS
 #endif
-
-
 #include <Fovea_CamImage_Display_Window.h>
 #include <iostream>
 #include <string>
@@ -13,11 +11,8 @@
 
 
 // Global variables to hold the info needed by the callback handlers
-
 int g_image_width = 96;
 int g_image_height = 96;
-
-//int curr_frame_id = 0;
 
 static atl::CamImage RequestImageHandler(void *userdata, const Fovea_ATL_image_request &request) {
     const char *jpeg_file_name0 = "./test0.jpg";
@@ -32,7 +27,6 @@ static atl::CamImage RequestImageHandler(void *userdata, const Fovea_ATL_image_r
         FILE *f = fopen(jpeg_file_name0, "rb");
         if (!f) {
             std::cerr << "Could not open JPEG file " << jpeg_file_name0 << std::endl;
-        //    return 1;
         }
 
         // Read the image into memory after finding its size.
@@ -44,12 +38,10 @@ static atl::CamImage RequestImageHandler(void *userdata, const Fovea_ATL_image_r
         fclose(f);
 
         ret.allocate(g_image_width, g_image_height, 24, ATL_MODE_JPEG_RGB, g_data_size);
-      //  ret.setCamId(0);
     } else {
       FILE *f1 = fopen(jpeg_file_name1, "rb");
       if (!f1) {
          std::cerr << "Could not open JPEG file " << jpeg_file_name1 << std::endl;
-      //   return 1;
       }
       fseek(f1, 0L, SEEK_END);
       g_data_size1 = ftell(f1);
@@ -58,7 +50,6 @@ static atl::CamImage RequestImageHandler(void *userdata, const Fovea_ATL_image_r
       fread(g_data1, sizeof(g_data1[0]), g_data_size1, f1);
       fclose(f1);
       ret.allocate(g_image_width, g_image_height, 24, ATL_MODE_JPEG_RGB, g_data_size1);
-      //    ret.setCamId(1);
     }
 
     uint8_t *writePointer;
