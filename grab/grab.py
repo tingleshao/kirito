@@ -26,15 +26,12 @@ api.setNewMCamCallback(newMcam)
 
 def startServer(self, start):
     if start:
-        # TODO: hard code the ip address
-        ipAddress = ui.ipAddress.text()
+        ipAddress = "10.0.0.173"
         # --- Connect to the camera ---
-        api.mCamConnect(ipAddress, int(ui.port.text()))
-        # -----------------------------
+        api.mCamConnect(ipAddress, 9999)
     else:
         # --- Disconnect from the camera ---
-        api.mCamDisconnect(ipAddress, int(ui.port.text()));
-        # ----------------------------------
+        api.mCamDisconnect(ipAddress, 9999);
 
 
 def call(self, meta, jpeg):
@@ -54,86 +51,14 @@ def grab():
         api.startMCamStream(mcamhandle, 9002)
         # --- Only receive HD ---
         api.setMCamStreamFilter(mcamhandle, 9002, api.ATL_SCALE_MODE_HD)
-        # -----------------------
     elif mcamhandle:
         # --- Start streaming ---
         api.stopMCamStream(mcamhandle, 9002)
-        # -----------------------
+
 
 def main():
     grab()
 
+
 if __name__ == "__main__":
     main()
-
-'''
-class PyCamViewer(QtWidgets.QMainWindow):
-    newImage = QtCore.pyqtSignal(api.FRAME_METADATA, 'QImage')
-    mcamhandle = None
-    ipAddress = None
-
-    def __init__(self, app):
-        QtWidgets.QMainWindow.__init__(self)
-        self.newImage.connect(self.receiveImage)
-        app.aboutToQuit.connect(self.exiting)
-        # --- Initialize the frame receiver ---
-        api.initMCamFrameReceiver(9002, 1)
-        # ---- Set the frame callback -----
-        api.setMCamFrameCallback(self.call)
-        # --- Set the new mcam callback ---
-        api.setNewMCamCallback(self.newMcam)
-        # ---------------------------------
-
-    def setup(self, ui):
-        self.ui = ui
-        ui.port.setValidator(QtGui.QIntValidator(1, 65535, self))
-
-    def newMcam(self, mcamhandle):
-        if not self.mcamhandle:
-            self.mcamhandle = mcamhandle
-
-    def call(self, meta, jpeg):
-        image = ImageQt(jpeg)
-        image = image.convertToFormat(QtGui.QImage.Format_RGB888)
-        self.newImage.emit(meta, image)
-
-    def startStreaming(self, start):
-        if start and self.mcamhandle:
-            # --- Start streaming ---
-            api.startMCamStream(self.mcamhandle, 9002)
-            # --- Only receive HD ---
-            api.setMCamStreamFilter(self.mcamhandle, 9002, api.ATL_SCALE_MODE_HD)
-            # -----------------------
-
-        elif self.mcamhandle:
-            # --- Start streaming ---
-            api.stopMCamStream(self.mcamhandle, 9002)
-            # -----------------------
-
-    def setShutter(self, val):
-        # --- Set the Shutter value ---
-        api.setMCamShutter(self.mcamhandle, val)
-        # -----------------------------
-
-    def receiveImage(self, meta, image):
-        lbl = self.ui.imageLabel
-        qimage = image.scaled(lbl.size(), QtCore.Qt.KeepAspectRatio);
-        lbl.setPixmap(QtGui.QPixmap.fromImage(qimage))
-
-    def startServer(self, start):
-        if start:
-            self.ipAddress = ui.ipAddress.text()
-            # --- Connect to the camera ---
-            api.mCamConnect(self.ipAddress, int(ui.port.text()))
-            # -----------------------------
-        else:
-            # --- Disconnect from the camera ---
-            api.mCamDisconnect(self.ipAddress, int(ui.port.text()));
-            # ----------------------------------
-
-    def exiting(self):
-        self.startStreaming(False)
-        self.startServer(False)
-        time.sleep(0.2) # Give it time to disconnect.  This is a known bug
-        api.closeMCamFrameReceiver(9002)
-        '''
