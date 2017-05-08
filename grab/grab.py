@@ -43,7 +43,6 @@ def newMcam(self, mcamhandle):
     if not self.mcamhandle:
         self.mcamhandle = mcamhandle
 
-
 def grab():
     if start and self.mcamhandle:
         # --- Start streaming ---
@@ -135,4 +134,3 @@ if __name__ == "__main__":
         myapp.setup(ui)
         myapp.show()
         exit(app.exec_())
->>>>>>> 1d989e62c9f03dc96ad4f2a29dd54db24e8f7733
