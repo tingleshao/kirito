@@ -1,5 +1,4 @@
 # grab frames using mantis API
-# TODO: implement me
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import sys, time
