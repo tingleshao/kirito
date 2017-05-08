@@ -11,11 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1315, 708)
+        MainWindow.resize(708, 708)
         self.centralWidget = QtWidgets.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
         self.label = QtWidgets.QLabel(self.centralWidget)
-        self.label.setGeometry(QtCore.QRect(50, 30, 1191, 421))
+        self.label.setGeometry(QtCore.QRect(50, 30, 708, 421))
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("kgui/AquetiLogo.jpg"))
         self.label.setObjectName("label")

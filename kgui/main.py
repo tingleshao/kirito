@@ -26,7 +26,8 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         os.system("autooptimiser -a -l -s -m -o optimized.pto lines.pto");
     #    os.system("hugin_executor -s optimized.pto -t 10")
     #    os.system("convert *.tif -resize 1500x500 output.jpg")
-        self.label.setPixmap(QtGui.QPixmap("output.jpg"))
+        os.system.("rendering/Kirito_rendering 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg 1021700000.jpg")
+        self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
 
 def main():
     app = QApplication(sys.argv)
