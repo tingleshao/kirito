@@ -13,49 +13,60 @@ except:
     from PyQt5.QtCore import pyqtSlot as Slot
     from PyQt5 import QtCore, QtWidgets, QtGui
 
+
 newImage = QtCore.pyqtSignal(api.FRAME_METADATA, 'QImage')
-self.newImage.connect(self.receiveImage)
+newImage.connect(receiveImage)
 mcamhandle = None
 ipAddress = None
 api.initMCamFrameReceiver(9002, 1)
-api.setMCamFrameCallback(self.call)
+api.setMCamFrameCallback(call)
 # --- Set the new mcam callback ---
-api.setNewMCamCallback(self.newMcam)
+api.setNewMCamCallback(newMcam)
 
 
 def startServer(self, start):
     if start:
-        self.ipAddress = ui.ipAddress.text()
+        # TODO: hard code the ip address
+        ipAddress = ui.ipAddress.text()
         # --- Connect to the camera ---
-        api.mCamConnect(self.ipAddress, int(ui.port.text()))
+        api.mCamConnect(ipAddress, int(ui.port.text()))
         # -----------------------------
     else:
         # --- Disconnect from the camera ---
-        api.mCamDisconnect(self.ipAddress, int(ui.port.text()));
+        api.mCamDisconnect(ipAddress, int(ui.port.text()));
         # ----------------------------------
+
 
 def call(self, meta, jpeg):
     image = ImageQt(jpeg)
     image = image.convertToFormat(QtGui.QImage.Format_RGB888)
     self.newImage.emit(meta, image)
 
+
 def newMcam(self, mcamhandle):
     if not self.mcamhandle:
         self.mcamhandle = mcamhandle
 
+
 def grab():
-    if start and self.mcamhandle:
+    if start and mcamhandle:
         # --- Start streaming ---
-        api.startMCamStream(self.mcamhandle, 9002)
+        api.startMCamStream(mcamhandle, 9002)
         # --- Only receive HD ---
-        api.setMCamStreamFilter(self.mcamhandle, 9002, api.ATL_SCALE_MODE_HD)
+        api.setMCamStreamFilter(mcamhandle, 9002, api.ATL_SCALE_MODE_HD)
         # -----------------------
-    elif self.mcamhandle:
+    elif mcamhandle:
         # --- Start streaming ---
-        api.stopMCamStream(self.mcamhandle, 9002)
+        api.stopMCamStream(mcamhandle, 9002)
         # -----------------------
 
+def main():
+    grab()
 
+if __name__ == "__main__":
+    main()
+
+'''
 class PyCamViewer(QtWidgets.QMainWindow):
     newImage = QtCore.pyqtSignal(api.FRAME_METADATA, 'QImage')
     mcamhandle = None
@@ -125,12 +136,4 @@ class PyCamViewer(QtWidgets.QMainWindow):
         self.startServer(False)
         time.sleep(0.2) # Give it time to disconnect.  This is a known bug
         api.closeMCamFrameReceiver(9002)
-
-if __name__ == "__main__":
-        app = QtWidgets.QApplication(sys.argv)
-        ui = UI()
-        myapp = PyCamViewer(app)
-        ui.setupUi(myapp)
-        myapp.setup(ui)
-        myapp.show()
-        exit(app.exec_())
+        '''
