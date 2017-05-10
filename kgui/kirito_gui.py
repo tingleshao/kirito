@@ -26,6 +26,9 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.centralWidget)
         self.pushButton.setGeometry(QtCore.QRect(60, 570, 113, 32))
         self.pushButton.setObjectName("pushButton")
+        self.pushButton2 = QtWidgets.QPushButton(self.centralWidget)
+        self.pushButton2.setGeometry(QtCore.QRect(200, 570, 113, 32))
+        self.pushButton2.setObjectName("previewButton")
         self.label_2 = QtWidgets.QLabel(self.centralWidget)
         self.label_2.setGeometry(QtCore.QRect(60, 480, 621, 16))
         self.label_2.setObjectName("label_2")
@@ -54,6 +57,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "Stitching"))
+        self.pushButton2.setText(_translate("MainWindow", "Preview"))
         self.label_2.setText(_translate("MainWindow", "Control points matching threshold (higher value: more features are expected to be found)"))
         self.label_3.setText(_translate("MainWindow", "0.1"))
         self.label_4.setText(_translate("MainWindow", "0.9"))
