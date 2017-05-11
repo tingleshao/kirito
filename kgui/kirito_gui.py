@@ -49,6 +49,12 @@ class Ui_MainWindow(object):
         self.statusBar = QtWidgets.QStatusBar(MainWindow)
         self.statusBar.setObjectName("statusBar")
         MainWindow.setStatusBar(self.statusBar)
+        self.loadModelCheckBox = QtWidgets.QCheckBox(MainWindow)
+        self.loadModelCheckBox.setGeometry(350, 598, 20, 20)
+        self.loadModelCheckBox.setObjectName("loadModelCheckBox")
+        self.label_5 = QtWidgets.QLabel(MainWindow)
+        self.label_5.setGeometry(QtCore.QRect(380,598, 200, 16))
+        self.label_5.setObjectName("label_5")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -61,3 +67,4 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Control points matching threshold (higher value: more features are expected to be found)"))
         self.label_3.setText(_translate("MainWindow", "0.1"))
         self.label_4.setText(_translate("MainWindow", "0.9"))
+        self.label_5.setText(_translate("MainWindow", "Load existing model file"))

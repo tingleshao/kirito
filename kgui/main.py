@@ -1,11 +1,13 @@
-import sys
 import cv2
+import os
+import sys
+
 # This gets the Qt stuff
 import PyQt5
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 import kgui.kirito_gui as kirito_gui
-import os
 
 
 class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
@@ -14,6 +16,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         super(self.__class__, self).__init__()
         self.setupUi(self) # gets defined in the UI file
         self.pushButton.clicked.connect(self.buttonClicked)
+        self.pushButton2.clicked.connect(self.button2Clicked)
 
     def buttonClicked(self):
         os.system("./MantisGetFrames")
@@ -33,7 +36,15 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     #    os.system("rendering/Kirito_rendering mcam_1.jpeg mcam_2.jpeg")
         os.system("python3 update_pto_resolution.py")
         os.system("hugin_executor --stitching optimized.pto")
+        os.system('convert "mcam_1 - mcam_19.tif" preview.jpg')
         self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
+
+    def button2Clicked(self):
+        if not("preview.jpg" in os.listdir()):
+            os.system("hugin_executor --stitching optimized.pto")
+            os.system('convert "mcam_1 - mcam_19.tif" preview.jpg')
+        self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
+
 
 def main():
     app = QApplication(sys.argv)
