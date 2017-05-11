@@ -328,25 +328,25 @@ static atl::CamImage RequestImageHandler(void *userdata, const Fovea_ATL_image_r
         } else if (request.d_camId == 1021700004 ) {
               memcpy(writePointer, g_data2, g_data_size2);
               ret.lockWritePointer(&writePointer, g_data_size2);
-          } else if (request.d_camId == 1021700005 ) {
-                memcpy(writePointer, g_data3, g_data_size3);
-                ret.lockWritePointer(&writePointer, g_data_size3);
-            } else if (request.d_camId == 1021700006 ) {
-                  memcpy(writePointer, g_data4, g_data_size4);
-                  ret.lockWritePointer(&writePointer, g_data_size4);
-              } else if (request.d_camId == 1021700007 ) {
-                    memcpy(writePointer, g_data5, g_data_size5);
-                    ret.lockWritePointer(&writePointer, g_data_size5);
-                } else if (request.d_camId == 1021700008 ) {
-                      memcpy(writePointer, g_data6, g_data_size6);
-                      ret.lockWritePointer(&writePointer, g_data_size6);
-                  } else if (request.d_camId == 1021700009 ) {
-                        memcpy(writePointer, g_data7, g_data_size7);
-                        ret.lockWritePointer(&writePointer, g_data_size7);
-                    } else if (request.d_camId == 1021700010 ) {
-                          memcpy(writePointer, g_data8, g_data_size8);
-                          ret.lockWritePointer(&writePointer, g_data_size8);
-                      } else if (request.d_camId == 1021700011 ) {
+        } else if (request.d_camId == 1021700005 ) {
+              memcpy(writePointer, g_data3, g_data_size3);
+              ret.lockWritePointer(&writePointer, g_data_size3);
+        } else if (request.d_camId == 1021700006 ) {
+              memcpy(writePointer, g_data4, g_data_size4);
+              ret.lockWritePointer(&writePointer, g_data_size4);
+        } else if (request.d_camId == 1021700007 ) {
+              memcpy(writePointer, g_data5, g_data_size5);
+              ret.lockWritePointer(&writePointer, g_data_size5);
+        } else if (request.d_camId == 1021700008 ) {
+              memcpy(writePointer, g_data6, g_data_size6);
+              ret.lockWritePointer(&writePointer, g_data_size6);
+        } else if (request.d_camId == 1021700009 ) {
+              memcpy(writePointer, g_data7, g_data_size7);
+              ret.lockWritePointer(&writePointer, g_data_size7);
+        } else if (request.d_camId == 1021700010 ) {
+              memcpy(writePointer, g_data8, g_data_size8);
+              ret.lockWritePointer(&writePointer, g_data_size8);
+        } else if (request.d_camId == 1021700011 ) {
                             memcpy(writePointer, g_data9, g_data_size9);
                             ret.lockWritePointer(&writePointer, g_data_size9);
                         } else if (request.d_camId == 1021700014 ) {
