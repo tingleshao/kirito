@@ -464,7 +464,10 @@ static uint64_t RequestLargestTimeHandler(void *userdata, uint64_t camera_id) {
 
 int main(int argc, char* argv[])
 {
-    jpeg_file_name0 = argv[1];
+  number_of_jpeg = argv[1]
+  int i;
+  for (i = 0; i < number_of_jpeg; i++) {}
+    jpeg_file_name0 = argv[i+2];
     jpeg_file_name1 = argv[2];
     jpeg_file_name2 = argv[3];
     jpeg_file_name3 = argv[4];
