@@ -31,7 +31,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     #    os.system("convert *.tif -resize 1500x500 output.jpg")
     #    os.system("rendering/Kirito_rendering 1021700000.jpg 1021700002.jpg 1021700004.jpg 1021700005.jpg 1021700006.jpg 1021700007.jpg 1021700008.jpg 1021700010.jpg 1021700010.jpg 1021700011.jpg 1021700014.jpg 1021700016.jpg 1021700018.jpg 1021700019.jpg 1021700021.jpg 1021700026.jpg 1031700003.jpg 1031700030.jpg 1021700012.jpg")
     #    os.system("rendering/Kirito_rendering mcam_1.jpeg mcam_2.jpeg")
-        # TODO: downscale the pto file output resolution
+        os.system("python3 update_pto_resolution.py")
         os.system("hugin_executor --stitching optimized.pto")
         self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
 
