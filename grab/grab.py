@@ -5,6 +5,7 @@ import sys, time
 #from pcvform import Ui_PyCamViewer as UI
 from PIL import Image
 from PIL.ImageQt import ImageQt
+
 import MantisPyAPI as mantis
 
 try:
