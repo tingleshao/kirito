@@ -20,7 +20,11 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.pushButton2.clicked.connect(self.button2Clicked)
 
     def buttonClicked(self):
-        stitching.stitching_pure_hugin()
+        threshold = self.horizontalSlider.getValue()
+        if self.loadModelCheckBox.isChecked():
+            stitching.stitching_pure_hugin(threshold)
+        else:
+            stitching.stitching_pure_hugin_without_existing_model(threshold)
         self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
 
     def button2Clicked(self):

@@ -8,6 +8,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+checked = 2
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -23,6 +25,7 @@ class Ui_MainWindow(object):
         self.horizontalSlider.setGeometry(QtCore.QRect(60, 500, 531, 41))
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider.setObjectName("horizontalSlider")
+        self.horizontalSlider.setValue(45)
         self.pushButton = QtWidgets.QPushButton(self.centralWidget)
         self.pushButton.setGeometry(QtCore.QRect(60, 570, 113, 32))
         self.pushButton.setObjectName("pushButton")
@@ -52,6 +55,7 @@ class Ui_MainWindow(object):
         self.loadModelCheckBox = QtWidgets.QCheckBox(MainWindow)
         self.loadModelCheckBox.setGeometry(350, 598, 20, 20)
         self.loadModelCheckBox.setObjectName("loadModelCheckBox")
+        self.loadModelCheckBox.setCheckState(checked)
         self.label_5 = QtWidgets.QLabel(MainWindow)
         self.label_5.setGeometry(QtCore.QRect(380,598, 200, 16))
         self.label_5.setObjectName("label_5")
