@@ -26,7 +26,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
             grab.grab_with_v2(ip)
-            # TODO: rename image name to 1-19
+            grab.rename_frames()
         threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
             stitching.stitching_pure_hugin(threshold)

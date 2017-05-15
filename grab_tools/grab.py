@@ -64,6 +64,23 @@ def grab_with_v2(ip):
     os.system("grab_tools/MantisGetFrames -ip " + ip)
 
 
+def rename_frames():
+    # rename frames to 1...19 jpeg
+    files = [f for f in os.listdir('.') if os.path.isfile(f) and len(f.split("."))> 1 and (f.split(".")[1] == 'jpeg' or f.split(".")[1] == "jpg") and not f == "preview.jpeg"]
+    # rename files
+    print("files: " + str(files))
+    new_file_names = [str(i) + ".jpeg" for i in range(19)]
+    print("new file names; " + str(new_file_names))
+    curr_index = 0
+    for f in files:
+        print(curr_index)
+        os.system("mv " + f + " " + new_file_names[curr_index])
+        curr_index = curr_index + 1
+        # avoid index out of bounds error
+        if curr_index == 19:
+            break
+
+
 def existing():
     grab(False)
     startServer(False)
