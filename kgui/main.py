@@ -7,6 +7,7 @@ import PyQt5
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import grab_tools.grab as grab
 import kgui.kirito_gui as kirito_gui
 import stitching
 
@@ -20,6 +21,9 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.pushButton2.clicked.connect(self.button2Clicked)
 
     def buttonClicked(self):
+        if self.grabFrameCheckBox.isChecked():
+            ip = self.ipLabel.text()
+            grab.grab_with_v2(ip)
         threshold = self.horizontalSlider.getValue()
         if self.loadModelCheckBox.isChecked():
             stitching.stitching_pure_hugin(threshold)
