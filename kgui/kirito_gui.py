@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         self.centralWidget = QtWidgets.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
         self.label = QtWidgets.QLabel(self.centralWidget)
-        self.label.setGeometry(QtCore.QRect(50, 30, 708, 421))
+        self.label.setGeometry(QtCore.QRect(50, 30, 608, 421))
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("kgui/AquetiLogo.jpg"))
         self.label.setObjectName("label")
@@ -72,6 +72,7 @@ class Ui_MainWindow(object):
         self.ipLabel = QtWidgets.QLineEdit(MainWindow)
         self.ipLabel.setGeometry(QtCore.QRect(380, 662, 200, 16))
         self.ipLabel.setObjectName("ipLabel")
+        self.ipLabel.setText("10.0.0.187")
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

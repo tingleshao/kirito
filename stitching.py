@@ -18,7 +18,7 @@ def stitching_pure_hugin(threshold):
     #    os.system("rendering/Kirito_rendering mcam_1.jpeg mcam_2.jpeg")
     os.system("python3 update_pto_resolution.py")
     os.system("hugin_executor --stitching optimized.pto")
-    os.system('convert "mcam_1 - mcam_19.tif" preview.jpg')
+    os.system('convert "1 - 19.tif" preview.jpg')
 
 def stitching_pure_hugin_without_existing_model(threshold):
     os.system("./MantisGetFrames")

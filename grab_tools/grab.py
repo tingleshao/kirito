@@ -1,7 +1,7 @@
 # grab frames using mantis API
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-import sys, time
+import os, sys, time
 #from pcvform import Ui_PyCamViewer as UI
 from PIL import Image
 from PIL.ImageQt import ImageQt
@@ -61,7 +61,7 @@ def grab(start):
 
 
 def grab_with_v2(ip):
-    os.system("./MantisGetFrames -ip " + ip)
+    os.system("grab_tools/MantisGetFrames -ip " + ip)
 
 
 def existing():

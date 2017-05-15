@@ -11,6 +11,8 @@ import grab_tools.grab as grab
 import kgui.kirito_gui as kirito_gui
 import stitching
 
+#TODO: rename image name to 1-19
+
 
 class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     # access variables inside of the UI's file
@@ -24,7 +26,8 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
             grab.grab_with_v2(ip)
-        threshold = self.horizontalSlider.getValue()
+            # TODO: rename image name to 1-19
+        threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
             stitching.stitching_pure_hugin(threshold)
         else:
@@ -33,6 +36,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
 
     def button2Clicked(self):
         stitching.preview_hugin()
+        os.system("convert preview.jpg -resize 608x421 preview.jpg")
         self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
 
 def main():
