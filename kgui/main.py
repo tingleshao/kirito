@@ -11,8 +11,6 @@ import grab_tools.grab as grab
 import kgui.kirito_gui as kirito_gui
 import stitching
 
-#TODO: rename image name to 1-19
-
 
 class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     # access variables inside of the UI's file

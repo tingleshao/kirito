@@ -72,7 +72,7 @@ class Ui_MainWindow(object):
         self.ipLabel = QtWidgets.QLineEdit(MainWindow)
         self.ipLabel.setGeometry(QtCore.QRect(380, 662, 200, 16))
         self.ipLabel.setObjectName("ipLabel")
-        self.ipLabel.setText("10.0.0.187")
+        self.ipLabel.setText("10.0.0.239")
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
