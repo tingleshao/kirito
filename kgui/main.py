@@ -19,6 +19,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.setupUi(self) # gets defined in the UI file
         self.pushButton.clicked.connect(self.buttonClicked)
         self.pushButton2.clicked.connect(self.button2Clicked)
+        self.pushButton3.clicked.connect(self.button3Clicked)
 
     def buttonClicked(self):
         if self.grabFrameCheckBox.isChecked():
@@ -36,6 +37,10 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         stitching.preview_hugin()
         os.system("convert preview.jpg -resize 608x421 preview.jpg")
         self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
+
+    def button3Clicked(self):
+        os.system("hugin optimized.pto")
+
 
 def main():
     app = QApplication(sys.argv)
