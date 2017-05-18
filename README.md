@@ -58,6 +58,7 @@ This process is similar to OpenCV + Hugin process. Besides that after stage 1 in
 1. You should have Hugin installed in your system.
 2. For process 2 and process 3, you also need to have OpenCV installed and linked to Python3.
 3. The program has been tested on Ubuntu 16.04.
+4. For running the GUI, PyQt5 is required. 
 
 ## Install OpenCV from source on Ubuntu <a name="Install-OpenCV"></a>
 
