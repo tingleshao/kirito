@@ -48,6 +48,7 @@ def parse(pano, filename):
 				m=re.search('\sb\S+\s',temp)
 				if(temp.find('=')!=-1):
 					print("found the equals")
+					k=k1[0]
 				else:
 					k=(temp[m.start()+2:m.end()])
 				print("distortion is "+ str(k))
@@ -67,6 +68,7 @@ def parse(pano, filename):
 
 				if(fov.find('=')!=-1):
 					print("found the equals")
+					F=f[0]
 				else:
 					F=float(width)/(math.pi*float(fov)/180)
 				#	F=41578.58/float(fov)
@@ -215,10 +217,10 @@ def parse(pano, filename):
 			if(key2 == "microcameras"):
 				i = 0
 				while(i<len(json_data[key][key2])):
-					json_data[key][key2][i] = {'Slot': int(s[i]), 'Sensorcal': ["1",str(redg[i]),  str(blueg[i]),"1"], 'gain': gain[i], 'vigoffset_x': 0, 'vigoffset_y': 0, 'Yaw': yaw[i], 'Pitch': pitch[i], 'Roll': roll[i], 'K1': k1[i], 'OFFSET_X': 0, 'OFFSET_Y': 0, 'F': f[i]}
+					json_data[key][key2][i] = {'Slot': int(s[i]), 'Sensorcal': ["1",str(redg[i]),  str(blueg[i]),"1"], 'gain': gain[i], 'vigoffset_x': 0, 'vigoffset_y': 0, 'Yaw': yaw[i], 'Pitch': pitch[i], 'Roll': roll[i], 'K1': k1[i], 'OFFSET_X': 0, 'OFFSET_Y': 0, 'F': f[i], 'Radial': 10, 'max_visible_scale': 1000}
 					i +=1
 				while(i<len(s)):
-					json_data[key][key2].append({'Slot': int(s[i]), 'Sensorcal': ["1",str(redg[i]), str(blueg[i]),"1"], 'gain': gain[i], 'vigoffset_x': 0, 'vigoffset_y': 0, 'Yaw': yaw[i], 'Pitch': pitch[i], 'Roll': roll[i], 'K1': k1[i], 'OFFSET_X': 0, 'OFFSET_Y': 0, 'F': f[i]})
+					json_data[key][key2].append({'Slot': int(s[i]), 'Sensorcal': ["1",str(redg[i]), str(blueg[i]),"1"], 'gain': gain[i], 'vigoffset_x': 0, 'vigoffset_y': 0, 'Yaw': yaw[i], 'Pitch': pitch[i], 'Roll': roll[i], 'K1': k1[i], 'OFFSET_X': 0, 'OFFSET_Y': 0, 'F': f[i], 'Radial': 10, 'max_visible_scale': 1000})
 					i+=1
 
 
