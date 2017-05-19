@@ -24,8 +24,20 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     def buttonClicked(self):
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
-            grab.grab_with_v2(ip)
+            trials = 0
+            directory = "test_dir"
+            # TODO: later make "test dir " to be a dir that refects the date and time
+            while trials < 10:
+                grab.grab_with_v2(ip, directory)
+                n = grab.count_frames(directory)
+                if n == 19:
+                    grab.rename_frames()
+                    break
+            if trials == 10:
+                print("error! failed to get frames after trying 10 times.")
+                return
             grab.rename_frames()
+        # Stitch frames
         threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
             stitching.stitching_pure_hugin(threshold)
