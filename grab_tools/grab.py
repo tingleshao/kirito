@@ -94,28 +94,8 @@ def existing():
 
 
 def main():
-    print("h4")
-
-#    startServer(True)
-    print("hi5")
-
     grab(True)
     existing()
 
-#ewImage = QtCore.pyqtSignal(mantis.FRAME_METADATA, 'QImage')
-#newImage.connect(receiveImage)
-#print("hi")
-#mhandle = None
-#ipAddress = "10.0.0.173"
-#print("h2")
-
-#mantis.initMCamFrameReceiver(9002, 1)
-#mantis.setMCamFrameCallback(call)
-# --- Set the new mcam callback ---
-#mantis.setNewMCamCallback(newMcam)
-
-
 if __name__ == "__main__":
-    print("hi3")
-
     main()
