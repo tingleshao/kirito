@@ -1,7 +1,7 @@
 import os
 
 
-def stitching_pure_hugin(threshold):
+def stitching_pure_hugin(threshold, max_visible_scale):
     print("stitching button clicked!")
 #    os.system("pto_gen *.jpeg -o test.pto")
     #    os.system("cpfind --prealigned --kdtreeseconddist=0.45 -o control_pts.pto init2.pto")
@@ -20,9 +20,11 @@ def stitching_pure_hugin(threshold):
     os.system("python3 update_pto_resolution.py")
     os.system("hugin_executor --stitching optimized_s.pto")
     os.system('convert "1 - 19.tif" preview.jpg')
+    # TODO: the json name should be depending on the date
+    os.system("python3 HuginMakeSaccadeConfig.py optimized.pto model.json " + max_visible_scale)
 
 
-def stitching_pure_hugin_without_existing_model(threshold):
+def stitching_pure_hugin_without_existing_model(threshold, max_visible_scale):
     print("stitching button clicked!")
     os.system("pto_gen *.jpeg -o init.pto")
     #    os.system("cpfind --prealigned --kdtreeseconddist=0.45 -o control_pts.pto init2.pto")
@@ -37,6 +39,8 @@ def stitching_pure_hugin_without_existing_model(threshold):
     os.system("python3 update_pto_resolution.py")
     os.system("hugin_executor --stitching optimized_s.pto")
     os.system('convert "*.tif" preview.jpg')
+    # TODO: the json name should be depending on the date
+    os.system("python3 HuginMakeSaccadeConfig.py optimized.pto model.json " + max_visible_scale)
 
 
 def preview_hugin():

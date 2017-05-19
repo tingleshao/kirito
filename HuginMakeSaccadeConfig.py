@@ -11,7 +11,7 @@ import re
 
 
 
-def parse(pano, filename):
+def parse(pano, filename, max_visible_scale):
 
 	yaw = list()
 	pitch = list()
@@ -214,13 +214,14 @@ def parse(pano, filename):
 				json_data[key][key2]['sensorheight'] = int(height)
 				json_data[key][key2]['pixel_size'] = .0014
 				json_data[key][key2]['focal_length'] = 35
+			# TODO: max visible scale should be different on wide field of view and narrow field of view cameras 
 			if(key2 == "microcameras"):
 				i = 0
 				while(i<len(json_data[key][key2])):
-					json_data[key][key2][i] = {'Slot': int(s[i]), 'Sensorcal': ["1",str(redg[i]),  str(blueg[i]),"1"], 'gain': gain[i], 'vigoffset_x': 0, 'vigoffset_y': 0, 'Yaw': yaw[i], 'Pitch': pitch[i], 'Roll': roll[i], 'K1': k1[i], 'OFFSET_X': 0, 'OFFSET_Y': 0, 'F': f[i], 'Radial': 10, 'max_visible_scale': 1000}
+					json_data[key][key2][i] = {'Slot': int(s[i]), 'Sensorcal': ["1",str(redg[i]),  str(blueg[i]),"1"], 'gain': gain[i], 'vigoffset_x': 0, 'vigoffset_y': 0, 'Yaw': yaw[i], 'Pitch': pitch[i], 'Roll': roll[i], 'K1': k1[i], 'OFFSET_X': 0, 'OFFSET_Y': 0, 'F': f[i], 'Radial': 10, 'max_visible_scale': int(max_visible_scale)}
 					i +=1
 				while(i<len(s)):
-					json_data[key][key2].append({'Slot': int(s[i]), 'Sensorcal': ["1",str(redg[i]), str(blueg[i]),"1"], 'gain': gain[i], 'vigoffset_x': 0, 'vigoffset_y': 0, 'Yaw': yaw[i], 'Pitch': pitch[i], 'Roll': roll[i], 'K1': k1[i], 'OFFSET_X': 0, 'OFFSET_Y': 0, 'F': f[i], 'Radial': 10, 'max_visible_scale': 1000})
+					json_data[key][key2].append({'Slot': int(s[i]), 'Sensorcal': ["1",str(redg[i]), str(blueg[i]),"1"], 'gain': gain[i], 'vigoffset_x': 0, 'vigoffset_y': 0, 'Yaw': yaw[i], 'Pitch': pitch[i], 'Roll': roll[i], 'K1': k1[i], 'OFFSET_X': 0, 'OFFSET_Y': 0, 'F': f[i], 'Radial': 10, 'max_visible_scale': int(max_visible_scale)})
 					i+=1
 
 
@@ -235,4 +236,4 @@ def parse(pano, filename):
 
 
 if __name__ == "__main__":
-	parse(sys.argv[1], sys.argv[2])
+	parse(sys.argv[1], sys.argv[2], sys.argv[3])

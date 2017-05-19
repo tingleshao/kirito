@@ -40,9 +40,9 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         # Stitch frames
         threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
-            stitching.stitching_pure_hugin(threshold)
+            stitching.stitching_pure_hugin(threshold, self.maxVisScaleLabel.text())
         else:
-            stitching.stitching_pure_hugin_without_existing_model(threshold)
+            stitching.stitching_pure_hugin_without_existing_model(threshold, self.maxVisScaleLabel.text())
         self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
 
     def button2Clicked(self):
