@@ -4,6 +4,16 @@ import sys
 import kgui.main as gui
 import stitching
 
+import argparse
+
+# Arguments
+parser = argparse.ArgumentParser(description="",
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+add_arg = parser.add_argument
+
+add_arg('--gui', action='store_true', help="Launch the GUI.")
+
+args = parser.parse_args()
 
 # Color coded output helps visualize the information a little better, plus looks cool!
 class ansi:
@@ -19,13 +29,7 @@ class ansi:
     CYAN_B = '\033[1;36m'
     ENDC = '\033[0m'
 
-# TODO: update readme to mention QT dependency
-
-# call snap to take images
-if len(sys.argv) > 1 and sys.argv[1] == "snap":
-    os.system("snap -c sync.cfg")
-
-if len(sys.argv) > 1 and sys.argv[1] == "gui":
+if args.gui:
     string = "\n{}Launching GUI\n"
     print(string.format(ansi.RED_B))
     gui.main()

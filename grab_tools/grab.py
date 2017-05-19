@@ -40,6 +40,9 @@ def newMcam(mcamhandle):
     if not mhandle:
         mhandle = mcamhandle
 
+def count_frames(directory):
+    files = [f for f in os.listdir(directory) if os.path.isfile(f) and len(f.split(".")) > 1 and (f.split(".")[1] == 'jpeg' or f.split(".")[1] == 'jpg') and not f == "preview.jpg"]
+    return len(files)
 
 def grab(start):
     print("ipaddress:" + str(ipAddress))
@@ -60,13 +63,15 @@ def grab(start):
 #        mantis.stopMCamStream(mcamhandle, 9002)
 
 
-def grab_with_v2(ip):
+def grab_with_v2(ip, directory):
     os.system("grab_tools/MantisGetFrames -ip " + ip)
+    os.system("mkdir " + directory)
+    os.system("cp *.jpeg " + directory)
 
 
 def rename_frames():
     # rename frames to 1...19 jpeg
-    files = [f for f in os.listdir('.') if os.path.isfile(f) and len(f.split("."))> 1 and (f.split(".")[1] == 'jpeg' or f.split(".")[1] == "jpg") and not f == "preview.jpeg"]
+    files = [f for f in os.listdir('.') if os.path.isfile(f) and len(f.split(".")) > 1 and (f.split(".")[1] == 'jpeg' or f.split(".")[1] == 'jpg') and not f == "preview.jpeg"]
     # rename files
     print("files: " + str(files))
     new_file_names = [str(i) + ".jpeg" for i in range(19)]
@@ -89,28 +94,8 @@ def existing():
 
 
 def main():
-    print("h4")
-
-#    startServer(True)
-    print("hi5")
-
     grab(True)
     existing()
 
-#ewImage = QtCore.pyqtSignal(mantis.FRAME_METADATA, 'QImage')
-#newImage.connect(receiveImage)
-#print("hi")
-#mhandle = None
-#ipAddress = "10.0.0.173"
-#print("h2")
-
-#mantis.initMCamFrameReceiver(9002, 1)
-#mantis.setMCamFrameCallback(call)
-# --- Set the new mcam callback ---
-#mantis.setNewMCamCallback(newMcam)
-
-
 if __name__ == "__main__":
-    print("hi3")
-
     main()

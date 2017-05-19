@@ -2,7 +2,7 @@
 
 
 def main():
-    with open("optimized.pto") as input_file:
+    with open("optimized_centered.pto") as input_file:
         text = input_file.read()
     lines = text.split('\n')
     curr_idx = 0

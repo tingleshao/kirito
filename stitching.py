@@ -1,5 +1,6 @@
 import os
 
+
 def stitching_pure_hugin(threshold):
     print("stitching button clicked!")
 #    os.system("pto_gen *.jpeg -o test.pto")
@@ -15,9 +16,11 @@ def stitching_pure_hugin(threshold):
     #    os.system("convert *.tif -resize 1500x500 output.jpg")
     #    os.system("rendering/Kirito_rendering 1021700000.jpg 1021700002.jpg 1021700004.jpg 1021700005.jpg 1021700006.jpg 1021700007.jpg 1021700008.jpg 1021700010.jpg 1021700010.jpg 1021700011.jpg 1021700014.jpg 1021700016.jpg 1021700018.jpg 1021700019.jpg 1021700021.jpg 1021700026.jpg 1031700003.jpg 1031700030.jpg 1021700012.jpg")
     #    os.system("rendering/Kirito_rendering mcam_1.jpeg mcam_2.jpeg")
+    os.system("pano_modify -o optimized_centered.pto --center --straighten --canvas=AUTO optimzied.pto")
     os.system("python3 update_pto_resolution.py")
     os.system("hugin_executor --stitching optimized_s.pto")
     os.system('convert "1 - 19.tif" preview.jpg')
+
 
 def stitching_pure_hugin_without_existing_model(threshold):
     print("stitching button clicked!")
@@ -30,10 +33,7 @@ def stitching_pure_hugin_without_existing_model(threshold):
     os.system("linefind -o lines.pto pruning_pts.pto")
     # optimizing positions and geometry
     os.system("autooptimiser -a -l -s -m -o optimized.pto lines.pto");
-    #    os.system("hugin_executor -s optimized.pto -t 10")
-    #    os.system("convert *.tif -resize 1500x500 output.jpg")
-    #    os.system("rendering/Kirito_rendering 1021700000.jpg 1021700002.jpg 1021700004.jpg 1021700005.jpg 1021700006.jpg 1021700007.jpg 1021700008.jpg 1021700010.jpg 1021700010.jpg 1021700011.jpg 1021700014.jpg 1021700016.jpg 1021700018.jpg 1021700019.jpg 1021700021.jpg 1021700026.jpg 1031700003.jpg 1031700030.jpg 1021700012.jpg")
-    #    os.system("rendering/Kirito_rendering mcam_1.jpeg mcam_2.jpeg")
+    os.system("pano_modify -o optimized_centered.pto --center --straighten --canvas=AUTO optimized.pto")
     os.system("python3 update_pto_resolution.py")
     os.system("hugin_executor --stitching optimized_s.pto")
     os.system('convert "*.tif" preview.jpg')
