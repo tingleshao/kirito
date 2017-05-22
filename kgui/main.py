@@ -19,22 +19,40 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.setupUi(self) # gets defined in the UI file
         self.pushButton.clicked.connect(self.buttonClicked)
         self.pushButton2.clicked.connect(self.button2Clicked)
+        self.pushButton3.clicked.connect(self.button3Clicked)
 
     def buttonClicked(self):
         work_dir = stitching.prepare_directory()
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
-            grab.grab_with_v2(ip, work_dir)
-        threshold = self.horizontalSlider.getValue()
+            trials = 0
+            # TODO: later make "test dir " to be a dir that refects the date and time
+            while trials < 10:
+                grab.grab_with_v2(ip, work_dir)
+                n = grab.count_frames(directory)
+                if n == 19:
+                    grab.rename_frames()
+                    break
+            if trials == 10:
+                print("error! failed to get frames after trying 10 times.")
+                return
+            grab.rename_frames()
+        # Stitch frames
+        threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
-            stitching.stitching_pure_hugin(threshold, work_dir)
+            stitching.stitching_pure_hugin(threshold, word_dir, self.maxVisScaleLabel.text())
         else:
-            stitching.stitching_pure_hugin_without_existing_model(threshold, work_dir)
+            stitching.stitching_pure_hugin_without_existing_model(threshold, work_dir, self.maxVisScaleLabel.text())
         self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
 
     def button2Clicked(self):
         stitching.preview_hugin()
+        os.system("convert preview.jpg -resize 608x421 preview.jpg")
         self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
+
+    def button3Clicked(self):
+        os.system("hugin optimized.pto")
+
 
 def main():
     app = QApplication(sys.argv)
