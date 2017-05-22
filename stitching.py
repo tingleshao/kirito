@@ -1,4 +1,7 @@
+import getpass
 import os
+import time
+
 
 def stitching_pure_hugin(threshold):
     os.system("./MantisGetFrames")
@@ -20,7 +23,7 @@ def stitching_pure_hugin(threshold):
     os.system("hugin_executor --stitching optimized.pto")
     os.system('convert "mcam_1 - mcam_19.tif" preview.jpg')
 
-def stitching_pure_hugin_without_existing_model(threshold):
+def stitching_pure_hugin_without_existing_model(threshold, working_dir):
     os.system("./MantisGetFrames")
     print("stitching button clicked!")
     os.system("pto_gen mcam_*.jpeg -o test.pto")
@@ -32,13 +35,20 @@ def stitching_pure_hugin_without_existing_model(threshold):
     os.system("linefind -o lines.pto pruning_pts.pto")
     # optimizing positions and geometry
     os.system("autooptimiser -a -l -s -m -o optimized.pto lines.pto");
-    #    os.system("hugin_executor -s optimized.pto -t 10")
-    #    os.system("convert *.tif -resize 1500x500 output.jpg")
-    #    os.system("rendering/Kirito_rendering 1021700000.jpg 1021700002.jpg 1021700004.jpg 1021700005.jpg 1021700006.jpg 1021700007.jpg 1021700008.jpg 1021700010.jpg 1021700010.jpg 1021700011.jpg 1021700014.jpg 1021700016.jpg 1021700018.jpg 1021700019.jpg 1021700021.jpg 1021700026.jpg 1031700003.jpg 1031700030.jpg 1021700012.jpg")
-    #    os.system("rendering/Kirito_rendering mcam_1.jpeg mcam_2.jpeg")
     os.system("python3 update_pto_resolution.py")
     os.system("hugin_executor --stitching optimized.pto")
     os.system('convert "mcam_1 - mcam_19.tif" preview.jpg')
+
+
+def prepare_directory():
+    username = getpass.getuser()
+    if not os.path.exists("/home/" + username + "/data"):
+        os.system("mkdir " + "/home/" + username + "/data")
+    if not os.path.exists("/home/" + username + "/data/stitching"):
+        os.system("mkdir " + "/home/" + username + "/data/stitching")
+    datetime = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d%H%M%S')
+    os.system("mdkir /home/" + username + "/data/stitching/" + datetime)
+    return "/home/" + username + "/data/stitching/" + datetime
 
 
 def preview_hugin():

@@ -21,14 +21,15 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.pushButton2.clicked.connect(self.button2Clicked)
 
     def buttonClicked(self):
+        work_dir = stitching.prepare_directory()
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
-            grab.grab_with_v2(ip)
+            grab.grab_with_v2(ip, work_dir)
         threshold = self.horizontalSlider.getValue()
         if self.loadModelCheckBox.isChecked():
-            stitching.stitching_pure_hugin(threshold)
+            stitching.stitching_pure_hugin(threshold, work_dir)
         else:
-            stitching.stitching_pure_hugin_without_existing_model(threshold)
+            stitching.stitching_pure_hugin_without_existing_model(threshold, work_dir)
         self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
 
     def button2Clicked(self):
