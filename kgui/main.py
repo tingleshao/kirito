@@ -26,7 +26,6 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
             trials = 0
-            # TODO: later make "test dir " to be a dir that refects the date and time
             while trials < 10:
                 grab.grab_with_v2(ip, work_dir)
                 n = grab.count_frames(directory)
