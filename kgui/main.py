@@ -22,30 +22,33 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.pushButton2.clicked.connect(self.button2Clicked)
         self.pushButton3.clicked.connect(self.button3Clicked)
         username = getpass.getuser()
-        self.dirLabel.setText("home/"+username+"/data/stitching/")
+        self.dirLabel.setText("/home/"+username+"/data/stitching/foo")
 
     def buttonClicked(self):
-        work_dir = stitching.prepare_directory()
+        if self.customDirCheckBox.isChecked():
+            work_dir = self.dirLabel.text()
+        else:
+            work_dir = stitching.prepare_directory()
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
             trials = 0
-            while trials < 10:
+            while trials < 5:
                 grab.grab_with_v2(ip, work_dir)
                 n = grab.count_frames(directory)
                 if n == 19:
                     grab.rename_frames()
                     break
-            if trials == 10:
-                print("error! failed to get frames after trying 10 times.")
+            if trials == 5:
+                print("error! failed to get frames after trying {0} times.".format(trails))
                 return
             grab.rename_frames()
         # Stitch frames
         threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
-            stitching.stitching_pure_hugin(threshold, word_dir, self.maxVisScaleLabel.text())
+            stitching.stitching_pure_hugin(threshold, work_dir, self.maxVisScaleLabel.text())
         else:
             stitching.stitching_pure_hugin_without_existing_model(threshold, work_dir, self.maxVisScaleLabel.text())
-        self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(work_dir)))
 
     def button2Clicked(self):
         stitching.preview_hugin()
