@@ -7,6 +7,7 @@ import PyQt5
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import getpass
 import grab_tools.grab as grab
 import kgui.kirito_gui as kirito_gui
 import stitching
@@ -20,6 +21,8 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.pushButton.clicked.connect(self.buttonClicked)
         self.pushButton2.clicked.connect(self.button2Clicked)
         self.pushButton3.clicked.connect(self.button3Clicked)
+        username = getpass.getuser()
+        self.dirLabel.setText("home/"+username+"/data/stitching/")
 
     def buttonClicked(self):
         work_dir = stitching.prepare_directory()
