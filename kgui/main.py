@@ -45,6 +45,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
                 print("error! failed to get frames after trying {0} times.".format(trails))
                 return
             grab.rename_frames()
+            grab.move_frames(work_dir)
         # Stitch frames
         threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
