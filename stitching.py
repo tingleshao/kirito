@@ -17,6 +17,7 @@ def stitching_pure_hugin(threshold, max_visible_scale):
     os.system("python3 {0}/update_pto_resolution.py".format(cwd))
     os.system("hugin_executor --stitching optimized_s.pto")
     os.system('convert "1 - 19.tif" preview.jpg')
+    os.system("cp {}/reference.json .".format(cwd))
     os.system("python3 {0}/HuginMakeSaccadeConfig.py optimized.pto model.json ".format(cwd) + max_visible_scale)
     os.chdir(cwd)
 
@@ -39,6 +40,7 @@ def stitching_pure_hugin_without_existing_model(threshold, working_dir, max_visi
     os.system("python3 {0}/update_pto_resolution.py".format(cwd))
     os.system("hugin_executor --stitching optimized_s.pto")
     os.system('convert "*.tif" -resize 608x421 preview.jpg')
+    os.system("cp {}/reference.json .".format(cwd))
     os.system("python3 {0}/HuginMakeSaccadeConfig.py optimized.pto model.json ".format(cwd) + max_visible_scale)
     # change back to the current working path
     os.chdir(cwd)
