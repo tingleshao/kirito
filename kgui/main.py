@@ -57,12 +57,20 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(work_dir)))
 
     def button2Clicked(self):
+        if self.customDirCheckBox.isChecked():
+            work_dir = self.dirLabel.text()
+        else:
+            work_dir = stitching.prepare_directory()
         stitching.preview_hugin()
         os.system("convert preview.jpg -resize 608x421 preview.jpg")
-        self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(work_dir)))
 
     def button3Clicked(self):
-        os.system("hugin optimized.pto")
+        if self.customDirCheckBox.isChecked():
+            work_dir = self.dirLabel.text()
+        else:
+            work_dir = stitching.prepare_directory()
+        os.system("hugin {0}/optimized.pto".format(work_dir))
 
     def enable_slot(self):
         print("load existing model enabled")
