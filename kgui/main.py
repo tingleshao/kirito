@@ -23,6 +23,9 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.pushButton3.clicked.connect(self.button3Clicked)
         username = getpass.getuser()
         self.dirLabel.setText("/home/"+username+"/data/stitching/foo")
+        # link the "use pre-calibrated" checkbox
+        self.loadModelCheckBox.stateChanged.connect(lambda x : self.enable_slot() if x else self.disable_slot())
+        self.prealigned_pto_path = ""
 
     def buttonClicked(self):
         if self.customDirCheckBox.isChecked():
@@ -45,6 +48,9 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         # Stitch frames
         threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
+            if self.prealigned_pto_path == "":
+                self.prealigned_pto_path = QFileDialog.getOpenFileName()[0]
+            os.system("cp {0} {1}".format(self.prealigned_pto_path, work_dir))
             stitching.stitching_pure_hugin(threshold, work_dir, self.maxVisScaleLabel.text())
         else:
             stitching.stitching_pure_hugin_without_existing_model(threshold, work_dir, self.maxVisScaleLabel.text())
@@ -57,6 +63,16 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
 
     def button3Clicked(self):
         os.system("hugin optimized.pto")
+
+    def enable_slot(self):
+        print("load existing model enabled")
+        default_pto_file_path = "/home/" + getpass.getuser() + "/data/stitching/prealigned.pto"
+        if not os.path.isfile(default_pto_file_path):
+            print("File not found in default location. Need to select the prealigned pto file path")
+            self.prealigned_pto_path = QFileDialog.getOpenFileName()[0]
+
+    def disable_slot(self):
+        print("load existing model disabled")
 
 
 def main():
