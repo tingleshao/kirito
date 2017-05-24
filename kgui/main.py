@@ -70,6 +70,8 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         if not os.path.isfile(default_pto_file_path):
             print("File not found in default location. Need to select the prealigned pto file path")
             self.prealigned_pto_path = QFileDialog.getOpenFileName()[0]
+        else:
+            self.prealigned_pto_path = default_pto_file_path
 
     def disable_slot(self):
         print("load existing model disabled")
