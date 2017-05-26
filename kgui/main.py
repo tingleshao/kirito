@@ -26,52 +26,55 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         # link the "use pre-calibrated" checkbox
         self.loadModelCheckBox.stateChanged.connect(lambda x : self.enable_slot() if x else self.disable_slot())
         self.prealigned_pto_path = ""
+        self.work_dir = ""
 
     def buttonClicked(self):
         if self.customDirCheckBox.isChecked():
-            work_dir = self.dirLabel.text()
-        else:
-            work_dir = stitching.prepare_directory()
+            self.work_dir = self.dirLabel.text()
+        else if self.work_dir == "":
+            self.work_dir = stitching.prepare_directory()
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
             trials = 0
             while trials < 5:
-                grab.grab_with_v2(ip, work_dir)
-                n = grab.count_frames(work_dir)
+                grab.grab_with_v2(ip, self.work_dir)
+                n = grab.count_frames(self.work_dir)
                 if n == 19:
-                    grab.rename_frames()
+                    # we don't rename frames
+                    #grab.rename_frames()
                     break
             if trials == 5:
                 print("error! failed to get frames after trying {0} times.".format(trails))
                 return
-            grab.rename_frames()
-            grab.move_frames(work_dir)
+            # we don't rename frames
+            #grab.rename_frames()
+            grab.move_frames(self.work_dir)
         # Stitch frames
         threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
             if self.prealigned_pto_path == "":
                 self.prealigned_pto_path = QFileDialog.getOpenFileName()[0]
-            os.system("cp {0} {1}".format(self.prealigned_pto_path, work_dir))
-            stitching.stitching_pure_hugin(threshold, work_dir, self.maxVisScaleLabel.text())
+            os.system("cp {0} {1}".format(self.prealigned_pto_path, self.work_dir))
+            stitching.stitching_pure_hugin(threshold, self.work_dir, self.maxVisScaleLabel.text())
         else:
-            stitching.stitching_pure_hugin_without_existing_model(threshold, work_dir, self.maxVisScaleLabel.text())
-        self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(work_dir)))
+            stitching.stitching_pure_hugin_without_existing_model(threshold, self.work_dir, self.maxVisScaleLabel.text())
+        self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
 
     def button2Clicked(self):
         if self.customDirCheckBox.isChecked():
-            work_dir = self.dirLabel.text()
-        else:
-            work_dir = stitching.prepare_directory()
+            self.work_dir = self.dirLabel.text()
+        else if self.work_dir == "":
+            self.work_dir = stitching.prepare_directory()
         stitching.preview_hugin()
         os.system("convert preview.jpg -resize 608x421 preview.jpg")
-        self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(work_dir)))
+        self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
 
     def button3Clicked(self):
         if self.customDirCheckBox.isChecked():
-            work_dir = self.dirLabel.text()
-        else:
-            work_dir = stitching.prepare_directory()
-        os.system("hugin {0}/optimized.pto".format(work_dir))
+            self.work_dir = self.dirLabel.text()
+        else if self.work_dir == "":
+            self.work_dir = stitching.prepare_directory()
+        os.system("hugin {0}/optimized.pto".format(self.work_dir))
 
     def enable_slot(self):
         print("load existing model enabled")
