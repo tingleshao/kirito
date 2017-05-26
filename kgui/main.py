@@ -37,7 +37,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
             trials = 0
             while trials < 5:
                 grab.grab_with_v2(ip, work_dir)
-                n = grab.count_frames(directory)
+                n = grab.count_frames(work_dir)
                 if n == 19:
                     grab.rename_frames()
                     break

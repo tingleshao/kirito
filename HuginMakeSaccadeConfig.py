@@ -81,7 +81,7 @@ def parse(pano, filename, max_visible_scale):
 				#slot=temp[m.start()-3:m.end()].split('.')[0]
 
 				m=re.search('\S+.jpeg', temp)
-				slot=temp[m.start():m.end()].split('.')[0].split("\"")[-1]
+				slot=temp[m.start():m.end()].split('.')[0].split("\"")[-1].split("_")[-1]
 				print("slot is "+str(slot))
 
 				m=re.search('\sVb\S+\s',temp)
