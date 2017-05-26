@@ -1,3 +1,4 @@
+import datetime
 import getpass
 import os
 import time
@@ -57,7 +58,7 @@ def prepare_directory():
     if not os.path.exists("/home/" + username + "/data/stitching"):
         os.system("mkdir " + "/home/" + username + "/data/stitching")
     dt = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d%H%M%S')
-    os.system("mdkir /home/" + username + "/data/stitching/" + dt)
+    os.system("mkdir /home/" + username + "/data/stitching/" + dt)
     return "/home/" + username + "/data/stitching/" + dt
 
 
