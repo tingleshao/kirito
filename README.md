@@ -20,16 +20,18 @@
 
 #### How do they work? <a name="how"></a>
 
-#### 0. Common points
+The program is for speeding up the process of building a camera model. This is done by 1) build a wrapper around Hugin command line tools, along with a GUI interface. 2) apply algorithms implemented in OpenCV.
+
+#### 1. Common points
 All three processes take input:
 
 A list of images that can potentially be stitched together.
 
 And produces outputs:
 1. optimized.pto: a project file that can be opened by Hugin.
-2. model.json: a model file taht can be openend by Saccade.
+2. model.json: a model file that can be opened by Saccade.
 
-#### 1. Completely Hugin-based stitching
+#### 2. Completely Hugin-based stitching
 Pure Hugin-based stitching contains the following stages:
 1. Initialize project
 2. Update the project file to set the crop factor equals 7
@@ -40,7 +42,7 @@ Pure Hugin-based stitching contains the following stages:
 7. Run optimization to find a stitching
 9. Run Python script to generate a Saccade model file
 
-#### 2. OpenCV + Hugin
+#### 3. OpenCV + Hugin
 In this version of stitching, the feature finding stage is different.
 1. Use the program "feature finder" to find the features in all images. Feature finder uses OpenCV library in finding the features. Feature type: ORB/SURF.
 2. The features are sent to a Python filter: "filter_features_based_on_locations.py" program. The filter program removes the feature matches if the two features are not in two adjacent images. When two features are in two adjacent images, if they are not on the overlapping region, they are also removed.
@@ -50,7 +52,7 @@ In this version of stitching, the feature finding stage is different.
 6. Same as stage 5 in completely Hugin-based stitching.
 7. Same as stage 7 in completely Hugin-based stitching.
 
-#### 3. OpenCV + Hugin + global view
+#### 4. OpenCV + Hugin + global view
 This process is similar to OpenCV + Hugin process. Besides that after stage 1 in OpenCV + Hugin process, the features are first sent to another filter "filter_features_based_on_global_view.py". In this program, first only the features in each local view image that matches features in the global view image is kept. Then if there is a direct match between two features in two local view images in this set, and the two features share the same matched feature in the global view, they are considered as a good match. Other matches are ignored. Then the later stages are the same as OpenCV + Hugin process stage 2~7.
 
 ## Required libraries <a name="Requirements"></a>
@@ -58,7 +60,7 @@ This process is similar to OpenCV + Hugin process. Besides that after stage 1 in
 1. You should have Hugin installed in your system.
 2. For process 2 and process 3, you also need to have OpenCV installed and linked to Python3.
 3. The program has been tested on Ubuntu 16.04.
-4. For running the GUI, PyQt5 is required. 
+4. For running the GUI, PyQt5 is required.
 
 ## Install OpenCV from source on Ubuntu <a name="Install-OpenCV"></a>
 
@@ -104,6 +106,7 @@ git checkout 3.1.0
 
 cd ~
 git clone https://github.com/opencv/opencv_contrib.git
+cd opencv_contrib
 git checkout 3.1.0
 
 cd ~/opencv
@@ -114,7 +117,8 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D INSTALL_C_EXAMPLES=OFF \
       -D INSTALL_PYTHON_EXAMPLES=ON \
       -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
-      -D BUILD_EXAMPLES=ON ..
+      -D BUILD_EXAMPLES=ON .. \
+      -D WITH_CUDA=OFF
 make -j4
 sudo make install
 sudo ldconfig
