@@ -1,3 +1,4 @@
+import datetime
 import getpass
 import os
 import time
@@ -53,9 +54,9 @@ def prepare_directory():
         os.system("mkdir " + "/home/" + username + "/data")
     if not os.path.exists("/home/" + username + "/data/stitching"):
         os.system("mkdir " + "/home/" + username + "/data/stitching")
-    datetime = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d%H%M%S')
-    os.system("mdkir /home/" + username + "/data/stitching/" + datetime)
-    return "/home/" + username + "/data/stitching/" + datetime
+    dt = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d%H%M%S')
+    os.system("mkdir /home/" + username + "/data/stitching/" + dt)
+    return "/home/" + username + "/data/stitching/" + dt
 
 
 def preview_hugin():
