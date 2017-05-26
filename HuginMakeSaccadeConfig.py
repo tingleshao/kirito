@@ -77,8 +77,11 @@ def parse(pano, filename, max_visible_scale):
 
 				#m=re.search('mcam_\S+.',temp)
 				#slot=(temp[m.start():m.end()].split('.')[0].split('_')[1])
-				m=re.search('1700\S+.',temp)
-				slot=temp[m.start()-3:m.end()].split('.')[0]
+				#m=re.search('1700\S+.',temp)
+				#slot=temp[m.start()-3:m.end()].split('.')[0]
+
+				m=re.search('\S+.jpeg', temp)
+				slot=temp[m.start():m.end()].split('.')[0].split("\"")[-1].split("_")[-1]
 				print("slot is "+str(slot))
 
 				m=re.search('\sVb\S+\s',temp)
@@ -214,7 +217,7 @@ def parse(pano, filename, max_visible_scale):
 				json_data[key][key2]['sensorheight'] = int(height)
 				json_data[key][key2]['pixel_size'] = .0014
 				json_data[key][key2]['focal_length'] = 35
-			# TODO: max visible scale should be different on wide field of view and narrow field of view cameras 
+			# TODO: max visible scale should be different on wide field of view and narrow field of view cameras
 			if(key2 == "microcameras"):
 				i = 0
 				while(i<len(json_data[key][key2])):

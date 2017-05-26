@@ -85,6 +85,10 @@ def rename_frames():
         if curr_index == 19:
             break
 
+def move_frames(work_dir):
+    # rename frames to 1...19 jpeg
+    os.system("mv *.jpeg {0}".format(work_dir))
+
 
 def existing():
     grab(False)

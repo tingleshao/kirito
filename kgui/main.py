@@ -7,6 +7,7 @@ import PyQt5
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import getpass
 import grab_tools.grab as grab
 import kgui.kirito_gui as kirito_gui
 import stitching
@@ -20,37 +21,72 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.pushButton.clicked.connect(self.buttonClicked)
         self.pushButton2.clicked.connect(self.button2Clicked)
         self.pushButton3.clicked.connect(self.button3Clicked)
+        username = getpass.getuser()
+        self.dirLabel.setText("/home/"+username+"/data/stitching/foo")
+        # link the "use pre-calibrated" checkbox
+        self.loadModelCheckBox.stateChanged.connect(lambda x : self.enable_slot() if x else self.disable_slot())
+        self.prealigned_pto_path = ""
+        self.work_dir = ""
 
     def buttonClicked(self):
-        work_dir = stitching.prepare_directory()
+        if self.customDirCheckBox.isChecked():
+            self.work_dir = self.dirLabel.text()
+        else if self.work_dir == "":
+            self.work_dir = stitching.prepare_directory()
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
             trials = 0
-            while trials < 10:
-                grab.grab_with_v2(ip, work_dir)
-                n = grab.count_frames(work_dir)
+            while trials < 5:
+                grab.grab_with_v2(ip, self.work_dir)
+                n = grab.count_frames(self.work_dir)
                 if n == 19:
-                    grab.rename_frames()
+                    # we don't rename frames
+                    #grab.rename_frames()
                     break
-            if trials == 10:
-                print("error! failed to get frames after trying 10 times.")
+            if trials == 5:
+                print("error! failed to get frames after trying {0} times.".format(trails))
                 return
-            grab.rename_frames()
+            # we don't rename frames
+            #grab.rename_frames()
+            grab.move_frames(self.work_dir)
         # Stitch frames
         threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
-            stitching.stitching_pure_hugin(threshold, word_dir, self.maxVisScaleLabel.text())
+            if self.prealigned_pto_path == "":
+                self.prealigned_pto_path = QFileDialog.getOpenFileName()[0]
+            os.system("cp {0} {1}".format(self.prealigned_pto_path, self.work_dir))
+            stitching.stitching_pure_hugin(threshold, self.work_dir, self.maxVisScaleLabel.text())
         else:
-            stitching.stitching_pure_hugin_without_existing_model(threshold, work_dir, self.maxVisScaleLabel.text())
-        self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
+            stitching.stitching_pure_hugin_without_existing_model(threshold, self.work_dir, self.maxVisScaleLabel.text())
+        self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
 
     def button2Clicked(self):
+        if self.customDirCheckBox.isChecked():
+            self.work_dir = self.dirLabel.text()
+        else if self.work_dir == "":
+            self.work_dir = stitching.prepare_directory()
         stitching.preview_hugin()
         os.system("convert preview.jpg -resize 608x421 preview.jpg")
-        self.label.setPixmap(QtGui.QPixmap("preview.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
 
     def button3Clicked(self):
-        os.system("hugin optimized.pto")
+        if self.customDirCheckBox.isChecked():
+            self.work_dir = self.dirLabel.text()
+        else if self.work_dir == "":
+            self.work_dir = stitching.prepare_directory()
+        os.system("hugin {0}/optimized.pto".format(self.work_dir))
+
+    def enable_slot(self):
+        print("load existing model enabled")
+        default_pto_file_path = "/home/" + getpass.getuser() + "/data/stitching/prealigned.pto"
+        if not os.path.isfile(default_pto_file_path):
+            print("File not found in default location. Need to select the prealigned pto file path")
+            self.prealigned_pto_path = QFileDialog.getOpenFileName()[0]
+        else:
+            self.prealigned_pto_path = default_pto_file_path
+
+    def disable_slot(self):
+        print("load existing model disabled")
 
 
 def main():
