@@ -31,7 +31,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     def buttonClicked(self):
         if self.customDirCheckBox.isChecked():
             self.work_dir = self.dirLabel.text()
-        else if self.work_dir == "":
+        elif self.work_dir == "":
             self.work_dir = stitching.prepare_directory()
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
@@ -63,7 +63,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     def button2Clicked(self):
         if self.customDirCheckBox.isChecked():
             self.work_dir = self.dirLabel.text()
-        else if self.work_dir == "":
+        elif self.work_dir == "":
             self.work_dir = stitching.prepare_directory()
         stitching.preview_hugin()
         os.system("convert preview.jpg -resize 608x421 preview.jpg")
@@ -72,7 +72,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     def button3Clicked(self):
         if self.customDirCheckBox.isChecked():
             self.work_dir = self.dirLabel.text()
-        else if self.work_dir == "":
+        elif self.work_dir == "":
             self.work_dir = stitching.prepare_directory()
         os.system("hugin {0}/optimized.pto".format(self.work_dir))
 
