@@ -42,7 +42,7 @@ def stitching_pure_hugin_without_existing_model(threshold, working_dir, max_visi
     os.system("pano_modify -o optimized_centered.pto --center --straighten --canvas=AUTO optimized.pto")
     os.system("python3 {0}/update_pto_resolution.py".format(cwd))
     #os.system("hugin_executor --stitching optimized_s.pto")
-    os.system("nona -m JPEG -v -z 85 -o preview.jpg optimized_s.pto")
+    os.system("nona -m JPEG -v -z 85 --ignore-exposure -o preview.jpg optimized_s.pto ")
     os.system('convert preview.jpg -resize 608x421 preview.jpg')
     #os.system('convert "*.tif" -resize 608x421 preview.jpg')
     os.system("cp {0}/reference.json .".format(cwd))
@@ -64,5 +64,5 @@ def prepare_directory():
 
 def preview_hugin():
     if not("preview.jpg" in os.listdir()):
-        os.system("hugin_executor --stitching optimized.pto")
-        os.system('convert "mcam_1 - mcam_19.tif" preview.jpg')
+        os.system("nona -m JPEG -v -z 85 --ignore-exposure -o preview.jpg optimized_s.pto")
+        os.system('convert preview.jpg -resize 608x421 preview.jpg')
