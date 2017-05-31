@@ -6,3 +6,4 @@ convert_output_for_hugin
 kgui/__pycache__/
 *.pyc
 model.json
+*_pkgs/
