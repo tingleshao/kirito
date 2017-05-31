@@ -1,3 +1,0 @@
-TODOs:
-
-1. Tune the HuginMakeSaccadeConfig.py script.
