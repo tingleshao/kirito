@@ -149,7 +149,9 @@ Store frame to custom directory: if checked, the program will set the working di
 #### Others:
 Slider: user can use slider to select the threshold in finding feature matching. Higher threshold: less picky in finding matches.
 
-max visible scale: the parameter used to determine the max scale for displaying narrow field view camera frames in viewing in V2.
+max visible scale: the parameter used to determine the max scale for displaying narrow field view camera frames in viewing in V2. Default: 4. The wide field of view camera is always 1000.
+
+radial: the parameter used to determine the order number in displaying narrow field of view camera frames in V2. Default: 10. The wide field of view camera is always 11.
 
 IP: IP address of the render machine.
 

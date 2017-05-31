@@ -55,9 +55,9 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
             if self.prealigned_pto_path == "":
                 self.prealigned_pto_path = QFileDialog.getOpenFileName()[0]
             os.system("cp {0} {1}".format(self.prealigned_pto_path, self.work_dir))
-            stitching.stitching_pure_hugin(threshold, self.work_dir, self.maxVisScaleLabel.text())
+            stitching.stitching_pure_hugin(threshold, self.work_dir, self.maxVisScaleLabel.text(), self.radialLabel.text())
         else:
-            stitching.stitching_pure_hugin_without_existing_model(threshold, self.work_dir, self.maxVisScaleLabel.text())
+            stitching.stitching_pure_hugin_without_existing_model(threshold, self.work_dir, self.maxVisScaleLabel.text(), self.radialLabel.text())
         self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
 
     def button2Clicked(self):
