@@ -33,7 +33,8 @@ def stitching_pure_hugin_without_existing_model(threshold, working_dir, max_visi
     os.chdir(working_dir)
     print("current dir: " + os.getcwd())
     os.system("pto_gen *.jpeg -o init.pto")
-    os.system("cpfind --multirow -o control_pts.pto init.pto")
+    os.system("python3 {0}/update_crop_factor_and_v.py init.pto".format(cwd))
+    os.system("cpfind --multirow -o control_pts.pto init2.pto")
     # pruning control points
     os.system("celeste_standalone -i control_pts.pto -o pruning_pts.pto")
     os.system("linefind -o lines.pto pruning_pts.pto")
