@@ -39,22 +39,19 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
             while trials < 5:
                 grab.grab_with_v2(ip, self.work_dir)
                 n = grab.count_frames(self.work_dir)
-                if n == 19:
-                    # we don't rename frames
-                    #grab.rename_frames()
+                if n == 19: # make sure we get all 19 frames
                     break
             if trials == 5:
                 print("error! failed to get frames after trying {0} times.".format(trails))
                 return
-            # we don't rename frames
-            #grab.rename_frames()
             grab.move_frames(self.work_dir)
         # Stitch frames
         threshold = self.horizontalSlider.tickPosition()
         if self.loadModelCheckBox.isChecked():
             if self.prealigned_pto_path == "":
                 self.prealigned_pto_path = QFileDialog.getOpenFileName()[0]
-            os.system("cp {0} {1}".format(self.prealigned_pto_path, self.work_dir))
+            # copy the prealigned model file to the working directory, and rename it as prealigned.pto
+            os.system("cp {0} {1}/prealigned.pto".format(self.prealigned_pto_path, self.work_dir))
             stitching.stitching_pure_hugin(threshold, self.work_dir, self.maxVisScaleLabel.text(), self.radialLabel.text())
         else:
             stitching.stitching_pure_hugin_without_existing_model(threshold, self.work_dir, self.maxVisScaleLabel.text(), self.radialLabel.text())

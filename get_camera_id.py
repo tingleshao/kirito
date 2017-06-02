@@ -18,7 +18,7 @@ def getCameraId(ip, port):
 
 
 def main():
-    print("hi")
+    print("main")
 
 
 if __name__ == "__main__":
