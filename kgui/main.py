@@ -12,7 +12,7 @@ import grab_tools.grab as grab
 import kgui.kirito_gui as kirito_gui
 import stitching
 
-
+# TODO: make sure the frames are in order 
 class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     # access variables inside of the UI's file
     def __init__(self):
