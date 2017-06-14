@@ -5,7 +5,7 @@ import os, sys, time
 #from pcvform import Ui_PyCamViewer as UI
 from PIL import Image
 from PIL.ImageQt import ImageQt
-
+import subprocess
 #import MantisPyAPI as mantis
 
 try:
@@ -63,11 +63,29 @@ def grab(start):
 #        mantis.stopMCamStream(mcamhandle, 9002)
 
 
+    os.chdir(working_dir)
+    a = subprocess.check_output("find -cmin -100 -printf \"%T+\\t%p\\n\" | sort", shell=True)
+    c = [b.split("\\t")[1] for b in str(a).split("\\n") if len(b.split("\\t")) > 1 and len(b.split("\\t")[1]) > 4]
+#    changed_files = os.system("find -cmin -100 -printf \"%T+\\t%p\\n\" | sort").split("\n")
+    pto_file_name = c[-1]
+
+
 def grab_with_v2(ip, directory):
-    os.system("grab_tools/MantisGetFrames -ip " + ip)
+    print("starting grab with v2 now \n")   
+    os.system("ls ./grab_tools") 
+#    output = subprocess.Popen("./grab_tools/mantisGetFrames -ip " + ip)
+#    output = subprocess.Popen(["./grab_tools/mantisGetFrames","-ip",ip])
+    output = subprocess.Popen(["mantisGetFrames","-ip",ip])
+    output.communicate()
+    print(output.returncode)
+    #lines = str(output).split("\\n")
+    if str(output)[2:32] == "Failed to establish connection":
+    #    cannot_connect_error_msg = "connect failed. Error: Connection refused"
+    #if cannot_connect_error_msg in lines:
+        return 1
     os.system("mkdir " + directory)
     os.system("cp *.jpeg " + directory)
-
+    return 0
 
 def rename_frames():
     # rename frames to 1...19 jpeg
