@@ -11,8 +11,13 @@ import getpass
 import grab_tools.grab as grab
 import kgui.kirito_gui as kirito_gui
 import stitching
+<<<<<<< HEAD
 import json
 import utils.utils as utils
+=======
+import clean_reference_pto_file as clean_reference_pto
+import json
+>>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
 
 
 class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
@@ -20,11 +25,19 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     def __init__(self):
         super(self.__class__, self).__init__()
         self.setupUi(self) # gets defined in the UI file
+<<<<<<< HEAD
         self.stitchingButton.clicked.connect(self.stitchingButtonClicked)
         self.previewButton.clicked.connect(self.previewButtonClicked)
         self.huginButton.clicked.connect(self.huginButtonClicked)
         self.restitchingButton.clicked.connect(self.restitchingButtonClicked)
         self.ptoButton.clicked.connect(self.ptoButtonClicked)
+=======
+        self.pushButton.clicked.connect(self.buttonClicked)
+        self.pushButton2.clicked.connect(self.button2Clicked)
+        self.pushButton3.clicked.connect(self.button3Clicked)
+        self.pushButton4.clicked.connect(self.button4Clicked)
+        self.pushButton5.clicked.connect(self.button5Clicked)
+>>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
         username = getpass.getuser()
         # Change default dir here
         self.default_dir = "/home/"+username+"/mantisModelGen"
@@ -35,7 +48,11 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.work_dir = ""
         self.currReferencePtoDirLabel.setText("using ref pto file: {0}".format(self.read_curr_ref_pto_file_location()))
 
+<<<<<<< HEAD
     def stitchingButtonClicked(self):
+=======
+    def buttonClicked(self):
+>>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
         #if self.customDirCheckBox.isChecked():
         #    self.work_dir = self.dirLabel.text()
         #elif self.work_dir == "":
@@ -74,6 +91,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
             stitching.stitching_pure_hugin_without_existing_model(threshold, self.work_dir, self.maxVisScaleLabel.text(), self.radialLabel.text())
         self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
 
+<<<<<<< HEAD
     def previewButtonClicked(self):
     #    if self.customDirCheckBox.isChecked():
     #        self.work_dir = self.dirLabel.text()
@@ -82,17 +100,30 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         stitching.preview_hugin(self.work_dir)
         cwd = os.getcwd()
         os.chdir(self.work_dir)
+=======
+    def button2Clicked(self):
+        if self.customDirCheckBox.isChecked():
+            self.work_dir = self.dirLabel.text()
+        elif self.work_dir == "":
+            self.work_dir = stitching.prepare_directory(self.default_dir)
+        stitching.preview_hugin()
+>>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
         os.system("convert preview.jpg -resize 608x421 preview.jpg")
         self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
         os.chdir(cwd)
 
+<<<<<<< HEAD
     def huginButtonClicked(self):
+=======
+    def button3Clicked(self):
+>>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
         #if self.customDirCheckBox.isChecked():
         #    self.work_dir = self.dirLabel.text()
         if self.work_dir == "":
             self.work_dir = stitching.prepare_directory(self.default_dir)
         os.system("hugin {0}/optimized.pto".format(self.work_dir))
         updated_pto_file_name = stitching.check_updated_pto_file(self.work_dir)
+<<<<<<< HEAD
         utils.clean_file("{0}/{1}".format(self.work_dir, updated_pto_file_name))
         self.currReferencePtoDirLabel.setText("using ref pto file: {0}/{1}".format(self.work_dir, updated_pto_file_name))
         #remember this working directory and the updated pto file name.
@@ -102,6 +133,17 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     def restitchingButtonClicked(self):
         # directly run the stitching again after open->close the Hugin application
         reference_pto_file_location = self.read_curr_ref_pto_file_location()
+=======
+        clean_reference_pto.clean_file("{0}/{1}".format(self.work_dir, updated_pto_file_name))
+        self.currReferencePtoDirLabel.setText("using ref pto file: {0}/{1}").format(self.work_dir, updated_pto_file_name)
+        #remember this working directory and the updated pto file name.
+        stitching.update_saved_reference_pto_file_location("{0}/{1}".format(self.work_dir, updated_pto_file_name))
+        self.pushButton4.setEnabled(True)
+
+    def button4Clicked(self):
+        # directly run the stitching again after open->close the Hugin application
+        reference_pto_file_location = self.read_cur_ref_pto_file_location()
+>>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
         #if self.customDirCheckBox.isChecked():
         #    self.work_dir = self.dirLabel.text()
         #elif self.work_dir == "":
@@ -130,7 +172,11 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         stitching.stitching_pure_hugin(threshold, self.work_dir, self.maxVisScaleLabel.text(), self.radialLabel.text())
         self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
 
+<<<<<<< HEAD
     def ptoButtonClicked(self):
+=======
+    def button5Clicked(self):
+>>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
         dlg = self.getFilenameDialog()
         if dlg.exec_():
             the_path = dlg.selectedFiles()[0]
@@ -160,10 +206,17 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
             data = json.load(data_file)
             return data["pto_file_location"]
 
+<<<<<<< HEAD
     def showErrorMsg(self, message):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Critical)
         msg.setText(message)
+=======
+    def showErrorMsg(self, msg):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Critical)
+        msg.setText(msg)
+>>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
         msg.setWindowTitle("Error")
         msg.setStandardButtons(QMessageBox.Ok)
         retval = msg.exec_()

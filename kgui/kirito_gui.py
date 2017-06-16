@@ -27,6 +27,7 @@ class Ui_MainWindow(object):
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider.setObjectName("horizontalSlider")
         self.horizontalSlider.setValue(45)
+<<<<<<< HEAD
         self.stitchingButton = QtWidgets.QPushButton(self.centralWidget)
         self.stitchingButton.setGeometry(QtCore.QRect(60, 570, 113, 32))
         self.stitchingButton.setObjectName("pushButton")
@@ -43,6 +44,24 @@ class Ui_MainWindow(object):
         self.ptoButton = QtWidgets.QPushButton(self.centralWidget)
         self.ptoButton.setGeometry(QtCore.QRect(60, 775, 113, 40))
         self.ptoButton.setObjectName("select-pto")
+=======
+        self.pushButton = QtWidgets.QPushButton(self.centralWidget)
+        self.pushButton.setGeometry(QtCore.QRect(60, 570, 113, 32))
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton2 = QtWidgets.QPushButton(self.centralWidget)
+        self.pushButton2.setGeometry(QtCore.QRect(60, 670, 113, 32))
+        self.pushButton2.setObjectName("previewButton")
+        self.pushButton3 = QtWidgets.QPushButton(self.centralWidget)
+        self.pushButton3.setGeometry(QtCore.QRect(60, 620, 113, 32))
+        self.pushButton3.setObjectName("OpenHugin")
+        self.pushButton4 = QtWidgets.QPushButton(self.centralWidget)
+        self.pushButton4.setGeometry(QtCore.QRect(60, 720, 113, 40))
+        self.pushButton4.setObjectName("Re-stitching")
+        self.pushButton4.setEnabled(False)
+        self.pushButton5 = QtWidgets.QPushButton(self.centralWidget)
+        self.pushButton5.setGeometry(QtCore.QRect(60, 775, 113, 40))
+        self.pushButton5.setObjectName("select-pto")
+>>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
         self.label_2 = QtWidgets.QLabel(self.centralWidget)
         self.label_2.setGeometry(QtCore.QRect(60, 480, 621, 16))
         self.label_2.setObjectName("label_2")
@@ -118,11 +137,19 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+<<<<<<< HEAD
         self.stitchingButton.setText(_translate("MainWindow", "Stitching"))
         self.previewButton.setText(_translate("MainWindow", "Preview"))
         self.huginButton.setText(_translate("MainWindow", "Open in Hugin"))
         self.restitchingButton.setText(_translate("MainWindow", "Stitching with\n Hugin Result"))
         self.ptoButton.setText(_translate("MainWindow", "Select\n Reference pto"))
+=======
+        self.pushButton.setText(_translate("MainWindow", "Stitching"))
+        self.pushButton2.setText(_translate("MainWindow", "Preview"))
+        self.pushButton3.setText(_translate("MainWindow", "Open in Hugin"))
+        self.pushButton4.setText(_translate("MainWindow", "Stitching with\n Hugin Result"))
+        self.pushButton5.setText(_translate("MainWindow", "Select\n Reference pto"))
+>>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
         self.label_2.setText(_translate("MainWindow", "Control points matching threshold (higher value: more features are expected to be found)"))
         self.label_3.setText(_translate("MainWindow", "0.1"))
         self.label_4.setText(_translate("MainWindow", "0.9"))
