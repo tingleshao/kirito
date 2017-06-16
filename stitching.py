@@ -27,6 +27,7 @@ def stitching_pure_hugin(threshold, working_dir, max_visible_scale, radial):
     os.system("python3 {0}/HuginMakeSaccadeConfig.py optimized.pto model.json ".format(cwd) + max_visible_scale + " " + radial)
     os.chdir(cwd)
 
+
 def stitching_pure_hugin_without_existing_model(threshold, working_dir, max_visible_scale, radial):
     print("stitching button clicked!")
     # save the current working path
@@ -54,13 +55,8 @@ def stitching_pure_hugin_without_existing_model(threshold, working_dir, max_visi
     os.chdir(cwd)
 
 
-<<<<<<< HEAD
 # prepare directory always has the date after the input dir
 def prepare_directory(default_dir):
-=======
-def prepare_directory(default_dir):
-    username = getpass.getuser()
->>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
     if not os.path.exists(default_dir):
         os.system("mkdir " + default_dir)
     dt = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d%H%M%S')
@@ -74,10 +70,7 @@ def preview_hugin(work_dir):
     if not("preview.jpg" in os.listdir()):
         os.system("nona -m JPEG -v -z 85 --ignore-exposure -o preview.jpg optimized_s.pto")
         os.system('convert preview.jpg -resize 608x421 preview.jpg')
-<<<<<<< HEAD
     os.chdir(cwd)
-=======
->>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
 
 
 def check_updated_pto_file(working_dir):
@@ -89,15 +82,11 @@ def check_updated_pto_file(working_dir):
     a = subprocess.check_output("find -cmin -100 -printf \"%T+\\t%p\\n\" | sort", shell=True)
     c = [b.split("\\t")[1] for b in str(a).split("\\n") if len(b.split("\\t")) > 1 and len(b.split("\\t")[1]) > 4]
 #    changed_files = os.system("find -cmin -100 -printf \"%T+\\t%p\\n\" | sort").split("\n")
-<<<<<<< HEAD
     print(c)
     if len(c) > 0:
        pto_file_name = c[-1]
     else:
        return
-=======
-    pto_file_name = c[-1]
->>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
     os.chdir(cwd)
     # remove the "./" in file name
     return pto_file_name[2:]
