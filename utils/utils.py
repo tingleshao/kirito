@@ -1,7 +1,7 @@
 import os
 import sys
 
-import MantisPyAPI as api
+#import MantisPyAPI as api
 
 
 def update_crop_factor(filename):
@@ -119,7 +119,6 @@ def adjust_order_for_mantis_cam4(input_pto_file_name, output_pto_file_name):
     # write output
     with open("output_pto_file_name", 'w') as output_file:
         output_file.write(output_str)
-<<<<<<< HEAD
 
 
 def clean_file(filename):
@@ -319,5 +318,3 @@ v'''
 
     with open('test0.pto', 'w') as pto_file:
         pto_file.write(output)
-=======
->>>>>>> e1950cc898d3d29210c34a4494efe6d3a6c2c95f
