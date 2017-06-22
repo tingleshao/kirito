@@ -12,6 +12,8 @@ parser = argparse.ArgumentParser(description="",
 add_arg = parser.add_argument
 
 add_arg('--gui', action='store_true', help="Launch the GUI.")
+add_arg('--test', action="store_true", help="Run in test mode (not acturally grabbing images from a Mantis Camera).")
+
 
 args = parser.parse_args()
 
@@ -32,6 +34,7 @@ class ansi:
 if args.gui:
     string = "\n{}Launching GUI\n"
     print(string.format(ansi.RED_B))
-    gui.main()
+    gui.main(test=True)
+    if args.test:
 
 stitching.stitching_pure_hugin()

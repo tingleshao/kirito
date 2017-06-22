@@ -40,9 +40,11 @@ def newMcam(mcamhandle):
     if not mhandle:
         mhandle = mcamhandle
 
+
 def count_frames(directory):
     files = [f for f in os.listdir(directory) if os.path.isfile(f) and len(f.split(".")) > 1 and (f.split(".")[1] == 'jpeg' or f.split(".")[1] == 'jpg') and not f == "preview.jpg"]
     return len(files)
+
 
 def grab(start):
     print("ipaddress:" + str(ipAddress))
@@ -61,8 +63,6 @@ def grab(start):
 #    elif mhandle:
         # --- Start streaming ---
 #        mantis.stopMCamStream(mcamhandle, 9002)
-
-
     os.chdir(working_dir)
     a = subprocess.check_output("find -cmin -100 -printf \"%T+\\t%p\\n\" | sort", shell=True)
     c = [b.split("\\t")[1] for b in str(a).split("\\n") if len(b.split("\\t")) > 1 and len(b.split("\\t")[1]) > 4]
@@ -71,10 +71,8 @@ def grab(start):
 
 
 def grab_with_v2(ip, directory):
-    print("starting grab with v2 now \n")   
-    os.system("ls ./grab_tools") 
-#    output = subprocess.Popen("./grab_tools/mantisGetFrames -ip " + ip)
-#    output = subprocess.Popen(["./grab_tools/mantisGetFrames","-ip",ip])
+    print("starting grab with v2 now \n")
+    os.system("ls ./grab_tools")
     output = subprocess.Popen(["mantisGetFrames","-ip",ip])
     output.communicate()
     print(output.returncode)
@@ -86,6 +84,15 @@ def grab_with_v2(ip, directory):
     os.system("mkdir " + directory)
     os.system("cp *.jpeg " + directory)
     return 0
+
+
+def grab_mock(ip, directory):
+    # copy the prepared frames to given directory
+    print("starting mock frame grab now\n")
+    os.system("mkdir " + directory)
+    os.system("cp test_frames/*.jpeg .")
+    return 0
+
 
 def rename_frames():
     # rename frames to 1...19 jpeg
@@ -102,6 +109,7 @@ def rename_frames():
         # avoid index out of bounds error
         if curr_index == 19:
             break
+
 
 def move_frames(work_dir):
     # rename frames to 1...19 jpeg
