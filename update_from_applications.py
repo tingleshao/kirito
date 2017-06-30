@@ -1,9 +1,12 @@
 # update the code from applications:stitching_gui
 import os
+from sys import platform
+ 
 
-
-applications_dir = '/Users/chongshao/dev/applications/stitching_app'
-
+if platform == "darwin":
+    applications_dir = '/Users/chongshao/dev/applications/stitching_app'
+if platform == "linux":
+    applications_dir = "/home/cshao/dev/applications/stitching_app"
 
 os.system("cp {0}/*.py .".format(applications_dir))
 os.system("cp {0}/utils/*.py utils/".format(applications_dir))
