@@ -7,7 +7,11 @@ import matching_visualizer as vis
 # 2. find features in all images, including the global one
 # 3. filter out matches, only leave matches between small view and global view
 # 4. run model estimation
-# TODO: try change the global stitching to use only Hugin
+
+# TODO: update this so it works
+# TODO: should not depend on the camera model
+# TODO: first, make the visualization tool work
+
 
 enhance_image = False
 use_ip_files = True
@@ -15,6 +19,7 @@ clean_up = False
 
 # this map is different than the one in the other script: it contians the global view
 # global view has id 0
+
 #sensor_id_map = [(1, 1, 17), (1, 2, 16), (2, 1, 15), (3, 1, 14), (4, 1, 13), (4, 2, 12), (5, 1, 4), (5, 2, 3), (2, 2, 2), (3, 2, 1),
 #                 (8, 1, 0), (8, 2, 11), (9, 1, 5), (9, 2, 6), (6, 1, 7), (6, 2, 8), (10, 1, 9), (10, 2, 10), (7, 1, 0)]
 sensor_id_map = [(1, 1, 5), (1, 2, 6), (2, 1, 7), (3, 1, 9), (4, 1, 4), (4, 2, 3), (5, 1, 2), (5, 2, 1),
