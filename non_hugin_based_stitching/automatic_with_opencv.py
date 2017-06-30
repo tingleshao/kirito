@@ -4,7 +4,6 @@ import cv2
 import sys
 
 
-# TODO: convert everything into JSON
 def enhance(img):
     img_yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
     img_yuv[:,:,0] = cv2.equalizeHist(img_yuv[:,:,0])
@@ -20,7 +19,7 @@ enhance_image = False
 #                 (9, 1, 5), (9, 2, 6), (6, 1, 7), (6, 2, 8), (10, 1, 9), (10, 2, 10)]
 sensor_id_map = [(1, 1, 5), (1, 2, 6), (2, 1, 7), (3, 1, 9), (4, 1, 4), (4, 2, 3), (5, 1, 2), (5, 2, 1), (2, 2, 8), (3, 2, 10),
                  (8, 1, 15), (8, 2, 14), (9, 1, 13), (9, 2, 12), (6, 1, 0), (6, 2, 11), (7, 1, 17), (7, 2, 16)]
-                 
+
 if rename_files:
     os.system("mkdir old_order_images")
     os.system("mv mcam*.jpg old_order_images")

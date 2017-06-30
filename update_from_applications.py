@@ -2,7 +2,7 @@
 import os
 
 
-applications_dir = '/home/cshao/dev/applications/stitching_app'
+applications_dir = '/Users/chongshao/dev/applications/stitching_app'
 
 
 os.system("cp {0}/*.py .".format(applications_dir))
