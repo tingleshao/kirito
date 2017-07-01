@@ -33,8 +33,7 @@ def test_finding_features_and_matching_two_images(image_name1, image_name2):
     visualize(kp1, "blue")
     kp2, des2 = hugin_find_features(img1)
     visualize(kp2, "red")
-    
 
 
-def test_findning_features_and_matching_multiple_images():
-    return None
+#def test_findning_features_and_matching_multiple_images():
+#    image_names = #
