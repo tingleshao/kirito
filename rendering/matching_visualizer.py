@@ -12,17 +12,14 @@ from PIL import ImageDraw
 
  # TODO: does this work?
 
-
 def main():
     img1_name = "test_frames/1021700000.jpeg"
     img2_name = "test_frames/1021700002.jpeg"
     orb = cv2.ORB()
     kp1, des1 = orb.detectAndCompute(img1, None)
     kp2, des2 = orb.detectAndCompute(img2, None)
-
     bf = cv2.BFMatcher()
     matches = bf.knnMatch(des1, des2, k=2)
-
     visualize(img1_name, kp1, img2_namem kp2)
 
 
