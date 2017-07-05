@@ -35,6 +35,6 @@ if args.gui:
     string = "\n{}Launching GUI\n"
     print(string.format(ansi.RED_B))
     gui.main(test=True)
-    if args.test:
 
-stitching.stitching_pure_hugin()
+if args.test:
+    stitching.stitching_pure_hugin()

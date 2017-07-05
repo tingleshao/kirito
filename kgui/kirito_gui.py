@@ -14,7 +14,7 @@ unchecked = 0
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(708, 858)
+        MainWindow.resize(708, 900)
         self.centralWidget = QtWidgets.QWidget(MainWindow)
         self.centralWidget.setObjectName("centralWidget")
         self.label = QtWidgets.QLabel(self.centralWidget)
@@ -43,6 +43,9 @@ class Ui_MainWindow(object):
         self.ptoButton = QtWidgets.QPushButton(self.centralWidget)
         self.ptoButton.setGeometry(QtCore.QRect(60, 775, 113, 40))
         self.ptoButton.setObjectName("select-pto")
+        self.colorAdjustButton = QtWidgets.QPushButton(self.centralWidget)
+        self.colorAdjustButton.setGeometry(QtCore.QRect(60, 830, 113, 32))
+        self.colorAdjustButton.setObjectName("adjust-color")
         self.label_2 = QtWidgets.QLabel(self.centralWidget)
         self.label_2.setGeometry(QtCore.QRect(60, 480, 621, 16))
         self.label_2.setObjectName("label_2")
@@ -123,6 +126,7 @@ class Ui_MainWindow(object):
         self.huginButton.setText(_translate("MainWindow", "Open in Hugin"))
         self.restitchingButton.setText(_translate("MainWindow", "Stitching with\n Hugin Result"))
         self.ptoButton.setText(_translate("MainWindow", "Select\n Reference pto"))
+        self.colorAdjustButton.setText(_translate("MainWindow", "Adjust Color"))
         self.label_2.setText(_translate("MainWindow", "Control points matching threshold (higher value: more features are expected to be found)"))
         self.label_3.setText(_translate("MainWindow", "0.1"))
         self.label_4.setText(_translate("MainWindow", "0.9"))

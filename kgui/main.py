@@ -27,6 +27,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.huginButton.clicked.connect(self.huginButtonClicked)
         self.restitchingButton.clicked.connect(self.restitchingButtonClicked)
         self.ptoButton.clicked.connect(self.ptoButtonClicked)
+        self.colorAdjustButton.clicked.connect(self.colorAdjustButtonClicked)
         username = getpass.getuser()
         # Change default dir here
         self.default_dir = "/home/"+username+"/mantisModelGen"
@@ -38,7 +39,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.currReferencePtoDirLabel.setText("ref pto file: {0}".format(self.read_curr_ref_pto_file_location()))
         self.test = False
 
-    def setTest():
+    def setTest(self):
         self.test = True
 
     def stitchingButtonClicked(self):
@@ -150,6 +151,10 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
             self.currReferencePtoDirLabel.setText("ref pto file: " + self.prealigned_pto_path)
             stitching.update_saved_reference_pto_file_location(self.prealigned_pto_path)
 
+    def colorAdjustButtonClicked(self):
+        # color adjust
+        stitching.match_color(self.work_dir, self.work_dir)
+
     def enable_slot(self):
         print("load existing model enabled")
         default_pto_file_path = self.read_curr_ref_pto_file_location()
@@ -188,10 +193,10 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
 
 def main(test=False):
     app = QApplication(sys.argv)
-    if test:
-        app.setTest()
     form = MainWindow()
     form.show()
+    if test:
+        form.setTest()
     sys.exit(app.exec_())
 
 
