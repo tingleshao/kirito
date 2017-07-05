@@ -2,6 +2,7 @@
 # And displays the features in different colors
 from numpy.misc import imread
 import cv2
+# TODO; implement this method
 from matching_visualizer import visualize
 # TODO: provide an interface from Hugin to Python to find features
 from hugin_api import hugin_find_features
@@ -34,6 +35,12 @@ def test_finding_features_and_matching_two_images(image_name1, image_name2):
     kp2, des2 = hugin_find_features(img1)
     visualize(kp2, "red")
 
+
+def main():
+    test_finding_features_in_hugin_non_hugin_single_image
+
+if __name__ == "__main__":
+    main()
 
 #def test_findning_features_and_matching_multiple_images():
 #    image_names = #
