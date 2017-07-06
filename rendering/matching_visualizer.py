@@ -10,7 +10,6 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 
- # TODO: does this work?
 
 def main():
     img1_name = "test_frames/1021700000.jpeg"

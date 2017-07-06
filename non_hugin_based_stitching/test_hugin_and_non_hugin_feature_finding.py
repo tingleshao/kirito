@@ -1,11 +1,12 @@
 # This script finds features using Hugin-based method and non-hugin based method.
 # And displays the features in different colors
-from numpy.misc import imread
+from scipy.misc import imread
 import cv2
-# TODO; implement this method
-from matching_visualizer import visualize
-from hugin_api.hugin_api import hugin_find_features
-
+import sys
+sys.path.append('/Users/chongshao/dev/applications/stitching_app/rendering/')
+sys.path.append('/Users/chongshao/dev/applications/stitching_app/hugin_api/')
+import hugin_api
+import matching_visualizer
 
 # def test_finding_features_image_pair(image_name):
 #     image1 = imread(image1_name)
@@ -34,14 +35,14 @@ def test_finding_features_image_pair(image_name1, image_name2):
 
 
 def test_finding_features_multiple_image_pairs():
-    image_names = #XXX
+    image_names = "none"
     for image_name in image_names:
         test_finding_features_image_pair(image_name)
 
 
 def main():
-    image1_name = # XXX:
-    image2_name = # XXX:
+    image1_name = 'test_frames/102170000.jpeg'
+    image2_name = 'test_frames/102170002.jpeg'
     test_finding_features_image_pair([image1_name, image2_name])
 
 
