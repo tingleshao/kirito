@@ -19,6 +19,11 @@ import matching_visualizer
 #     visualize(kp1, "blue", kp2, "red")
 
 
+# TODO: 1. Make a warp to see the errors
+#       2. Evaluate the performance on wide field of view camera
+#       3. when features not found, load the referencer pto matches
+#       4. Spherical warper testing: detail::SphericalWarper
+
 def test_finding_features_image_pair(image_names):
     image1_name = image_names[0]
     image2_name = image_names[1]
