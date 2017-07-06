@@ -34,12 +34,12 @@ def test_finding_features_image_pair(image_names):
     index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
     search_params = dict(checkds=50)
     flann = cv2.FlannBasedMatcher(index_params, search_params)
-    maches = flann.knnMatch(des1, des2, k=2)
-    matching_visualizer.visualize(maches, image1, image2, kp1, kp2)
-    match_dict = hugin_find_features(img1)
-    # TODO: implement this
-    matches = hugin_find_matches(match_dict)
-    visualize(, image1, image2, match_dict[0], match_dict[1])
+    matches = flann.knnMatch(des1, des2, k=1)
+    for match in matches:
+        print(match)
+    matching_visualizer.visualize(matches, image1, image2, kp1, kp2)
+    matches = hugin_find_matches(img1)
+    matching_visualizer.visualize(matches, image1, image2, cam1_pts, cam2_pts)
 
 
 def test_finding_features_multiple_image_pairs():
