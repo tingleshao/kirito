@@ -8,6 +8,7 @@ import sys
 import cv2
 from PIL import Image
 from PIL import ImageFont
+import matplotlib.pyplot as plt
 from PIL import ImageDraw
 
 
@@ -19,7 +20,7 @@ def main():
     kp2, des2 = orb.detectAndCompute(img2, None)
     bf = cv2.BFMatcher()
     matches = bf.knnMatch(des1, des2, k=2)
-    visualize(img1_name, kp1, img2_namem kp2)
+    visualize(img1_name, kp1, img2_name, kp2)
 
 
 def visualize(img1_name, match1, img2_name, match2):
@@ -43,10 +44,11 @@ def visualize(img1_name, match1, img2_name, match2):
     img1.save("annonated" + img1_name)
     img2.save("annonated" + img2_name)
 
-def visualize(matches):
+
+def visualize(matches, img1, img2, kp1, kp2):
     draw_params = dict(matchColor = (0, 255, 0),
-                       singlePointColor = (255, 0 ,0)
-                       matchesMask = matchesMask,
+                       singlePointColor = (255, 0 ,0),
+                      # matchesMask = matchesMask,
                        flags = 0)
 
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, matches, None, **draw_params)
