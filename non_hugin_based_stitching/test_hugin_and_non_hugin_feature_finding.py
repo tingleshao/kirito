@@ -10,15 +10,6 @@ sys.path.append('/Users/chongshao/dev/applications/stitching_app/')
 import hugin_api
 import matching_visualizer
 
-# def test_finding_features_image_pair(image_name):
-#     image1 = imread(image1_name)
-#     # find features using opencv
-#     orb = cv2.ORB()
-#     kp1, des1 = orb.detectAndCompute(img1, None)
-#     kp2, des2 = hugin_find_features(img1)
-#     visualize(kp1, "blue", kp2, "red")
-
-
 # TODO: 1. Make a warp to see the errors
 #       2. Evaluate the performance on wide field of view camera
 #       3. when features not found, load the referencer pto matches
@@ -42,7 +33,6 @@ def test_finding_features_image_pair(image_names):
     matches = flann.knnMatch(des1, des2, k=1)
 #    for match in matches:
 #        print(match)
-#    matching_visualizer.visualize(matches, image1, image2, kp1, kp2)
     matches, cam1_pts, cam2_pts = hugin_api.hugin_find_matches(image_names)
     matching_visualizer.visualize(matches, image1, image2, cam1_pts, cam2_pts)
 
