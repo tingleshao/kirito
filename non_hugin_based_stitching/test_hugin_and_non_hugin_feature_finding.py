@@ -38,7 +38,7 @@ def test_finding_features_image_pair(image_names):
     for match in matches:
         print(match)
     matching_visualizer.visualize(matches, image1, image2, kp1, kp2)
-    matches = hugin_find_matches(img1)
+    matches, cam1_pts, cam2_pts = hugin_find_matches(img1)
     matching_visualizer.visualize(matches, image1, image2, cam1_pts, cam2_pts)
 
 
