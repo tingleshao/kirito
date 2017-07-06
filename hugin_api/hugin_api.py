@@ -12,7 +12,7 @@ def hugin_find_features(image_names):
     return kp
 
 
-def hugin_find_matches():
+def hugin_find_matches(image_names):
     image_names_str = " ".join(image_names)
     os.system("pto_gen {0} -o temp.pto".format(image_names_str))
     os.system("cpfind --multirow -o temp_control_pts.pto temp.pto")

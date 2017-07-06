@@ -40,10 +40,10 @@ def test_finding_features_image_pair(image_names):
     search_params = dict(checkds=50)
     flann = cv2.FlannBasedMatcher(index_params, search_params)
     matches = flann.knnMatch(des1, des2, k=1)
-    for match in matches:
-        print(match)
-    matching_visualizer.visualize(matches, image1, image2, kp1, kp2)
-    matches, cam1_pts, cam2_pts = hugin_find_matches(img1)
+#    for match in matches:
+#        print(match)
+#    matching_visualizer.visualize(matches, image1, image2, kp1, kp2)
+    matches, cam1_pts, cam2_pts = hugin_api.hugin_find_matches(image_names)
     matching_visualizer.visualize(matches, image1, image2, cam1_pts, cam2_pts)
 
 
