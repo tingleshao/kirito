@@ -47,7 +47,7 @@ def load_matches(pto_name):
             pt2_idx = len(cam2_pts)
             cam2_pts.append(cam1_pt)
         dmatch = cv2.DMatch(pt1_idx, pt2_idx, 0)
-        matches.append(dmatch)
+        matches.append([dmatch])
     return matches, cam1_pts, cam2_pts
 
 
@@ -74,9 +74,10 @@ def load_control_points(pto_name):
             kp_dict[cam_2_id].append(cam2_pt)
         return kp_dict
 
+
 def toKeyPoints(kps):
     # covert x, y pair to KeyPoint object
     keyPoints = []
     for kp in kps:
-        keyPoints.append(cv2.KeyPoint(kp[0], kp[1]))
+        keyPoints.append(cv2.KeyPoint(kp[0], kp[1], 1.0))
     return keyPoints

@@ -50,9 +50,9 @@ def visualize(matches, img1, img2, kp1, kp2):
                        singlePointColor = (255, 0 ,0),
                       # matchesMask = matchesMask,
                        flags = 0)
-
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, matches, None, **draw_params)
-    plt.imshow(img3,),plt.show()
+    plt.figure()
+    plt.imshow(img3,),plt.draw()
 
 
 if __name__ == "__main__":
