@@ -76,3 +76,7 @@ def load_control_points(pto_name):
 
 def toKeyPoints(kps):
     # covert x, y pair to KeyPoint object
+    keyPoints = []
+    for kp in kps:
+        keyPoints.append(cv2.KeyPoint(kp[0], kp[1]))
+    return keyPoints
