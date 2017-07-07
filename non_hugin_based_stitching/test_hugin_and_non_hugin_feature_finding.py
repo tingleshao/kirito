@@ -10,6 +10,7 @@ sys.path.append('/Users/chongshao/dev/applications/stitching_app/')
 import hugin_api
 import matching_visualizer
 
+
 # TODO: 1. Make a warp to see the errors
 #       2. Evaluate the performance on wide field of view camera
 #       3. when features not found, load the referencer pto matches
@@ -31,9 +32,11 @@ def test_finding_features_image_pair(image_names):
     search_params = dict(checkds=50)
     flann = cv2.FlannBasedMatcher(index_params, search_params)
     matches = flann.knnMatch(des1, des2, k=1)
-#    for match in matches:
-#        print(match)
     matches, cam1_pts, cam2_pts = hugin_api.hugin_find_matches(image_names)
+    # TODO: keyponts should be opencv KeyPoints Object
+    cam1_pts = toKeyPoints(cam1_pts)
+    cam2_pts = toKeyPoints(cam2_pts)
+    # TODO: implement these methods 
     matching_visualizer.visualize(matches, image1, image2, cam1_pts, cam2_pts)
 
 
@@ -44,8 +47,8 @@ def test_finding_features_multiple_image_pairs():
 
 
 def main():
-    image1_name = '../test_frames/1021700000.jpeg'
-    image2_name = '../test_frames/1021700002.jpeg'
+    image1_name = '../test_frames/1021700006.jpeg'
+    image2_name = '../test_frames/1021700005.jpeg'
     test_finding_features_image_pair([image1_name, image2_name])
 
 

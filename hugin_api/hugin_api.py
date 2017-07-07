@@ -1,5 +1,6 @@
 # Hugin API
 import os
+import cv2
 
 
 def hugin_find_features(image_names):
@@ -34,7 +35,7 @@ def load_matches(pto_name):
     cam2_pts = []
     matches = []
     for pts in pts_list:
-        tokens = pts.split("")
+        tokens = pts.split(" ")
         cam1_pt = (float(tokens[3][1:]), float(tokens[4][1:]))
         cam2_pt = (float(tokens[5][1:]), float(tokens[6][1:]))
         if cam1_pt in cam1_pts:
