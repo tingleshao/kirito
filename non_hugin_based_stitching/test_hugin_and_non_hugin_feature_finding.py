@@ -42,6 +42,7 @@ def test_finding_features_image_pair(image_names):
     matching_visualizer.visualize(matches2, image1, image2, cam1_pts, cam2_pts)
     plt.show()
 
+
 def test_finding_features_multiple_image_pairs():
     image_names = "none"
     for image_name in image_names:
