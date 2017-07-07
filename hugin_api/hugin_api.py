@@ -28,9 +28,7 @@ def load_matches(pto_name):
         pto = pto_file.read()
     pts_list = []
     lines = pto.split("\n")
-    for line in lines:
-        if len(line) > 1 and line[0] == 'c':
-            pts_list.append(line)
+    pts_list = list(filter(lambda x: len(x) > 1 and x[0] == 'c', lines))
     cam1_pts = []
     cam2_pts = []
     matches = []
@@ -59,10 +57,7 @@ def load_control_points(pto_name):
     pts_list = []
     lines = pto.split("\n")
     kp_dict = {}
-    # TODO: this can be rewritten using a filter
-    for line in lines:
-        if len(line) > 1 and line[0] == 'c':
-            pts_list.append(line)
+    pts_list = list(filter(lambda x: len(x) > 1 and x[0] == 'c', lines))
     for pts in pts_list:
         tokens = pts.split(" ")
         cam1_id = int(tokens[1][1:])
@@ -78,3 +73,6 @@ def load_control_points(pto_name):
         else:
             kp_dict[cam_2_id].append(cam2_pt)
         return kp_dict
+
+def toKeyPoints(kps):
+    # covert x, y pair to KeyPoint object
