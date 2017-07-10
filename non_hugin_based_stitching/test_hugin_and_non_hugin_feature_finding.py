@@ -12,6 +12,7 @@ import matching_visualizer
 import matplotlib.pyplot as plt
 
 
+
 # TODO: 1. Make a warp to see the errors
 # TODO: 2. Evaluate the performance on wide field of view camera
 # TODO: 4. Spherical warper testing: detail::SphericalWarper
@@ -50,6 +51,11 @@ def test_finding_features_multiple_image_pairs():
 def test_warping_errors():
     # TODO: find matches using two methods and wrap the image (compute homography?)
     # Or another method used in the demo
+    return None
+
+
+def test_wide_feld_of_view_warping_errors():
+    # TODO: do the same thing as test_warping_errors, except for wide field of view cameras
     return None
 
 
