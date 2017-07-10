@@ -2,6 +2,7 @@
 # And displays the features in different colors
 from scipy.misc import imread
 import cv2
+
 import sys
 import numpy as np
 sys.path.append('/Users/chongshao/dev/applications/stitching_app/rendering/')
@@ -20,6 +21,24 @@ def test_finding_features_image_pair(image_names):
     image2_name = image_names[1]
     image1 = cv2.imread(image1_name)
     image2 = cv2.imread(image2_name)
+
+# TODO; implement this method
+from matching_visualizer import visualize
+from hugin_api.hugin_api import hugin_find_features
+
+
+# def test_finding_features_image_pair(image_name):
+#     image1 = imread(image1_name)
+#     # find features using opencv
+#     orb = cv2.ORB()
+#     kp1, des1 = orb.detectAndCompute(img1, None)
+#     kp2, des2 = hugin_find_features(img1)
+#     visualize(kp1, "blue", kp2, "red")
+
+
+def test_finding_features_image_pair(image_name1, image_name2):
+    image1 = imread(image1_name)
+    image2 = imread(image2_name)
     # find features using opencv
     orb = cv2.ORB_create()
     kp1, des1 = orb.detectAndCompute(image1, None)
@@ -52,7 +71,6 @@ def test_warping_errors():
     # TODO: find matches using two methods and wrap the image (compute homography?)
     # Or another method used in the demo
     return None
-
 
 def main():
     image1_name = '../test_frames/1021700006.jpeg'
