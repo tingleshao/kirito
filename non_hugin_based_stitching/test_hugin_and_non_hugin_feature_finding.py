@@ -74,9 +74,14 @@ def detectAndDescribe(image):
 
 
 def test_warping_errors():
-    # TODO: find matches using two methods and wrap the image (compute homography?)
-    # Or another method used in the demo
-    return None
+    # Hugin based warping
+b   # TODO: implement me 
+    # OpenCV based warping
+    M = matchKeypoints(kps1, kps2, features1, features2 , ratio, reprojThresh)
+    (matches, H, status) = M
+    result = cv2.warpPerspective(image1, H, (image1.shape[1] + image2.shape[1], image1.shape[0]))
+    result[0:image2.shape[0], 0:image2.shape[1]] = image2
+    return result
 
 def test_wide_feld_of_view_warping_errors():
     # TODO: do the same thing as test_warping_errors, except for wide field of view cameras
