@@ -5,7 +5,6 @@ import time
 import subprocess
 import json
 import utils.utils as utils
-import mantisStitchingFunctions as msf ##### Must have mantisStitchingFunctions.py in path
 import numpy as np
 from matplotlib import pyplot as plt
 import cv2
@@ -106,6 +105,7 @@ def update_saved_reference_pto_file_location(location):
 
 
 def match_color(model_dir, image_dir):
+    import mantisStitchingFunctions as msf ##### Must have mantisStitchingFunctions.py in path
     N_desired_slots = np.size(desired_slots);
     #image_extension='tiff';
     image_extension='.jpeg';

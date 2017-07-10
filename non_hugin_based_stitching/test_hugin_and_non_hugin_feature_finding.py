@@ -13,9 +13,9 @@ import matching_visualizer
 import matplotlib.pyplot as plt
 
 # TODO: 1. Make a warp to see the errors
-#       2. Evaluate the performance on wide field of view camera
-#       3. when features not found, load the referencer pto matches
-#       4. Spherical warper testing: detail::SphericalWarper
+# TODO: 2. Evaluate the performance on wide field of view camera
+# TODO: 3. when features not found, load the referencer pto matches
+# TODO: 4. Spherical warper testing: detail::SphericalWarper
 
 def test_finding_features_image_pair(image_names):
     image1_name = image_names[0]
@@ -47,6 +47,12 @@ def test_finding_features_multiple_image_pairs():
     image_names = "none"
     for image_name in image_names:
         test_finding_features_image_pair(image_name)
+
+
+def test_warping_errors():
+    # TODO: find matches using two methods and wrap the image (compute homography?)
+    # Or another method used in the demo
+    return None 
 
 
 def main():
