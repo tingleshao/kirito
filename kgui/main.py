@@ -95,6 +95,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
         os.chdir(cwd)
 
+
     def huginButtonClicked(self):
         #if self.customDirCheckBox.isChecked():
         #    self.work_dir = self.dirLabel.text()

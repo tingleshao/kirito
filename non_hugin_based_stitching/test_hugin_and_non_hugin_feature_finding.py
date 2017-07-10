@@ -11,9 +11,9 @@ import hugin_api
 import matching_visualizer
 import matplotlib.pyplot as plt
 
+
 # TODO: 1. Make a warp to see the errors
 # TODO: 2. Evaluate the performance on wide field of view camera
-# TODO: 3. when features not found, load the referencer pto matches
 # TODO: 4. Spherical warper testing: detail::SphericalWarper
 def test_finding_features_image_pair(image_names):
     image1_name = image_names[0]
@@ -39,7 +39,6 @@ def test_finding_features_image_pair(image_names):
     matching_visualizer.visualize(matches, image1, image2, kp1, kp2)
     matching_visualizer.visualize(matches2, image1, image2, cam1_pts, cam2_pts)
     plt.show()
-
 
 
 def test_finding_features_multiple_image_pairs():
