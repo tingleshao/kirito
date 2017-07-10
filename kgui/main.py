@@ -16,7 +16,6 @@ import utils.utils as utils
 
 
 # TODO: may combine some duplicated code
-# TODO: when feature is not found, call the reference PTO features
 class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
     # access variables inside of the UI's file
     def __init__(self):
