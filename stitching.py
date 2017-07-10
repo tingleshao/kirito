@@ -12,6 +12,8 @@ from scipy import misc
 import glob
 
 
+# TODO: test,
+# TODO: may adding a switch for add/NOT features from referece pto
 def stitching_pure_hugin(threshold, working_dir, max_visible_scale, radial):
     print("stitching button clicked!")
     cwd = os.getcwd()
@@ -19,7 +21,10 @@ def stitching_pure_hugin(threshold, working_dir, max_visible_scale, radial):
     os.system("cpfind --prealigned --kdtreeseconddist=" + str(float(threshold)/100) + " -o control_pts.pto prealigned.pto")
     # pruning control points
     os.system("celeste_standalone -i control_pts.pto -o pruning_pts.pto")
-    os.system("linefind -o lines.pto pruning_pts.pto")
+    empty_feature_cam_ids = check_number_of_features_for_every_camera("pruning_pts.pto")
+    # append pto feautres from reference pto to pruning_pts pto
+    copy_reference_features_to_current_pto("prealigned.pto", "pruning_pts.pto", empty_feature_cam_ids)
+    os.system("linefind -o lines.pto pruning_pts_adding_feature.pto")
     # optimizing positions and geometry
     os.system("autooptimiser -a -l -s -m -o optimized.pto lines.pto");
     os.system("pano_modify -o optimized_centered.pto --center --straighten --canvas=AUTO optimized.pto")
@@ -246,3 +251,54 @@ def match_color(model_dir, image_dir):
     plt.figure(1)
     plt.imshow(newcomposite)
     plt.title('After')
+
+
+def  check_number_of_features_for_every_camera(pto_filename):
+    # return the index for cameras that does not have enough number of features
+    # current the camera ids are identical ids in the pto file
+    with open(pto_filename) as pto_file:
+        pto = pto_file.read()
+    pts_list = [0] * 19
+    lines = pto.split("\n")
+    pts_list = list(filter(lambda x: len(x) > 1 and x[0] == 'c', lines))
+    for pts in pts_list:
+        tokens = pts.split(" ")
+        cam_id = int(tokens[1][1:])
+        pts_list[cam_id] += 1
+    a = 0
+    result_lst = []
+    for pts in pts_list:
+        if pts < 3:
+            result_lst.append(a)
+        a += 1
+    return result_lst
+
+
+def copy_reference_features_to_current_pto(prealigned_pto_filename, current_pto_filename, empty_feature_cam_ids):
+    # copy the features from first pto file to the second pto file, select the cameras based on emtpy_feature_cam_ids
+    camera_feature_dict = {}
+    with open(prealigned_pto_fielname) as pto_file:
+        prealigned_pto = pto_file.read()
+    lines = prealigned_pto.split("\n")
+    pts_list = list(filter(lambda x: len(x) > 1 and x[0] == 'c', lines))
+    for pts in pts_list:
+        tokens = pts.split(" ")
+        cam_id = int(tokens[1][1:])
+        if cam_id in empty_feature_cam_ids:
+            if cam_id not in camera_feature_dict:
+                camera_feature_dict[cam_id] = [pts]
+            else:
+                camera_feature_dict[cam_id].append(pts)
+    with open(current_pto_filename) as pto_file:
+        current_pto = pro_file.read()
+    output_pto_str = ""
+    lines = current_pto.split("\n")
+    for line in lines:
+        if len(line) > 1 and line == 'control points':
+           for cam_id in camera_feature_dict.keys():
+               for feature_line = camera_feature_dict[cam_id]:
+                   output_pto_str = output_pto_str + feature_line + "\n"
+        else:
+            output_pto_str = output_pto_str + line + "\n"
+    with open("pruning_pts_adding_feature.pto", 'w') as output_pto:
+        output_pto.write(output_pto_str)

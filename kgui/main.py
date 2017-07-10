@@ -79,7 +79,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
             self.currReferencePtoDirLabel.setText("ref pto file: " + self.prealigned_pto_path)
             stitching.update_saved_reference_pto_file_location(self.prealigned_pto_path)
             os.system("cp {0} {1}/prealigned.pto".format(self.prealigned_pto_path, self.work_dir))
-            stitching.stitching_pure_hugin(threshold, self.work_dir, self.maxVisScaleLabel.text(), self.radialLabel.text())
+            stitching.stitching`_pure_hugin(threshold, self.work_dir, self.maxVisScaleLabel.text(), self.radialLabel.text())
         else:
             stitching.stitching_pure_hugin_without_existing_model(threshold, self.work_dir, self.maxVisScaleLabel.text(), self.radialLabel.text())
         self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
@@ -109,6 +109,7 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         stitching.update_saved_reference_pto_file_location("{0}/{1}".format(self.work_dir, updated_pto_file_name))
         self.restitchingButton.setEnabled(True)
 
+# TODO: restitching may not need grabbing frames
     def restitchingButtonClicked(self):
         # directly run the stitching again after open->close the Hugin application
         reference_pto_file_location = self.read_curr_ref_pto_file_location()
