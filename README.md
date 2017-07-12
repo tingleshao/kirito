@@ -1,6 +1,6 @@
 # kirito
 
-##### This repository contains a set of Python scripts and C/C++ programs for multi-row image stitiching.
+##### This repository contains a set of Python scripts and C/C++ programs for multi-row image stitching.
 
 
 
