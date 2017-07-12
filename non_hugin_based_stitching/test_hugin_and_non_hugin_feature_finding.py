@@ -71,14 +71,47 @@ def detectAndDescribe(image):
     return (kps, features)
 
 
-def test_warping_errors():
+def test_warping_errors(image_names):
     # Hugin based warping
     # OpenCV based warping
-    M = matchKeypoints(kps1, kps2, features1, features2 , ratio, reprojThresh)
+    image1_name = image_names[0]
+    image2_name = image_names[1]
+
+    image1 = cv2.imread(image1_name)
+    image2 = cv2.imread(image2_name)
+    # find features using opencv
+    orb = cv2.ORB_create()
+    kp1, des1 = orb.detectAndCompute(image1, None)
+    kp2, des2 = orb.detectAndCompute(image2, None)
+    des1 = np.float32(des1)
+    des2 = np.float32(des2)
+    FLANN_INDEX_KDTREE = 0
+    index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
+    search_params = dict(checkds=50)
+    # TODO: raetio = XXX
+    # TODO: reprojThresh = XXX
+    M = matchKeypoints(kps1, kps2, des1, des2 , ratio, reprojThresh)
     (matches, H, status) = M
     result = cv2.warpPerspective(image1, H, (image1.shape[1] + image2.shape[1], image1.shape[0]))
     result[0:image2.shape[0], 0:image2.shape[1]] = image2
-    return result
+
+    # TODO: implement me
+    matching_visualizer.visualize_result(result)
+
+    print(matches)
+    matches2, cam1_pts, cam2_pts = hugin_api.hugin_find_matches(image_names)
+    print(matches2)
+    cam1_pts = hugin_api.toKeyPoints(cam1_pts)
+    cam2_pts = hugin_api.toKeyPoints(cam2_pts)
+
+    # TODO: how to derive des1 and des2 in Hugin?
+    # TODO: does Hugin API provide anything?
+    M = matchKeypoints(cam1_pts, cam2_pts, des1, des2 , ratio, reprojThresh)
+    (matches, H, status) = M
+    result = cv2.warpPerspective(image1, H, (image1.shape[1] + image2.shape[1], image1.shape[0]))
+    result[0:image2.shape[0], 0:image2.shape[1]] = image2
+
+    matching_visualizer.visualize_result(result)
 
 
 def test_wide_feld_of_view_warping_errors():
@@ -93,6 +126,7 @@ def main():
     image1_name = '../test_frames/1021700006.jpeg'
     image2_name = '../test_frames/1021700005.jpeg'
     test_finding_features_image_pair([image1_name, image2_name])
+    test_warping_errors([image1_name, image2_name])
 
 
 if __name__ == "__main__":
