@@ -38,13 +38,12 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.currReferencePtoDirLabel.setText("ref pto file: {0}".format(self.read_curr_ref_pto_file_location()))
         self.test = False
 
+
     def setTest(self):
         self.test = True
 
+
     def stitchingButtonClicked(self):
-        #if self.customDirCheckBox.isChecked():
-        #    self.work_dir = self.dirLabel.text()
-        #elif self.work_dir == "":
         self.work_dir = stitching.prepare_directory(self.default_dir)
         if self.grabFrameCheckBox.isChecked():
             ip = self.ipLabel.text()
@@ -84,8 +83,6 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         self.label.setPixmap(QtGui.QPixmap("{0}/preview.jpg".format(self.work_dir)))
 
     def previewButtonClicked(self):
-    #    if self.customDirCheckBox.isChecked():
-    #        self.work_dir = self.dirLabel.text()
         if self.work_dir == "":
             self.work_dir = stitching.prepare_directory(self.default_dir)
         stitching.preview_hugin(self.work_dir)
@@ -97,8 +94,6 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
 
 
     def huginButtonClicked(self):
-        #if self.customDirCheckBox.isChecked():
-        #    self.work_dir = self.dirLabel.text()
         if self.work_dir == "":
             self.work_dir = stitching.prepare_directory(self.default_dir)
         os.system("hugin {0}/optimized.pto".format(self.work_dir))
@@ -109,7 +104,8 @@ class MainWindow(QMainWindow, kirito_gui.Ui_MainWindow):
         stitching.update_saved_reference_pto_file_location("{0}/{1}".format(self.work_dir, updated_pto_file_name))
         self.restitchingButton.setEnabled(True)
 
-# TODO: restitching may not need grabbing frames
+
+# TODO: restitching does not need grabbing frames
     def restitchingButtonClicked(self):
         # directly run the stitching again after open->close the Hugin application
         reference_pto_file_location = self.read_curr_ref_pto_file_location()
