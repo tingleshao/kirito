@@ -12,8 +12,6 @@ import matching_visualizer
 import matplotlib.pyplot as plt
 
 
-# TODO: 1. Make a warp to see the errors
-# TODO: 2. Evaluate the performance on wide field of view camera
 # TODO: 4. Spherical warper testing: detail::SphericalWarper
 def test_finding_features_image_pair(image_names):
     image1_name = image_names[0]
@@ -75,7 +73,6 @@ def detectAndDescribe(image):
 
 def test_warping_errors():
     # Hugin based warping
-    # TODO: implement me
     # OpenCV based warping
     M = matchKeypoints(kps1, kps2, features1, features2 , ratio, reprojThresh)
     (matches, H, status) = M
@@ -83,9 +80,13 @@ def test_warping_errors():
     result[0:image2.shape[0], 0:image2.shape[1]] = image2
     return result
 
+
 def test_wide_feld_of_view_warping_errors():
-    # TODO: do the same thing as test_warping_errors, except for wide field of view cameras
-    return None
+    M = matchKeypoints(kps1, kps2, features1, features2, ratio, reprojThresh)
+    (matches, H, status) = M
+    result = cv2.warpPerspective(image1, H, (image1.shape[1] + image2.shape[1], image1.shape[0]))
+    result[0:image2.shape[0], 0:image2.shape[1]] = image2
+    return result
 
 
 def main():
