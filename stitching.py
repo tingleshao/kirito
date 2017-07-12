@@ -296,7 +296,7 @@ def copy_reference_features_to_current_pto(prealigned_pto_filename, current_pto_
     for line in lines:
         if len(line) > 1 and line == 'control points':
            for cam_id in camera_feature_dict.keys():
-               for feature_line = camera_feature_dict[cam_id]:
+               for feature_line in camera_feature_dict[cam_id]:
                    output_pto_str = output_pto_str + feature_line + "\n"
         else:
             output_pto_str = output_pto_str + line + "\n"
