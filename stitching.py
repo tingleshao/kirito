@@ -277,7 +277,7 @@ def  check_number_of_features_for_every_camera(pto_filename):
 def copy_reference_features_to_current_pto(prealigned_pto_filename, current_pto_filename, empty_feature_cam_ids):
     # copy the features from first pto file to the second pto file, select the cameras based on emtpy_feature_cam_ids
     camera_feature_dict = {}
-    with open(prealigned_pto_fielname) as pto_file:
+    with open(prealigned_filename) as pto_file:
         prealigned_pto = pto_file.read()
     lines = prealigned_pto.split("\n")
     pts_list = list(filter(lambda x: len(x) > 1 and x[0] == 'c', lines))

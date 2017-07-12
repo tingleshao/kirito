@@ -75,7 +75,7 @@ def detectAndDescribe(image):
 
 def test_warping_errors():
     # Hugin based warping
-    # TODO: implement me
+    # TODO: implement me 
     # OpenCV based warping
     M = matchKeypoints(kps1, kps2, features1, features2 , ratio, reprojThresh)
     (matches, H, status) = M
