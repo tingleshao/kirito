@@ -10,6 +10,7 @@
 2. [Install OpenCV from source on Ubuntu](#Install-OpenCV)
 3. [Run stitching script](#Run)
 4. [Run pure-OpenCV stitching](#OpenCV-stitching)
+5. [TODOs](#TODOs)
 
 
 ## Introduction <a name="Introduction"></a>
@@ -195,3 +196,7 @@ To run the compiled program, stay at [your_opencv_dir]/samples/cpp/ and type:
 ./stitching_detailed [input_image_names_separated_by_space] --features orb --ba reproj
 ```
 "--ba reproj" is need to make it work, and you are free to use another type of feature other than orb (you can use surf).
+
+
+## TODOs <a name="TODOs"></a>
+1. Pure-OpenCV stitching takes much longer time than Hugin. Figure out the approach to speed up it.
