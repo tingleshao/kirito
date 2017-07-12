@@ -117,8 +117,8 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D INSTALL_C_EXAMPLES=OFF \
       -D INSTALL_PYTHON_EXAMPLES=ON \
       -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
-      -D BUILD_EXAMPLES=ON .. \
-      -D WITH_CUDA=OFF
+      -D BUILD_EXAMPLES=ON \
+      -D WITH_CUDA=OFF ..
 make -j4
 sudo make install
 sudo ldconfig
@@ -140,11 +140,11 @@ Open in Hugin: Open Hugin. The Hugin program will try open the optimized.pto fil
 
 Preview: don't run stitching, but show the preview stitched result, assume there is a file "preview.jpg" in the working directory.
 #### Checkboxes
-Loading existing model file: in Hugin-based stitching, a pre-aligned model can be used in the optimization process. The default pre-aligned model file is "/home/$user/data/stitching/prealigned.pto". If the default file is not found, a pop-up window will appear to let user select the pre-aligned model file.
+Loading existing model file: in Hugin-based stitching, a pre-aligned model can be used in the optimization process. The default pre-aligned model file is "/home/$user/data/mantisModelGen/prealigned.pto". If the default file is not found, a pop-up window will appear to let user select the pre-aligned model file. The default directory can be modified in the \_\_init\_\_() method in main.py
 
 Grab frames: if checked, the program will get frames from the render machine (render machine IP address specified in IP text field). The frames will be saved in the working directory.
 
-Store frame to custom directory: if checked, the program will set the working directory to the one specified in the textfield below the checkbox. Otherwise the default working directory is /home/$user/data/stitching/$yeardatetime/.
+Store frame to custom directory: if checked, the program will set the working directory to the one specified in the textfield below the checkbox. Otherwise the default working directory is /home/$user/mantisModelGen/$yeardatetime/.
 
 #### Others:
 Slider: user can use slider to select the threshold in finding feature matching. Higher threshold: less picky in finding matches.
