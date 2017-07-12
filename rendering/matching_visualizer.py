@@ -54,5 +54,10 @@ def visualize(matches, img1, img2, kp1, kp2):
     plt.imshow(img3,),plt.draw()
 
 
+def visualize_result(result):
+    plt.figure()
+    plt.imshow(result), plt.draw()
+
+
 if __name__ == "__main__":
     main()

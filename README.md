@@ -5,11 +5,11 @@
 
 
 ## Table of Contents
-0. [Introduction](#Introduction)
- -  [How do they work?](#how)
+0. [Introduction](#Introduction) & [How do they work?](#how)
 1. [Required libraries](#Requirements)
 2. [Install OpenCV from source on Ubuntu](#Install-OpenCV)
 3. [Run stitching script](#Run)
+4. [Run pure-OpenCV stitching](#OpenCV-stitching)
 
 
 ## Introduction <a name="Introduction"></a>
@@ -180,3 +180,18 @@ python3 automatic_with_opencv.py 0.1
 ```bash
 python3 HuginMakeSaccadeConfig.py optimized.pto model.json
 ```
+
+## Run pure-OpenCV stitching <a name="OpenCV-stitching"></a>
+There is a multiple (>2) image stitching program available in OpenCV. It is located in [your_opencv_dir]/samples/cpp/stitching_detailed.cpp. I modified the program so that it can directly output the stitching result as a list of H matrices, one for each image. The modified program is located in non_hugin_based_stitching/ folder.
+
+However, the output H matrix cannot be correctly interpreted in Hugin or V2. Further effort is needed to make it work.
+
+To compile the cpp program, go to [your_opencv_dir]/samples/cpp/ directory (if necessary, copy the modified stitching_detailed.cpp file to here), and type:
+```bash
+g++ -ggdb stitching_detailed.cpp -o stitching_detailed `pkg-config --cflags --libs opencv`
+```
+To run the compiled program, stay at [your_opencv_dir]/samples/cpp/ and type:
+```bash
+./stitching_detailed [input_image_names_separated_by_space] --features orb --ba reproj
+```
+"--ba reproj" is need to make it work, and you are free to use another type of feature other than orb (you can use surf).

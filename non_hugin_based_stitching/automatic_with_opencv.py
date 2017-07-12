@@ -10,6 +10,7 @@ def enhance(img):
     img_output = cv2.cvtColor(img_yuv, cv2.COLOR_YUV2BGR)
     return img_output
 
+
 rename_files = False
 use_ip_files = True
 clean_up = False
@@ -56,8 +57,11 @@ if use_ip_files:
             enhanced_img = enhance(new_img)
             cv2.imwrite("mcam_{0}_scale_2.jpg".format(old_id+1), new_img)
 
-# call the opencv customzied
-os.system("./feature_finder mcam_1_scale_2.jpg mcam_2_scale_2.jpg mcam_3_scale_2.jpg mcam_4_scale_2.jpg mcam_5_scale_2.jpg mcam_6_scale_2.jpg mcam_7_scale_2.jpg mcam_8_scale_2.jpg mcam_9_scale_2.jpg mcam_10_scale_2.jpg  mcam_11_scale_2.jpg mcam_12_scale_2.jpg mcam_13_scale_2.jpg mcam_14_scale_2.jpg mcam_15_scale_2.jpg mcam_16_scale_2.jpg mcam_17_scale_2.jpg mcam_18_scale_2.jpg --features orb --match_conf " + sys.argv[1] + " --rangewidth 8 --conf_thresh 0.5 | tee sample_output_0.txt")
+# call the opencv customzied feature finder
+threshold_for_matching = sys.argv[1]
+img_list = [0, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 19, 21, 26]
+image_list_str = " ".join(["test_frames/10217000%02d.jpeg" % i for i in img_list])
+os.system("./feature_finder {0} --features orb --match_conf {1} --rangewidth 8 --conf_thresh 0.5 | tee sample_output_0.txt".format(image_list_str, threshold_for_matching))
 
 # convert the output into a simplified format
 os.system("python3 parse_opencv_output.py sample_output_0.txt")
