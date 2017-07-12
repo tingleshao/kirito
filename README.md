@@ -102,12 +102,12 @@ Install OpenCV 3 with Python bindings
 cd ~
 git clone https://github.com/opencv/opencv.git
 cd opencv
-git checkout 3.1.0
+git checkout 3.0.0
 
 cd ~
 git clone https://github.com/opencv/opencv_contrib.git
 cd opencv_contrib
-git checkout 3.1.0
+git checkout 3.0.0
 
 cd ~/opencv
 mkdir build

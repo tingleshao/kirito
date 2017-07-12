@@ -48,7 +48,6 @@ def visualize(img1_name, match1, img2_name, match2):
 def visualize(matches, img1, img2, kp1, kp2):
     draw_params = dict(matchColor = (0, 255, 0),
                        singlePointColor = (255, 0 ,0),
-                      # matchesMask = matchesMask,
                        flags = 0)
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, matches, None, **draw_params)
     plt.figure()

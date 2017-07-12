@@ -18,7 +18,6 @@ def hugin_find_matches(image_names):
     os.system("pto_gen {0} -o temp.pto".format(image_names_str))
     os.system("cpfind --multirow -o temp_control_pts.pto temp.pto")
     matches = load_matches("temp_control_pts.pto")
-#    os.system("rm temp.pto")
     # return key point location and descriptor?
     return matches
 
