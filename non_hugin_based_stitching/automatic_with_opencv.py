@@ -4,6 +4,7 @@ import cv2
 import sys
 
 
+# TODO: make this work 
 def enhance(img):
     img_yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
     img_yuv[:,:,0] = cv2.equalizeHist(img_yuv[:,:,0])
