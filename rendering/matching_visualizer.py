@@ -59,5 +59,49 @@ def visualize_result(result):
     plt.imshow(result), plt.draw()
 
 
+def visualize_features_from_pto_files(pto_file_name, camera1_id, camera2_id):
+    with open(pto_file_name, 'r') as pto_file:
+        pto_str = pto_file.read()
+    pto_str_lines = pto_str.split('\n')
+    display_lst = []
+    camera_count = 0
+    camera1_filename = ""
+    camera2_filename = ""
+    for line in pto_str_lines:
+        if len(line) > 0 and line[0] == "i":
+            camera_count += 1
+            if camera_count == camera1_id:
+                tokens = line.split(" ")
+                camera1_filename = tokens[-1][1:]
+            if camera_count == camera2_id:
+                tokens = line.split(" ")
+                camera2_filename = tokens[-1][1:]
+        if len(line) > 0 and line[0] == "c":
+            tokens = line.split(" ")
+            cam1_id = int(tokens[1][1:])
+            cam2_id = int(tokens[2][1:])
+            if cam1_id == camera1_id and cam2_id == camera2_id:
+                display_lst.append(line)
+    # convert the display_lst into matches, kps and images
+    camera1_image = cv2.imread(camera1_filename)
+    camera2_image = cv2.imread(camera2_filename)
+    idx = 0
+    cam1_ptx = []
+    cam2_pts = []
+    for line in display_lst:
+        tokens = line.split(" ")
+        cam1_x = float(tokens[3][1:])
+        cam1_y = float(tokens[4][1:])
+        cam1_pts.append((cam1_x, cam1_y))
+        cam2_x = float(tokens[5][1:])
+        cam2_y = float(tokens[6][1:])
+        cam2_pts.append((cam2_x, cam2_y))
+        dmatch = cv2.DMatch(idx, idx, 0)
+        matches.append([dmatch])
+    kp1 = hugin_api.toKeyPoints(cam1_pts)
+    kp2 = hugin_api.toKeyPoints(cam2_pts)
+    matching_visualizer.visualize(matches, camera1_image, camera2_image, kp1, kp2)
+
+
 if __name__ == "__main__":
     main()

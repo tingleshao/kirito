@@ -22,6 +22,7 @@ def hugin_find_matches(image_names):
     return matches
 
 
+# TODO: separate the match generation into a separate function
 def load_matches(pto_name):
     with open(pto_name) as pto_file:
         pto = pto_file.read()
