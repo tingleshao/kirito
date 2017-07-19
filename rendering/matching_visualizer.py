@@ -12,7 +12,7 @@ from PIL import ImageFont
 import matplotlib.pyplot as plt
 from PIL import ImageDraw
 
-import hugin_api.hugin_api as hapi
+import hugin.hugin_api as hapi
 
 
 def main():
