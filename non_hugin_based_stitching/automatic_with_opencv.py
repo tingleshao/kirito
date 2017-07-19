@@ -4,7 +4,7 @@ import cv2
 import sys
 
 
-# TODO: make this work 
+# TODO: make this work
 def enhance(img):
     img_yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
     img_yuv[:,:,0] = cv2.equalizeHist(img_yuv[:,:,0])
@@ -59,7 +59,10 @@ if use_ip_files:
             cv2.imwrite("mcam_{0}_scale_2.jpg".format(old_id+1), new_img)
 
 # call the opencv customzied feature finder
-threshold_for_matching = sys.argv[1]
+if len(sys.argv) > 1:
+    threshold_for_matching = sys.argv[1]
+else:
+    threshold_for_matching = 0.1 
 img_list = [0, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 19, 21, 26]
 image_list_str = " ".join(["test_frames/10217000%02d.jpeg" % i for i in img_list])
 os.system("./feature_finder {0} --features orb --match_conf {1} --rangewidth 8 --conf_thresh 0.5 | tee sample_output_0.txt".format(image_list_str, threshold_for_matching))

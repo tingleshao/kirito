@@ -11,6 +11,8 @@ from PIL import ImageFont
 import matplotlib.pyplot as plt
 from PIL import ImageDraw
 
+import hugin_api
+
 
 def main():
     img1_name = "test_frames/1021700000.jpeg"
@@ -49,6 +51,9 @@ def visualize(matches, img1, img2, kp1, kp2):
     draw_params = dict(matchColor = (0, 255, 0),
                        singlePointColor = (255, 0 ,0),
                        flags = 0)
+    print(matches)
+    print(img1)
+    print(img2)
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, matches, None, **draw_params)
     plt.figure()
     plt.imshow(img3,),plt.draw()
@@ -83,11 +88,14 @@ def visualize_features_from_pto_files(pto_file_name, camera1_id, camera2_id):
             if cam1_id == camera1_id and cam2_id == camera2_id:
                 display_lst.append(line)
     # convert the display_lst into matches, kps and images
+    print(camera1_filename)
+    print(camera2_filename)
     camera1_image = cv2.imread(camera1_filename)
     camera2_image = cv2.imread(camera2_filename)
     idx = 0
-    cam1_ptx = []
+    cam1_pts = []
     cam2_pts = []
+    matches = []
     for line in display_lst:
         tokens = line.split(" ")
         cam1_x = float(tokens[3][1:])
@@ -100,7 +108,8 @@ def visualize_features_from_pto_files(pto_file_name, camera1_id, camera2_id):
         matches.append([dmatch])
     kp1 = hugin_api.toKeyPoints(cam1_pts)
     kp2 = hugin_api.toKeyPoints(cam2_pts)
-    matching_visualizer.visualize(matches, camera1_image, camera2_image, kp1, kp2)
+
+    visualize(matches, camera1_image, camera2_image, kp1, kp2)
 
 
 if __name__ == "__main__":
