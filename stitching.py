@@ -12,7 +12,6 @@ from scipy import misc
 import glob
 
 
-# TODO: test
 # TODO: may adding a switch for add/NOT features from referece pto
 def stitching_pure_hugin(threshold, working_dir, max_visible_scale, radial):
     print("stitching button clicked!")

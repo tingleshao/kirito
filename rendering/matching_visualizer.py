@@ -52,9 +52,8 @@ def visualize(matches, img1, img2, kp1, kp2):
     draw_params = dict(matchColor = (0, 255, 0),
                        singlePointColor = (255, 0 ,0),
                        flags = 0)
+    print("matches: ")
     print(matches)
-#    print(img1)
-#    print(img2)
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, matches, None, **draw_params)
     plt.figure()
     plt.imshow(img3,),plt.draw()

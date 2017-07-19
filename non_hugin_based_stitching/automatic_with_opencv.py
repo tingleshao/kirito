@@ -16,7 +16,6 @@ rename_files = False
 use_ip_files = True
 clean_up = False
 enhance_image = False
-
 #sensor_id_map = [(1, 1, 17), (1, 2, 16), (2, 1, 15), (3, 1, 14), (4, 1, 13), (4, 2, 12), (5, 1, 4), (5, 2, 3), (2, 2, 2), (3, 2, 1), (8, 1, 0), (8, 2, 11),
 #                 (9, 1, 5), (9, 2, 6), (6, 1, 7), (6, 2, 8), (10, 1, 9), (10, 2, 10)]
 sensor_id_map = [(1, 1, 5), (1, 2, 6), (2, 1, 7), (3, 1, 9), (4, 1, 4), (4, 2, 3), (5, 1, 2), (5, 2, 1), (2, 2, 8), (3, 2, 10),
@@ -62,7 +61,7 @@ if use_ip_files:
 if len(sys.argv) > 1:
     threshold_for_matching = sys.argv[1]
 else:
-    threshold_for_matching = 0.1 
+    threshold_for_matching = 0.1
 img_list = [0, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 19, 21, 26]
 image_list_str = " ".join(["test_frames/10217000%02d.jpeg" % i for i in img_list])
 os.system("./feature_finder {0} --features orb --match_conf {1} --rangewidth 8 --conf_thresh 0.5 | tee sample_output_0.txt".format(image_list_str, threshold_for_matching))
