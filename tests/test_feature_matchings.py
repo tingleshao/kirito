@@ -13,11 +13,9 @@ if platform == "linux":
     sys.path.append('/home/cshao/dev/applications/stitching_app/rendering/')
     sys.path.append('/home/cshao/dev/applications/stitching_app/hugin_api/')
     sys.path.append('/home/cshao/dev/applications/stitching_app/')
-
-
 import hugin_api
 import matching_visualizer
-
+import matplotlib.pyplot as plt
 
 
 def test():
@@ -26,6 +24,7 @@ def test():
     camera2_id = 2
     currdir = os.getcwd()
     matching_visualizer.visualize_features_from_pto_files(currdir, pto_file_name, camera1_id, camera2_id)
+    plt.show()
 
 
 if __name__ == "__main__":

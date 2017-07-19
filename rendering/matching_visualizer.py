@@ -53,8 +53,8 @@ def visualize(matches, img1, img2, kp1, kp2):
                        singlePointColor = (255, 0 ,0),
                        flags = 0)
     print(matches)
-    print(img1)
-    print(img2)
+#    print(img1)
+#    print(img2)
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, matches, None, **draw_params)
     plt.figure()
     plt.imshow(img3,),plt.draw()
@@ -97,8 +97,8 @@ def visualize_features_from_pto_files(working_dir, pto_file_name, camera1_id, ca
     camera2_image = cv2.imread(camera2_filename)
     print("in pto visualize")
 
-    print(camera1_image)
-    print(camera2_image)
+#    print(camera1_image)
+#    print(camera2_image)
     os.chdir(currdir)
     idx = 0
     cam1_pts = []
