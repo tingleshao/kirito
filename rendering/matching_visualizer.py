@@ -96,9 +96,6 @@ def visualize_features_from_pto_files(working_dir, pto_file_name, camera1_id, ca
     camera1_image = cv2.imread(camera1_filename)
     camera2_image = cv2.imread(camera2_filename)
     print("in pto visualize")
-
-#    print(camera1_image)
-#    print(camera2_image)
     os.chdir(currdir)
     idx = 0
     cam1_pts = []
