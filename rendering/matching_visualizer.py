@@ -5,13 +5,14 @@
 #
 # display the features with circles and indices in two images
 import sys
+import os
 import cv2
 from PIL import Image
 from PIL import ImageFont
 import matplotlib.pyplot as plt
 from PIL import ImageDraw
 
-import hugin_api
+import hugin_api.hugin_api as hapi
 
 
 def main():
@@ -64,7 +65,7 @@ def visualize_result(result):
     plt.imshow(result), plt.draw()
 
 
-def visualize_features_from_pto_files(pto_file_name, camera1_id, camera2_id):
+def visualize_features_from_pto_files(working_dir, pto_file_name, camera1_id, camera2_id):
     with open(pto_file_name, 'r') as pto_file:
         pto_str = pto_file.read()
     pto_str_lines = pto_str.split('\n')
@@ -77,10 +78,10 @@ def visualize_features_from_pto_files(pto_file_name, camera1_id, camera2_id):
             camera_count += 1
             if camera_count == camera1_id:
                 tokens = line.split(" ")
-                camera1_filename = tokens[-1][1:]
+                camera1_filename = tokens[-1][2:-1]
             if camera_count == camera2_id:
                 tokens = line.split(" ")
-                camera2_filename = tokens[-1][1:]
+                camera2_filename = tokens[-1][2:-1]
         if len(line) > 0 and line[0] == "c":
             tokens = line.split(" ")
             cam1_id = int(tokens[1][1:])
@@ -90,8 +91,15 @@ def visualize_features_from_pto_files(pto_file_name, camera1_id, camera2_id):
     # convert the display_lst into matches, kps and images
     print(camera1_filename)
     print(camera2_filename)
+    currdir = os.getcwd()
+    os.chdir(working_dir)
     camera1_image = cv2.imread(camera1_filename)
     camera2_image = cv2.imread(camera2_filename)
+    print("in pto visualize")
+
+    print(camera1_image)
+    print(camera2_image)
+    os.chdir(currdir)
     idx = 0
     cam1_pts = []
     cam2_pts = []
@@ -106,9 +114,8 @@ def visualize_features_from_pto_files(pto_file_name, camera1_id, camera2_id):
         cam2_pts.append((cam2_x, cam2_y))
         dmatch = cv2.DMatch(idx, idx, 0)
         matches.append([dmatch])
-    kp1 = hugin_api.toKeyPoints(cam1_pts)
-    kp2 = hugin_api.toKeyPoints(cam2_pts)
-
+    kp1 = hapi.toKeyPoints(cam1_pts)
+    kp2 = hapi.toKeyPoints(cam2_pts)
     visualize(matches, camera1_image, camera2_image, kp1, kp2)
 
 
