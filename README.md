@@ -200,3 +200,4 @@ To run the compiled program, stay at [your_opencv_dir]/samples/cpp/ and type:
 
 ## TODOs <a name="TODOs"></a>
 1. Pure-OpenCV stitching takes much longer time than Hugin. Figure out the approach to speed up it.
+2. Pure-OpenCV stitching is not robust.
