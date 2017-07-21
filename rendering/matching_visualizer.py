@@ -11,7 +11,6 @@ from PIL import Image
 from PIL import ImageFont
 import matplotlib.pyplot as plt
 from PIL import ImageDraw
-
 import hugin.hugin_api as hapi
 
 

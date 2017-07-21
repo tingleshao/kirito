@@ -4,13 +4,12 @@ import cv2
 import sys
 
 
-
 # Files generated:
 # 1. feature_finder: input: set of images,
 #                    output: sample_output_0.txt
 # 2. parse_opencv_output.py: input: sample_output_0.txt
 #                            output: parsed_output.txt
-# 3. filter_features_based_on_locations.py: input: parsed_output_2.txt
+# 3. filter_features_based_on_locations.py: input: parsed_output.txt
 #                                           output: parsed_output_3.txt
 # 4. parse_output_for_hugin.py: input: parsed_output_3.txt
 #                               output:parsed_output_for_hugin.txt
@@ -30,7 +29,6 @@ import sys
 
 # 10. hugin_executor: input: optimized.pto
 #                     output: stitched images
-
 def enhance(img):
     img_yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
     img_yuv[:,:,0] = cv2.equalizeHist(img_yuv[:,:,0])
@@ -88,15 +86,17 @@ if len(sys.argv) > 1:
     threshold_for_matching = sys.argv[1]
 else:
     threshold_for_matching = 0.1
-img_list = [0, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 19, 21, 26]
-image_list_str = " ".join(["test_frames/10217000%02d.jpeg" % i for i in img_list])
+
+#img_list = [0, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 19, 21, 26]
+image_list_str = " ".join(["mcam_%d_scale_2.jpg" % i for i in range(1,19)])
+
 os.system("./feature_finder {0} --features orb --match_conf {1} --rangewidth 8 --conf_thresh 0.5 | tee sample_output_0.txt".format(image_list_str, threshold_for_matching))
 
 # convert the output into a simplified format
 os.system("python3 parse_opencv_output.py sample_output_0.txt parsed_output.txt")
 
 # remove the false matches by limiting the pixel coordinates to be the overlapping regions
-os.system("python3 filter_features_based_on_locations.py parsed_output2.txt parsed_output_3.txt")
+os.system("python3 filter_features_based_on_locations.py parsed_output.txt parsed_output_3.txt")
 
 # convert the simplified output to hugin format
 os.system("python3 parse_output_for_hugin.py parsed_output3.txt parsed_output_for_hugin.txt")
