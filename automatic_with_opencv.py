@@ -4,7 +4,33 @@ import cv2
 import sys
 
 
-# TODO: make this work
+
+# Files generated:
+# 1. feature_finder: input: set of images,
+#                    output: sample_output_0.txt
+# 2. parse_opencv_output.py: input: sample_output_0.txt
+#                            output: parsed_output.txt
+# 3. filter_features_based_on_locations.py: input: parsed_output_2.txt
+#                                           output: parsed_output_3.txt
+# 4. parse_output_for_hugin.py: input: parsed_output_3.txt
+#                               output:parsed_output_for_hugin.txt
+# 5. generate_hugin_input.py: input: parsed_output_for_hugin.txt
+#                             output: test0.pto
+# 6. celeste_standalone: input: test0.pto
+#                        output: pruning_pts.pto
+
+# 7. cpclean: input: pruning_pts.pto
+#             output: pruning_pts2.pto
+
+# 8. linefind: input: pruning_pts2.pto
+#              output: pruning_pts3.pto
+
+# 9. autooptimiser: input: pruning_pts3.pto
+#                   output: optimized.pto
+
+# 10. hugin_executor: input: optimized.pto
+#                     output: stitched images
+
 def enhance(img):
     img_yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
     img_yuv[:,:,0] = cv2.equalizeHist(img_yuv[:,:,0])
@@ -16,7 +42,6 @@ rename_files = False
 use_ip_files = True
 clean_up = False
 enhance_image = False
-
 #sensor_id_map = [(1, 1, 17), (1, 2, 16), (2, 1, 15), (3, 1, 14), (4, 1, 13), (4, 2, 12), (5, 1, 4), (5, 2, 3), (2, 2, 2), (3, 2, 1), (8, 1, 0), (8, 2, 11),
 #                 (9, 1, 5), (9, 2, 6), (6, 1, 7), (6, 2, 8), (10, 1, 9), (10, 2, 10)]
 sensor_id_map = [(1, 1, 5), (1, 2, 6), (2, 1, 7), (3, 1, 9), (4, 1, 4), (4, 2, 3), (5, 1, 2), (5, 2, 1), (2, 2, 8), (3, 2, 10),
@@ -62,22 +87,22 @@ if use_ip_files:
 if len(sys.argv) > 1:
     threshold_for_matching = sys.argv[1]
 else:
-    threshold_for_matching = 0.1 
+    threshold_for_matching = 0.1
 img_list = [0, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 19, 21, 26]
 image_list_str = " ".join(["test_frames/10217000%02d.jpeg" % i for i in img_list])
 os.system("./feature_finder {0} --features orb --match_conf {1} --rangewidth 8 --conf_thresh 0.5 | tee sample_output_0.txt".format(image_list_str, threshold_for_matching))
 
 # convert the output into a simplified format
-os.system("python3 parse_opencv_output.py sample_output_0.txt")
+os.system("python3 parse_opencv_output.py sample_output_0.txt parsed_output.txt")
 
 # remove the false matches by limiting the pixel coordinates to be the overlapping regions
-os.system("python3 filter_features_based_on_locations.py")
+os.system("python3 filter_features_based_on_locations.py parsed_output2.txt parsed_output_3.txt")
 
 # convert the simplified output to hugin format
-os.system("python3 parse_output_for_hugin.py")
+os.system("python3 parse_output_for_hugin.py parsed_output3.txt parsed_output_for_hugin.txt")
 
 # put all the parts together to generate the pto file
-os.system("python3 generate_hugin_input.py")
+os.system("python3 generate_hugin_input.py parsed_output_for_hugin.txt test0.txt")
 
 # use hugin tools to filter features, and generate paranoma
 os.system("celeste_standalone -i test0.pto -o pruning_pts.pto")

@@ -1,5 +1,6 @@
 import math
 import cv2
+import sys 
 
 # we need to scale the feature location numbers because
 # the opencv feature extraction is based on scale image

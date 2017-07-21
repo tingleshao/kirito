@@ -1,4 +1,5 @@
 # For every image pair, we examine if the matched features are inside the overlaopping regions, if not then we remove it.
+import sys
 
 
 img_size = [1033, 581]
@@ -57,7 +58,9 @@ def is_good_match(match, percent, relation, img_size):
 
 
 def main():
-    with open("parsed_output_2.txt") as input_file:
+    input_filename = sys.argv[1]
+    output_filename = sys.argv[2]
+    with open(input_filename) as input_file:
         text = input_file.read()
     lines = text.split('\n')
     curr_idx = 0
@@ -91,7 +94,7 @@ def main():
             curr_i = curr_i + 1
         curr_idx = curr_i
 
-    with open("parsed_output_3.txt", 'w') as output_file:
+    with open(output_filename, 'w') as output_file:
         output_file.write(output_str)
 
 
